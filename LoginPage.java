@@ -7,6 +7,9 @@ public class LoginPage extends JPanel
 // the class LoginPage inherits from JPanel class
 // that means LoginPage will acquire properties of the JPanel class
 {
+    public String input_mail;
+    public String user_password;
+
     public LoginPage(MainFrame mainFrame) 
     // constructor for the LoginPage class
     // it accepts and object of type MainFrame, which will allow the class
@@ -15,7 +18,7 @@ public class LoginPage extends JPanel
         setBackground(new Color(110, 20, 90));
         setLayout(null);
 
-        // Initializing components for the login page
+        // Adding components for the login page
         instructions_fields();
         user_fields();
     }
@@ -59,7 +62,7 @@ public class LoginPage extends JPanel
             @Override
             public void actionPerformed(ActionEvent press)
             {
-                String input_mail = user_mail.getText();
+                input_mail = user_mail.getText();
                 // get the text from the text field
                 System.out.println("user: " + input_mail);
                 //user_mail.setText(""); // clears the text field after pressing enter
@@ -77,8 +80,8 @@ public class LoginPage extends JPanel
                 // Get the password (as a char array)
                 char[] passwordChars = pass_field.getPassword();
                 // converting the char array to a string
-                String password = new String(passwordChars);
-                System.out.println("password: " + password);
+                user_password = new String(passwordChars);
+                System.out.println("password: " + user_password);
                 
                 // clear the password field
                 //pass_field.setText("");
