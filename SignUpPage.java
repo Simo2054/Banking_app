@@ -9,4 +9,6 @@ public class SignUpPage extends JPanel
     {
         // Initialize components for the signup page
     }
+
+    
 }

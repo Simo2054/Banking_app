@@ -1,0 +1,3 @@
+user1@yahoo.com,planet,solarsystem123
+user2@gmail.com,tree,forest345
+user3@email.com,plant,20garten54

@@ -18,8 +18,11 @@ class MainFrame
      * in a separate class and to use them for the card layout
     */
 
-    MainFrame() // constructor
+    MainFrame() throws IOException // constructor
     {
+        loginPage = new LoginPage(this);
+        signUpPage = new SignUpPage(this);
+
         startFrame();
         initMainPanel();
 
@@ -123,6 +126,13 @@ public class Banking_app
 {
     public static void main(String[] args) 
     {
-        new MainFrame();
+        try
+        {
+            new MainFrame();
+        }
+        catch (IOException e)
+        {
+            e.printStackTrace();
+        }
     }
 }

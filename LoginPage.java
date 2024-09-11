@@ -2,6 +2,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 
 public class LoginPage extends JPanel
 // the class LoginPage inherits from JPanel class
@@ -9,18 +10,27 @@ public class LoginPage extends JPanel
 {
     public String input_mail;
     public String user_password;
+    public String username;
 
-    public LoginPage(MainFrame mainFrame) 
+    private UserManager userManager;
+    // creating a userManager instance to manage user authentication
+
+    public LoginPage(MainFrame mainFrame) throws IOException
     // constructor for the LoginPage class
     // it accepts and object of type MainFrame, which will allow the class
     // to interact with the MainFrame class
     {
+        userManager = new UserManager();
+        // initializing user manager to handle users
+
         setBackground(new Color(110, 20, 90));
         setLayout(null);
 
         // Adding components for the login page
         instructions_fields();
-        user_fields();
+        user_fields(); // input fields
+
+        loginCheck();
     }
 
     private void instructions_fields()
@@ -93,6 +103,33 @@ public class LoginPage extends JPanel
 
         add(user_mail);
         add(pass_field);
+    }
+
+    private void loginCheck()
+    {
+        JButton loginCheckButton = new JButton("Log in");
+        loginCheckButton.setBounds(50, 500, 100, 40);
+
+        loginCheckButton.addActionListener(new ActionListener() 
+        {
+            @Override
+            public void actionPerformed(ActionEvent e)
+            {
+                System.out.println(); System.out.println();
+                System.out.println("username: " + input_mail);
+                System.out.println("password: " + user_password);
+                if(userManager.authenticate(input_mail, user_password))
+                {
+                    System.out.println("Login Successful!");
+                }
+                else
+                {
+                    System.out.println("incorrect data!");
+                }
+            }
+        });
+
+        add(loginCheckButton);
     }
 
 }
