@@ -59,6 +59,7 @@ class MainFrame
     {
         openingPage = new JPanel();
         openingPage.setLayout(null);
+        openingPage.setBackground(new Color(50, 52, 88));
 
         LoginButton();
         SignUpButton();
