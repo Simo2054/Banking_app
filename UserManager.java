@@ -8,7 +8,7 @@ public class UserManager
     // the key is the user’s email (String), and the value is a User object 
     // that contains the user’s details (email, name, password)
 
-    private final String filePath = "user_files/user_cred.txt";
+    private final String filePath = "user_files/user_credentials.txt";
     // the file in which we will store user credentials
 
     public UserManager() throws IOException 
