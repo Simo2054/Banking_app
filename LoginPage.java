@@ -2,6 +2,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.FocusEvent;
+import java.awt.event.FocusListener;
 import java.io.IOException;
 
 public class LoginPage extends JPanel
@@ -67,7 +69,7 @@ public class LoginPage extends JPanel
         pass_field.setBounds(50, 390, 300, 40);
         pass_field.setFont(new Font("Arial", Font.LAYOUT_LEFT_TO_RIGHT, 18));
 
-        user_mail.addActionListener(new ActionListener() 
+        user_mail.addActionListener(new ActionListener() // user_mail textfield will wait for action(click)
         {
             @Override
             public void actionPerformed(ActionEvent press)
@@ -79,6 +81,20 @@ public class LoginPage extends JPanel
 
                 // enter focuses the pass field
                 pass_field.requestFocusInWindow();
+            }
+        });
+
+        user_mail.addFocusListener(new FocusListener() // checks focus on the user_mail textfield
+        {
+            @Override
+            public void focusGained(FocusEvent e)
+            {
+                // nothing yet
+            }
+            public void focusLost(FocusEvent e)
+            {
+                input_mail = user_mail.getText();
+                System.out.println("user: " + input_mail);
             }
         });
 
@@ -98,6 +114,21 @@ public class LoginPage extends JPanel
                 
                 // clear the char array (for security reasons)
                 //java.util.Arrays.fill(passwordChars, ' ');
+            }
+        });
+
+        pass_field.addFocusListener(new FocusListener() 
+        {
+            @Override
+            public void focusGained(FocusEvent e)
+            {
+                // nothing yet
+            }
+            public void focusLost(FocusEvent e)
+            {
+                char[] passwordChars = pass_field.getPassword();
+                user_password = new String(passwordChars);
+                System.out.println("password: " + user_password);
             }
         });
 
