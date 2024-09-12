@@ -1,4 +1,3 @@
-import javax.crypto.IllegalBlockSizeException;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -63,17 +62,21 @@ public class SignUpPage extends JPanel
         add(safety_pass_instr);
     }
 
+    private JTextField input_mail;
+    private JPasswordField pass_field;
+    private JPasswordField safety_pass_field;
+
     private void user_input_fields()
     {
-        JTextField input_mail = new JTextField();
+        input_mail = new JTextField();
         input_mail.setBounds(50, 260 , 300, 40);
         input_mail.setFont(new Font("Arial", Font.LAYOUT_LEFT_TO_RIGHT, 18));
 
-        JPasswordField pass_field = new JPasswordField();
+        pass_field = new JPasswordField();
         pass_field.setBounds(50, 410, 300, 40);
         pass_field.setFont(new Font("Arial", Font.LAYOUT_LEFT_TO_RIGHT, 18));
 
-        JPasswordField safety_pass_field = new JPasswordField();
+        safety_pass_field = new JPasswordField();
         safety_pass_field.setBounds(50, 520 , 300, 40);
         safety_pass_field.setFont(new Font("Arial", Font.LAYOUT_LEFT_TO_RIGHT, 18));
     
@@ -157,5 +160,36 @@ public class SignUpPage extends JPanel
         add(input_mail);
         add(pass_field);
         add(safety_pass_field);
+    }
+
+    public void signUpCheck()
+    {
+        JButton signUpButton = new JButton("Sign up");
+        signUpButton.setBounds(50, 500, 100, 40);
+
+        signUpButton.addActionListener(new ActionListener() 
+        {
+            @Override
+            public void actionPerformed(ActionEvent e)
+            {
+                System.out.println(); System.out.println();
+                System.out.println("username: " + new_input_mail);
+                System.out.println("password: " + new_user_password);
+                System.out.println("Safe pass: " + new_safety_user_password);
+
+                if(new_user_password.equals(new_safety_user_password))
+                {
+                    System.out.println("great! now how would you like us to call you?");
+                    System.out.println("please introduce your username:");
+                    // gets to the next page
+                }
+                else
+                {
+                    safety_pass_field.setText(""); // clears the second password field\
+                    System.out.println("please reintroduce your password!");
+                    safety_pass_field.requestFocusInWindow();//focuses the second password field
+                }
+            }
+        });
     }
 }
