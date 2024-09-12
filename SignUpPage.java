@@ -223,7 +223,7 @@ public class SignUpPage extends JPanel
                         safety_pass_field.requestFocusInWindow();//focuses the second password field
                     }
                 }
-                else
+                else // if one or more of the credentials are missing
                 {
                     System.out.println("please introduce your credentials!");
                 }

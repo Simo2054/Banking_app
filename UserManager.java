@@ -43,7 +43,8 @@ public class UserManager
         }
     }
 
-    public boolean checkExistentAcc(String email)
+    public boolean checkExistentAcc(String email) 
+    //checking if an account already exists (by email adress)
     {
         User user = userMap.get(email); // Get the User object by email
         if(user != null)
