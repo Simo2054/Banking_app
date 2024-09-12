@@ -26,6 +26,8 @@ public class SignUpPage extends JPanel
         // components of the Sign up page:
         instructions_fields();
         user_input_fields();
+
+        signUpCheck();
     }
 
     private void instructions_fields()
@@ -113,6 +115,7 @@ public class SignUpPage extends JPanel
                 char[] passwordChars = pass_field.getPassword();
                 new_user_password = new String(passwordChars);
                 System.out.println("password: " + new_user_password);
+                safety_pass_field.requestFocusInWindow();
             }
         });
 
@@ -162,12 +165,25 @@ public class SignUpPage extends JPanel
         add(safety_pass_field);
     }
 
+    private JTextArea warning; 
+    // will be used to display warnings about the correctness of user input
+
     public void signUpCheck()
     {
-        JButton signUpButton = new JButton("Sign up");
-        signUpButton.setBounds(50, 500, 100, 40);
+        JButton NextButton = new JButton("Next");
+        NextButton.setBounds(50, 600, 100, 40);
+        
+        warning = new JTextArea("Please reintroduce your password!");
+        warning.setBounds(50, 565, 300, 20);
+        warning.setEditable(false);
+        warning.setFont(new Font("Arial", Font.LAYOUT_LEFT_TO_RIGHT, 15));
+        warning.setForeground(Color.PINK);
+        warning.setBackground(new Color(0,0,0,0));
+        warning.setLineWrap(true);
+        warning.setWrapStyleWord(true);
+        warning.setVisible(false);
 
-        signUpButton.addActionListener(new ActionListener() 
+        NextButton.addActionListener(new ActionListener() 
         {
             @Override
             public void actionPerformed(ActionEvent e)
@@ -177,7 +193,9 @@ public class SignUpPage extends JPanel
                 System.out.println("password: " + new_user_password);
                 System.out.println("Safe pass: " + new_safety_user_password);
 
-                if(new_user_password.equals(new_safety_user_password))
+                // add a checker for whether of not the account exists (mail adress)
+                
+                if(new_user_password.equals(new_safety_user_password))// checking if first and second passwords match
                 {
                     System.out.println("great! now how would you like us to call you?");
                     System.out.println("please introduce your username:");
@@ -185,11 +203,14 @@ public class SignUpPage extends JPanel
                 }
                 else
                 {
-                    safety_pass_field.setText(""); // clears the second password field\
-                    System.out.println("please reintroduce your password!");
+                    safety_pass_field.setText(""); // clears the second password field
+                    warning.setVisible(true);
                     safety_pass_field.requestFocusInWindow();//focuses the second password field
                 }
             }
         });
+
+        add(NextButton);
+        add(warning);
     }
 }
