@@ -8,10 +8,10 @@ import java.io.IOException;
 
 public class SignUpPage extends JPanel 
 {
-    public String new_input_mail;
-    public String new_user_password;
-    public String new_safety_user_password;
-    public String new_username;
+    public String new_input_mail = "";
+    public String new_user_password = "";
+    public String new_safety_user_password = "";
+    public String new_username = "";
 
     private UserManager userManager;
 
@@ -173,8 +173,7 @@ public class SignUpPage extends JPanel
         JButton NextButton = new JButton("Next");
         NextButton.setBounds(50, 600, 100, 40);
         
-        warning = new JTextArea("Please reintroduce your password!");
-        warning.setBounds(50, 565, 300, 20);
+        warning = new JTextArea();
         warning.setEditable(false);
         warning.setFont(new Font("Arial", Font.LAYOUT_LEFT_TO_RIGHT, 15));
         warning.setForeground(Color.PINK);
@@ -193,19 +192,40 @@ public class SignUpPage extends JPanel
                 System.out.println("password: " + new_user_password);
                 System.out.println("Safe pass: " + new_safety_user_password);
 
-                // add a checker for whether of not the account exists (mail adress)
-                
-                if(new_user_password.equals(new_safety_user_password))// checking if first and second passwords match
+                if(userManager.checkExistentAcc(new_input_mail))
+                //checking if an account with the same e-mail adress already exists
                 {
-                    System.out.println("great! now how would you like us to call you?");
-                    System.out.println("please introduce your username:");
-                    // gets to the next page
+                    pass_field.setText(null);
+                    safety_pass_field.setText(null);
+                    warning.setBounds(50, 305, 300, 45);
+                    warning.setText("An account with this e-mail adress already exists!");
+                    warning.setVisible(true);
+                    input_mail.requestFocusInWindow();
+                }
+                else if(!(new_input_mail.isEmpty()) && !(new_user_password.isEmpty()) && !(new_safety_user_password.isEmpty()))
+                // checking if the fields are completed
+                {
+                    if(new_user_password.equals(new_safety_user_password))
+                    // checking if first and second passwords match and if they are completed in the field
+                    {
+                        System.out.println("great! now how would you like us to call you?");
+                        System.out.println("please introduce your username:");
+                        // gets to the next page
+                    }
+                    else
+                    {
+                        safety_pass_field.setText(null); // clears the second password field
+                    
+                        warning.setBounds(50, 565, 300, 20);
+                        warning.setText("Please reintroduce your password!"); // display the warning message
+                        warning.setVisible(true);
+                    
+                        safety_pass_field.requestFocusInWindow();//focuses the second password field
+                    }
                 }
                 else
                 {
-                    safety_pass_field.setText(""); // clears the second password field
-                    warning.setVisible(true);
-                    safety_pass_field.requestFocusInWindow();//focuses the second password field
+                    System.out.println("please introduce your credentials!");
                 }
             }
         });

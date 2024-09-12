@@ -3,7 +3,7 @@ import java.util.*;
 
 public class UserManager
 {
-    private Map<String, User> userMap = new HashMap<>();
+    public Map<String, User> userMap = new HashMap<>();
     // a Map is used to store user information
     // the key is the user’s email (String), and the value is a User object 
     // that contains the user’s details (email, name, password)
@@ -41,7 +41,23 @@ public class UserManager
             System.out.println("User not found with email: " + email);
             return false;
         }
-        
+    }
+
+    public boolean checkExistentAcc(String email)
+    {
+        User user = userMap.get(email); // Get the User object by email
+        if(user != null)
+        {
+            System.out.println("User found: " + user.getEmail());
+            System.out.println("User introduced: " + email);
+            System.out.println("result: " + (user.getEmail()).equals(email));
+            return user.getEmail().equals(email);
+        }
+        else
+        {
+            System.out.println("User not found with email " + email);
+            return false;
+        }
     }
 
     // Method to load users from the file into the map
