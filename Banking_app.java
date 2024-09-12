@@ -7,8 +7,11 @@ import java.io.*;
 class MainFrame
 {
     private JFrame frame;
-    private JPanel mainPanel;
-    private CardLayout cardLayout;
+    public JPanel mainPanel;
+    public CardLayout cardLayout;
+
+    // creating an instance for the opening page
+    OpeningPage openingPage = new OpeningPage(this);
 
     // create instances of Login and Signup pages
     LoginPage loginPage = new LoginPage(this);
@@ -16,17 +19,18 @@ class MainFrame
     /*
      * we create instances to keep the code for each page 
      * in a separate class and to use them for the card layout
+     * 
+     * this is refering to the instance of MainFrame class
     */
 
     MainFrame() throws IOException // constructor
     {
+        openingPage = new OpeningPage(this);
         loginPage = new LoginPage(this);
         signUpPage = new SignUpPage(this);
 
         startFrame();
         initMainPanel();
-
-        setupOpeningPage();
 
         mainPanel.add(openingPage, "openingPage");
         mainPanel.add(loginPage, "loginPage");
@@ -55,71 +59,6 @@ class MainFrame
         // will hold the other panels (or pages/frames)
         // a panel can hold multiple components
     }
-
-    private JPanel openingPage;
-
-    private void setupOpeningPage()
-    {
-        openingPage = new JPanel();
-        openingPage.setLayout(null);
-        openingPage.setBackground(new Color(50, 52, 88));
-
-        LoginButton();
-        SignUpButton();
-
-    }
-
-    private void LoginButton()
-    {
-        JButton LogInButton = new JButton("Log in");
-        LogInButton.setBounds(50, 600, 300, 50);
-        LogInButton.setBackground(Color.WHITE);
-        LogInButton.setFont(new Font("Arial", Font.BOLD, 18));
-
-        LogInButton.addActionListener(new ActionListener()
-        // attaches an action listener to the LogInButton 
-        {
-            @Override
-            public void actionPerformed(ActionEvent login)
-            {
-                cardLayout.show(mainPanel, "loginPage");
-            }
-        });
-        /*
-         * An action listener is an object that listens for actions (like button clicks) 
-         *  and executes a specified block of code when the event occurs.
-         * 
-         *  ActionListener is an interface so it doesn’t have an implementation by default
-         *  We are providing the implementation by overriding the actionPerformed() method 
-         *  inside the curly braces 
-         * 
-         *  The method receives an object (login) of type ActionEvent which will contain information
-         *  aboutthe event 
-         *  (login is not used here but we usually use the obect when we need to know which button is
-         *  pressed if there are more buttons)
-         */
-
-        openingPage.add(LogInButton);
-    }
-
-    private void SignUpButton()
-    {
-        JButton SignUpButton = new JButton("Sign Up");
-        SignUpButton.setBounds(50, 700, 300, 50);
-        SignUpButton.setBackground(Color.WHITE);
-        SignUpButton.setFont(new Font("Arial", Font.BOLD, 18));
-
-        SignUpButton.addActionListener(new ActionListener() 
-        {
-            public void actionPerformed(ActionEvent e)
-            {
-                cardLayout.show(mainPanel, "signUpPage");
-            }
-        });
-
-        openingPage.add(SignUpButton);
-    }
-
 }
 
 public class Banking_app
