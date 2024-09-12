@@ -10,8 +10,8 @@ public class LoginPage extends JPanel
 // the class LoginPage inherits from JPanel class
 // that means LoginPage will acquire properties of the JPanel class
 {
-    public String input_mail;
-    public String user_password;
+    public String input_mail = "";
+    public String user_password = "";
     public String username;
 
     private UserManager userManager;
@@ -152,6 +152,10 @@ public class LoginPage extends JPanel
                 if(userManager.authenticate(input_mail, user_password))
                 {
                     System.out.println("Login Successful!");
+                }
+                else if((input_mail.isEmpty()) && (user_password.isEmpty()))
+                {
+                    System.out.println("introduce data!");
                 }
                 else
                 {

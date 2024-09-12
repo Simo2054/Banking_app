@@ -198,7 +198,7 @@ public class SignUpPage extends JPanel
                     pass_field.setText(null);
                     safety_pass_field.setText(null);
                     warning.setBounds(50, 305, 300, 45);
-                    warning.setText("An account with this e-mail adress already exists!");
+                    warning.setText("An account with this e-mail adress already exists!");// display the warning message
                     warning.setVisible(true);
                     input_mail.requestFocusInWindow();
                 }
