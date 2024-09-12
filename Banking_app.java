@@ -1,10 +1,12 @@
 import javax.swing.*;
 import javax.swing.border.*;
 import java.awt.*;
-import java.awt.event.*;
 import java.io.*;
 
 class MainFrame
+// MainFrame is the main class that controls the window and the auth screens 
+// such as log in screens and sign up screens
+// it uses a card layout to do that
 {
     private JFrame frame;
     public JPanel mainPanel;
