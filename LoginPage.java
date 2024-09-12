@@ -12,7 +12,6 @@ public class LoginPage extends JPanel
 {
     public String input_mail = "";
     public String user_password = "";
-    public String username;
 
     private UserManager userManager;
     // creating a userManager instance to manage user authentication

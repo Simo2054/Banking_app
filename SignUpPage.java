@@ -11,7 +11,6 @@ public class SignUpPage extends JPanel
     public String new_input_mail = "";
     public String new_user_password = "";
     public String new_safety_user_password = "";
-    public String new_username = "";
 
     private UserManager userManager;
 
