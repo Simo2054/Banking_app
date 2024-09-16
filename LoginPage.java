@@ -1,9 +1,6 @@
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.FocusEvent;
-import java.awt.event.FocusListener;
+import java.awt.event.*;
 import java.io.IOException;
 
 public class LoginPage extends JPanel
@@ -16,11 +13,16 @@ public class LoginPage extends JPanel
     private UserManager userManager;
     // creating a userManager instance to manage user authentication
 
+    private MainFrame mainFrame;// field to hold the reference to the MainFrame class
+
     public LoginPage(MainFrame mainFrame) throws IOException
     // constructor for the LoginPage class
     // it accepts and object of type MainFrame, which will allow the class
     // to interact with the MainFrame class
     {
+        this.mainFrame = mainFrame;
+        // storing the reference to MainFrame class
+        
         userManager = new UserManager();
         // initializing user manager to handle users
 
@@ -31,7 +33,9 @@ public class LoginPage extends JPanel
         instructions_fields();
         user_fields(); // input fields
 
-        loginCheck();
+        loginCheck(); // checks credentials introduced
+
+        BackButton();// button to go back to previus page
     }
 
     private void instructions_fields()
@@ -164,6 +168,23 @@ public class LoginPage extends JPanel
         });
 
         add(loginCheckButton);
+    }
+
+    private void BackButton()
+    {
+        JButton backButton = new JButton("Back");
+        backButton.setBounds(300, 730, 80, 50);
+
+        backButton.addActionListener(new ActionListener() 
+        {
+            @Override
+            public void actionPerformed(ActionEvent e)
+            {
+                mainFrame.cardLayout.show(mainFrame.mainPanel, "openingPage");
+            }
+        });
+
+        add(backButton);
     }
 
 }

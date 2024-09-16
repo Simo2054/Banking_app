@@ -1,11 +1,9 @@
 import javax.swing.*;
-import javax.swing.border.*;
 import java.awt.*;
 import java.awt.event.*;
 
 public class OpeningPage extends JPanel
 {
-
     private MainFrame mainFrame; // a field to hold the reference (connection) to the MainFrame class
     // this is allowing the OpeningPage to store the MainFrame instance and use it in the class
 

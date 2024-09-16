@@ -1,9 +1,6 @@
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.FocusEvent;
-import java.awt.event.FocusListener;
+import java.awt.event.*;
 import java.io.IOException;
 
 public class SignUpPage extends JPanel 
@@ -14,8 +11,12 @@ public class SignUpPage extends JPanel
 
     private UserManager userManager;
 
+    private MainFrame mainFrame;
+
     public SignUpPage(MainFrame mainFrame) throws IOException
     {
+        this.mainFrame = mainFrame;
+
         userManager = new UserManager();
         // initializing user manager to handle users
 
@@ -26,7 +27,9 @@ public class SignUpPage extends JPanel
         instructions_fields();
         user_input_fields();
 
-        signUpCheck();
+        signUpCheck(); // checking the input credentials
+
+        BackButton(); // a button to go back to previous page
     }
 
     private void instructions_fields()
@@ -231,5 +234,22 @@ public class SignUpPage extends JPanel
 
         add(NextButton);
         add(warning);
+    }
+
+    private void BackButton()
+    {
+        JButton backButton = new JButton("Back");
+        backButton.setBounds(300, 730, 80, 50);
+
+        backButton.addActionListener(new ActionListener() 
+        {
+            @Override
+            public void actionPerformed(ActionEvent e)
+            {
+                mainFrame.cardLayout.show(mainFrame.mainPanel, "openingPage");
+            }
+        });
+
+        add(backButton);
     }
 }
