@@ -139,10 +139,21 @@ public class LoginPage extends JPanel
         add(pass_field);
     }
 
+    private JTextArea warning;
+
     private void loginCheck()
     {
         JButton loginCheckButton = new JButton("Log in");
         loginCheckButton.setBounds(50, 500, 100, 40);
+
+        warning = new JTextArea();
+        warning.setEditable(false);
+        warning.setFont(new Font("Arial", Font.LAYOUT_LEFT_TO_RIGHT, 15));
+        warning.setForeground(Color.PINK);
+        warning.setBackground(new Color(0,0,0,0));
+        warning.setLineWrap(true);
+        warning.setWrapStyleWord(true);
+        warning.setVisible(false);
 
         loginCheckButton.addActionListener(new ActionListener() 
         {
@@ -154,7 +165,9 @@ public class LoginPage extends JPanel
                 System.out.println("password: " + user_password);
                 if(userManager.authenticate(input_mail, user_password))
                 {
-                    System.out.println("Login Successful!");
+                    warning.setBounds(50, 305 , 300, 45);
+                    warning.setText("Login Successful!");
+                    warning.setVisible(true);
                 }
                 else if((input_mail.isEmpty()) && (user_password.isEmpty()))
                 {
