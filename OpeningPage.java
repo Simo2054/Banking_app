@@ -24,10 +24,11 @@ public class OpeningPage extends JPanel
 
     private void LoginButton()
     {
-        JButton LogInButton = new JButton("Log in");
-        LogInButton.setBounds(50, 600, 300, 50);
-        LogInButton.setBackground(Color.WHITE);
+        RoundedButton LogInButton = new RoundedButton("Log in", 30);
+        LogInButton.setBounds(50, 600, 300, 70);
         LogInButton.setFont(new Font("Arial", Font.BOLD, 18));
+        LogInButton.setBackground(Color.white);
+        LogInButton.setForeground(Color.black);
 
         LogInButton.addActionListener(new ActionListener()
         // attaches an action listener to the LogInButton 
@@ -58,10 +59,11 @@ public class OpeningPage extends JPanel
 
     private void SignUpButton()
     {
-        JButton SignUpButton = new JButton("Sign Up");
-        SignUpButton.setBounds(50, 700, 300, 50);
-        SignUpButton.setBackground(Color.WHITE);
+        RoundedButton SignUpButton = new RoundedButton("Sign Up", 30);
+        SignUpButton.setBounds(50, 700, 300, 70);
         SignUpButton.setFont(new Font("Arial", Font.BOLD, 18));
+        SignUpButton.setBackground(Color.WHITE);
+        SignUpButton.setForeground(Color.black);
 
         SignUpButton.addActionListener(new ActionListener() 
         {
