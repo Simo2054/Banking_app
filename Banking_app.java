@@ -7,8 +7,6 @@ class MainFrame
 // such as log in screens and sign up screens
 // it uses a card layout to do that
 {
-    public UserManager userManager;
-
     private JFrame frame;
     public JPanel mainPanel;
     public CardLayout cardLayout;
@@ -31,14 +29,10 @@ class MainFrame
 
     MainFrame() throws IOException // constructor
     {
-        userManager = new UserManager();
-
         openingPage = new OpeningPage(this);
         loginPage = new LoginPage(this);
         signUpPage = new SignUpPage(this);
-        successfulLogIn = new LogInSuccess(this, userManager, loginPage);
-
-        userManager.setLogInSuccess(successfulLogIn);// injecting LogInSuccess to use it in UserManager
+        successfulLogIn = new LogInSuccess(this, loginPage);
 
         startFrame();
         initMainPanel();

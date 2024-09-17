@@ -10,9 +10,9 @@ public class LogInSuccess extends JPanel
     private MainFrame mainFrame;
     private LoginPage loginPage;
     
-    public LogInSuccess(MainFrame mainFrame, UserManager userManager, LoginPage loginPage) throws IOException
+    public LogInSuccess(MainFrame mainFrame, LoginPage loginPage) throws IOException
     {
-        this.userManager = userManager;
+        userManager = new UserManager();
         this.mainFrame = mainFrame;
         this.loginPage = loginPage;
         
@@ -98,10 +98,10 @@ public class LogInSuccess extends JPanel
             {
                 if(rememberUser == true)
                 {
-                    System.out.println("checkbox: " + rememberUser);
-                    //userManager.RememberUser(loginPage.input_mail, loginPage.user_password);
+                    //System.out.println("check: " + rememberUser);
+                    userManager.RememberUser(loginPage.input_mail, loginPage.user_password);
                 }
-                System.out.print("ceav: " + rememberUser);
+                System.out.println("ch: " + rememberUser);
                 System.out.println("next>>>");
             }
         });

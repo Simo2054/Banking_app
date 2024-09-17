@@ -35,9 +35,9 @@ public class OpeningPage extends JPanel
             public void actionPerformed(ActionEvent login)
             {
                 // access the MainFrame fields for switching between cards
-                //mainFrame.cardLayout.show(mainFrame.mainPanel, "loginPage");
+                mainFrame.cardLayout.show(mainFrame.mainPanel, "loginPage");
                 
-                mainFrame.cardLayout.show(mainFrame.mainPanel, "successfulLogIn");
+                //mainFrame.cardLayout.show(mainFrame.mainPanel, "successfulLogIn");
             }
         });
         /*

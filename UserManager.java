@@ -3,10 +3,6 @@ import java.util.*;
 
 public class UserManager
 {
-    private LogInSuccess logInSuccess;
-    //initializing LogInSuccess instance to gain access to
-    // boolean decision (if user wants to be remembered)
-
     public Map<String, User> userMap = new HashMap<>();
     // a Map is used to store user information
     // the key is the user’s email (String), and the value is a User object 
@@ -114,33 +110,20 @@ public class UserManager
 
     //---------------------------------------------------------------------------
 
-    // Setter method to inject LogInSuccess after instantiation
-    public void setLogInSuccess(LogInSuccess logInSuccess) 
-    {
-        this.logInSuccess = logInSuccess;
-    }
-
-    // Method to write user credentials into a file if user wants to be remembered
+    // Method to write user credentials into a file if user wants to be
     public void RememberUser(String email, String password)
     {
-        if(logInSuccess != null)
+        User user = userMap.get(email);// get the User object by email
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(RememberCredPath)))
         {
-            boolean rememberMeStatus = logInSuccess.rememberUser;
-            if(rememberMeStatus == true)
-            {
-                User user = userMap.get(email);// get the User object by email
-                try (BufferedWriter writer = new BufferedWriter(new FileWriter(RememberCredPath)))
-                {
-                    writer.write(email + "," + user.getName() + "," + password);
-                    // writes user details(email, name, password) in a single line using a format
-                    // writing will be done in the file that holds credentials for remembering 
-                    writer.newLine();
-                }
-                catch (IOException e)
-                {
-                    e.printStackTrace();
-                }
-            }
+            writer.write(email + "," + user.getName() + "," + password);
+            // writes user details(email, name, password) in a single line using a format
+            // writing will be done in the file that holds credentials for remembering 
+            writer.newLine();
+        }
+        catch (IOException e)
+        {
+            e.printStackTrace();
         }
     }
 
