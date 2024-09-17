@@ -37,6 +37,8 @@ public class LogInSuccess extends JPanel
         add(logInSuccess);
     }
 
+    public boolean rememberUser = false;
+
     private void RememberMeBox()
     {
         JTextArea question = new JTextArea();
@@ -49,6 +51,30 @@ public class LogInSuccess extends JPanel
         question.setLineWrap(true);
         question.setWrapStyleWord(true);
 
+        JCheckBox rememberMe = new JCheckBox("Yes, remember me");
+        rememberMe.setBounds(50, 520, 300, 50);
+        rememberMe.setFont(new Font("Arial", Font.BOLD, 18));
+        rememberMe.setForeground(Color.white);
+        rememberMe.setBackground(new Color(0,0,0,0));
+
+        rememberMe.addActionListener(new ActionListener() 
+        {
+            @Override
+            public void actionPerformed(ActionEvent checked)
+            {
+                if(rememberMe.isSelected())
+                {
+                    System.out.println("checked!");
+                    rememberUser = true;
+                }
+                else
+                {
+                    System.out.println("no no!");
+                }
+            }
+        });
+
         add(question);
+        add(rememberMe);
     }
 }
