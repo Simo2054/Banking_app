@@ -3,6 +3,10 @@ import java.util.*;
 
 public class UserManager
 {
+    private LogInSuccess logInSuccess;
+    //initializing LogInSuccess instance to gain access to
+    // boolean decision (if user wants to be remembered)
+
     public Map<String, User> userMap = new HashMap<>();
     // a Map is used to store user information
     // the key is the user’s email (String), and the value is a User object 
@@ -10,6 +14,10 @@ public class UserManager
 
     private final String filePath = "user_files/user_credentials.txt";
     // the file in which we will store user credentials
+
+    private final String RememberCredentials = "user_files/stored_credentials.txt";
+    // the file in which we will store the user credentials for them to not need to
+    // authenticate each time the app opens
 
     public UserManager() throws IOException 
     {
@@ -104,5 +112,28 @@ public class UserManager
         }
     }
 
+    //--------------------------------------
+
+    // Setter method to inject LogInSuccess after instantiation
+    public void setLogInSuccess(LogInSuccess logInSuccess) 
+    {
+        this.logInSuccess = logInSuccess;
+    }
+
+    // Example method that accesses the fields
+    public void checkRememberStatus() 
+    {
+        System.out.println("ceav: " + logInSuccess);
+        if (logInSuccess != null) 
+        {
+            boolean rememberMeStatus = logInSuccess.rememberUser;
+            System.out.println("Remember User status: " + rememberMeStatus);
+        }
+    }
+
+    // private void RememberUser(String email, String password)
+    // {
+    //     if()
+    // }
 }
 

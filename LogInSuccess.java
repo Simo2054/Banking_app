@@ -1,17 +1,19 @@
 import javax.swing.*;
 import javax.swing.border.Border;
-
 import java.awt.*;
 import java.awt.event.*;
 import java.io.IOException;
 
 public class LogInSuccess extends JPanel
 {
+    private UserManager userManager;
     private MainFrame mainFrame;
     
-    public LogInSuccess(MainFrame mainFrame) throws IOException
+    public LogInSuccess(MainFrame mainFrame, UserManager userManager) throws IOException
     {
-        //this.mainFrame = mainFrame;
+        this.userManager = userManager;
+        this.mainFrame = mainFrame;
+        
         
         setBackground(new Color(110, 20, 90));
         setLayout(null);
@@ -38,6 +40,7 @@ public class LogInSuccess extends JPanel
     }
 
     public boolean rememberUser = false;
+    // decides if user's credentails will be remembered or not
 
     private void RememberMeBox()
     {
@@ -57,7 +60,7 @@ public class LogInSuccess extends JPanel
         rememberMe.setForeground(Color.white);
         rememberMe.setBackground(new Color(0,0,0,0));
 
-        rememberMe.addActionListener(new ActionListener() 
+        rememberMe.addActionListener(new ActionListener() // checks if user checked the checkbox :)
         {
             @Override
             public void actionPerformed(ActionEvent checked)
@@ -66,6 +69,9 @@ public class LogInSuccess extends JPanel
                 {
                     System.out.println("checked!");
                     rememberUser = true;
+
+                    //userManager.setLogInSuccess(successfulLogIn);
+                    userManager.checkRememberStatus();
                 }
                 else
                 {
