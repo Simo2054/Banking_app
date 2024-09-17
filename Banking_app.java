@@ -24,11 +24,14 @@ class MainFrame
      * this is refering to the instance of MainFrame class
     */
 
+    LogInSuccess successfulLogIn = new LogInSuccess(this);// instance for the successful log in page
+
     MainFrame() throws IOException // constructor
     {
         openingPage = new OpeningPage(this);
         loginPage = new LoginPage(this);
         signUpPage = new SignUpPage(this);
+        successfulLogIn = new LogInSuccess(this);
 
         startFrame();
         initMainPanel();
@@ -36,6 +39,7 @@ class MainFrame
         mainPanel.add(openingPage, "openingPage");
         mainPanel.add(loginPage, "loginPage");
         mainPanel.add(signUpPage, "signUpPage");
+        mainPanel.add(successfulLogIn, "successfulLogIn");
 
         frame.add(mainPanel);
         frame.setVisible(true);
@@ -47,6 +51,7 @@ class MainFrame
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         // when we close application, it will stop running in terminal too
         frame.setSize(400, 800);
+        // 400 width and 800 length
         frame.setLocationRelativeTo(null);
         // places the frame on the center of user display
     }

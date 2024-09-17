@@ -38,9 +38,12 @@ public class LoginPage extends JPanel
         BackButton();// button to go back to previus page
     }
 
+    private JTextArea mail_instr;
+    private JTextArea pass_instr;
+
     private void instructions_fields()
     {
-        JTextArea mail_instr = new JTextArea("Please introduce your e-mail adress: ");
+        mail_instr = new JTextArea("Please introduce your e-mail adress: ");
         mail_instr.setBounds(50, 200, 300, 50);
         mail_instr.setEditable(false);
         mail_instr.setFont(new Font("Arial", Font.BOLD, 18));
@@ -49,7 +52,7 @@ public class LoginPage extends JPanel
         mail_instr.setLineWrap(true);
         mail_instr.setWrapStyleWord(true);// this is to wrap by word, not by character
 
-        JTextArea pass_instr = new JTextArea("Please introduce your password: ");
+        pass_instr = new JTextArea("Please introduce your password: ");
         pass_instr.setBounds(50, 350, 300, 50);
         pass_instr.setEditable(false);
         pass_instr.setFont(new Font("Arial", Font.LAYOUT_LEFT_TO_RIGHT, 18));
@@ -62,13 +65,16 @@ public class LoginPage extends JPanel
         add(pass_instr);
     }
 
+    private JTextField user_mail;
+    private JPasswordField pass_field;
+
     private void user_fields()
     {
-        JTextField user_mail = new JTextField();
+        user_mail = new JTextField();
         user_mail.setBounds(50, 260 , 300, 40);
         user_mail.setFont(new Font("Arial", Font.LAYOUT_LEFT_TO_RIGHT, 18));
 
-        JPasswordField pass_field = new JPasswordField();
+        pass_field = new JPasswordField();
         pass_field.setBounds(50, 390, 300, 40);
         pass_field.setFont(new Font("Arial", Font.LAYOUT_LEFT_TO_RIGHT, 18));
 
@@ -139,11 +145,12 @@ public class LoginPage extends JPanel
         add(pass_field);
     }
 
+    private JButton loginCheckButton;
     private JTextArea warning;
 
     private void loginCheck()
     {
-        JButton loginCheckButton = new JButton("Log in");
+        loginCheckButton = new JButton("Log in");
         loginCheckButton.setBounds(50, 500, 100, 40);
 
         warning = new JTextArea();
@@ -165,17 +172,24 @@ public class LoginPage extends JPanel
                 System.out.println("password: " + user_password);
                 if(userManager.authenticate(input_mail, user_password))
                 {
-                    warning.setBounds(50, 305 , 300, 45);
-                    warning.setText("Login Successful!");
-                    warning.setVisible(true);
+                    System.out.println("Login Successful!");
+                    mail_instr.setVisible(false);
+                    pass_instr.setVisible(false);
+                    user_mail.setVisible(false);
+                    pass_field.setVisible(false);
+                    loginCheckButton.setVisible(false);
+                    warning.setVisible(false);
+                    backButton.setVisible(false);
+                    
+                    //LoginSuccess();
                 }
                 else if((input_mail.isEmpty()) && (user_password.isEmpty()))
                 {
-                    System.out.println("introduce data!");
+                    System.out.println("introduce data!"); // data missing from both fields
                 }
                 else
                 {
-                    System.out.println("incorrect data!");
+                    System.out.println("incorrect data!"); // data missing from one field of data is wrong on one or both fields
                 }
             }
         });
@@ -183,9 +197,27 @@ public class LoginPage extends JPanel
         add(loginCheckButton);
     }
 
+    /* 
+    private void LoginSuccess()
+    {
+        JTextArea logInSuccess = new JTextArea("Log In Successful!");
+        logInSuccess.setBounds(50, 100, 300, 200);
+        logInSuccess.setEditable(false);
+        logInSuccess.setFont(new Font("Arial", Font.LAYOUT_LEFT_TO_RIGHT, 15));
+        logInSuccess.setBackground(Color.white);
+        logInSuccess.setForeground(Color.black);
+        logInSuccess.setLineWrap(true);
+        logInSuccess.setWrapStyleWord(true);
+
+        add(logInSuccess);
+    }
+    */
+
+    JButton backButton;
+
     private void BackButton()
     {
-        JButton backButton = new JButton("Back");
+        backButton = new JButton("Back");
         backButton.setBounds(300, 730, 80, 50);
 
         backButton.addActionListener(new ActionListener() 

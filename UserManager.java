@@ -27,7 +27,6 @@ public class UserManager
     public boolean authenticate(String email, String password) 
     {
         User user = userMap.get(email); // Get the User object by email
-        System.out.println("asdf: "+ user);
         if (user != null) 
         {
             System.out.println("User found: " + user.getEmail());
