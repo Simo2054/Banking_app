@@ -17,6 +17,7 @@ public class LogInSuccess extends JPanel
         setLayout(null);
 
         Rectangle();
+        RememberMeBox();
     }
 
     private void Rectangle()
@@ -34,5 +35,20 @@ public class LogInSuccess extends JPanel
         logInSuccess.setBorder(lineBorder);
 
         add(logInSuccess);
+    }
+
+    private void RememberMeBox()
+    {
+        JTextArea question = new JTextArea();
+        question.setText("Would you like us to remember you?");
+        question.setBounds(50, 480, 300, 50);
+        question.setEditable(false);
+        question.setFont(new Font("Arial", Font.BOLD, 18));
+        question.setForeground(Color.WHITE);
+        question.setBackground(new Color(0,0,0,0));
+        question.setLineWrap(true);
+        question.setWrapStyleWord(true);
+
+        add(question);
     }
 }
