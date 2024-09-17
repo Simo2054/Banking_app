@@ -8,12 +8,13 @@ public class LogInSuccess extends JPanel
 {
     private UserManager userManager;
     private MainFrame mainFrame;
+    private LoginPage loginPage;
     
-    public LogInSuccess(MainFrame mainFrame, UserManager userManager) throws IOException
+    public LogInSuccess(MainFrame mainFrame, UserManager userManager, LoginPage loginPage) throws IOException
     {
         this.userManager = userManager;
         this.mainFrame = mainFrame;
-        
+        this.loginPage = loginPage;
         
         setBackground(new Color(110, 20, 90));
         setLayout(null);
@@ -72,6 +73,8 @@ public class LogInSuccess extends JPanel
 
                     //userManager.setLogInSuccess(successfulLogIn);
                     userManager.checkRememberStatus();
+                    System.out.println("mail: " + loginPage.input_mail);
+                    userManager.RememberUser(loginPage.input_mail, loginPage.user_password);
                 }
                 else
                 {

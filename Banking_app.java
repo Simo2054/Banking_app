@@ -36,7 +36,7 @@ class MainFrame
         openingPage = new OpeningPage(this);
         loginPage = new LoginPage(this);
         signUpPage = new SignUpPage(this);
-        successfulLogIn = new LogInSuccess(this, userManager);
+        successfulLogIn = new LogInSuccess(this, userManager, loginPage);
 
         userManager.setLogInSuccess(successfulLogIn);// injecting LogInSuccess to use it in UserManager
 

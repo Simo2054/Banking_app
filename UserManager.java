@@ -15,7 +15,7 @@ public class UserManager
     private final String filePath = "user_files/user_credentials.txt";
     // the file in which we will store user credentials
 
-    private final String RememberCredentials = "user_files/stored_credentials.txt";
+    private final String RememberCredPath = "user_files/stored_credentials.txt";
     // the file in which we will store the user credentials for them to not need to
     // authenticate each time the app opens
 
@@ -112,7 +112,7 @@ public class UserManager
         }
     }
 
-    //--------------------------------------
+    //---------------------------------------------------------------------------
 
     // Setter method to inject LogInSuccess after instantiation
     public void setLogInSuccess(LogInSuccess logInSuccess) 
@@ -131,9 +131,28 @@ public class UserManager
         }
     }
 
-    // private void RememberUser(String email, String password)
-    // {
-    //     if()
-    // }
+    public void RememberUser(String email, String password)
+    {
+        if(logInSuccess != null)
+        {
+            boolean rememberMeStatus = logInSuccess.rememberUser;
+            if(rememberMeStatus == true)
+            {
+                User user = userMap.get(email);// get the User object by email
+                try (BufferedWriter writer = new BufferedWriter(new FileWriter(RememberCredPath)))
+                {
+                    writer.write(email + "," + user.getName() + "," + password);
+                    // writes user details(email, name, password) in a single line using a format
+                    // writing will be done in the file that holds credentials for remembering 
+                    writer.newLine();
+                }
+                catch (IOException e)
+                {
+                    e.printStackTrace();
+                }
+            }
+        }
+    }
+
 }
 
