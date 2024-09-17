@@ -173,15 +173,7 @@ public class LoginPage extends JPanel
                 if(userManager.authenticate(input_mail, user_password))
                 {
                     System.out.println("Login Successful!");
-                    mail_instr.setVisible(false);
-                    pass_instr.setVisible(false);
-                    user_mail.setVisible(false);
-                    pass_field.setVisible(false);
-                    loginCheckButton.setVisible(false);
-                    warning.setVisible(false);
-                    backButton.setVisible(false);
-                    
-                    //LoginSuccess();
+                    mainFrame.cardLayout.show(mainFrame.mainPanel, "successfulLogIn");
                 }
                 else if((input_mail.isEmpty()) && (user_password.isEmpty()))
                 {
@@ -196,22 +188,6 @@ public class LoginPage extends JPanel
 
         add(loginCheckButton);
     }
-
-    /* 
-    private void LoginSuccess()
-    {
-        JTextArea logInSuccess = new JTextArea("Log In Successful!");
-        logInSuccess.setBounds(50, 100, 300, 200);
-        logInSuccess.setEditable(false);
-        logInSuccess.setFont(new Font("Arial", Font.LAYOUT_LEFT_TO_RIGHT, 15));
-        logInSuccess.setBackground(Color.white);
-        logInSuccess.setForeground(Color.black);
-        logInSuccess.setLineWrap(true);
-        logInSuccess.setWrapStyleWord(true);
-
-        add(logInSuccess);
-    }
-    */
 
     JButton backButton;
 
