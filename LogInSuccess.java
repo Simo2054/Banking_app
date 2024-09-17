@@ -21,6 +21,7 @@ public class LogInSuccess extends JPanel
 
         Rectangle();
         RememberMeBox();
+        NextButton();
     }
 
     private void Rectangle()
@@ -43,6 +44,8 @@ public class LogInSuccess extends JPanel
     public boolean rememberUser = false;
     // decides if user's credentails will be remembered or not
 
+    JCheckBox rememberMe; 
+
     private void RememberMeBox()
     {
         JTextArea question = new JTextArea();
@@ -55,7 +58,7 @@ public class LogInSuccess extends JPanel
         question.setLineWrap(true);
         question.setWrapStyleWord(true);
 
-        JCheckBox rememberMe = new JCheckBox("Yes, remember me");
+        rememberMe = new JCheckBox("Yes, remember me");
         rememberMe.setBounds(50, 520, 300, 50);
         rememberMe.setFont(new Font("Arial", Font.BOLD, 18));
         rememberMe.setForeground(Color.white);
@@ -70,14 +73,10 @@ public class LogInSuccess extends JPanel
                 {
                     System.out.println("checked!");
                     rememberUser = true;
-
-                    //userManager.setLogInSuccess(successfulLogIn);
-                    userManager.checkRememberStatus();
-                    System.out.println("mail: " + loginPage.input_mail);
-                    userManager.RememberUser(loginPage.input_mail, loginPage.user_password);
                 }
                 else
                 {
+                    rememberUser = false;
                     System.out.println("no no!");
                 }
             }
@@ -85,5 +84,28 @@ public class LogInSuccess extends JPanel
 
         add(question);
         add(rememberMe);
+    }
+
+    private void NextButton()
+    {
+        JButton nextButton = new JButton("Next >");
+        nextButton.setBounds(300, 730, 80, 50);
+
+        nextButton.addActionListener(new ActionListener() 
+        {
+            @Override
+            public void actionPerformed(ActionEvent e)
+            {
+                if(rememberUser == true)
+                {
+                    System.out.println("checkbox: " + rememberUser);
+                    //userManager.RememberUser(loginPage.input_mail, loginPage.user_password);
+                }
+                System.out.print("ceav: " + rememberUser);
+                System.out.println("next>>>");
+            }
+        });
+
+        add(nextButton);
     }
 }

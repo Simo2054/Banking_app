@@ -120,17 +120,7 @@ public class UserManager
         this.logInSuccess = logInSuccess;
     }
 
-    // Example method that accesses the fields
-    public void checkRememberStatus() 
-    {
-        System.out.println("ceav: " + logInSuccess);
-        if (logInSuccess != null) 
-        {
-            boolean rememberMeStatus = logInSuccess.rememberUser;
-            System.out.println("Remember User status: " + rememberMeStatus);
-        }
-    }
-
+    // Method to write user credentials into a file if user wants to be remembered
     public void RememberUser(String email, String password)
     {
         if(logInSuccess != null)
