@@ -22,13 +22,11 @@ class MainFrame
     LogInSuccess successfulLogIn;
 
     // instance for successful sign up page (card details)
-
+    CardDetailsPage cardDetailsPage;
 
     /*
      * we create instances to keep the code for each page 
      * in a separate class and to use them for the card layout
-     * 
-     * this is refering to the instance of MainFrame class
     */
 
     MainFrame() throws IOException // constructor
@@ -37,6 +35,7 @@ class MainFrame
         loginPage = new LoginPage(this);
         signUpPage = new SignUpPage(this);
         successfulLogIn = new LogInSuccess(this, loginPage);
+        cardDetailsPage = new CardDetailsPage(this);
 
         startFrame();
         initMainPanel();
@@ -45,6 +44,7 @@ class MainFrame
         mainPanel.add(loginPage, "loginPage");
         mainPanel.add(signUpPage, "signUpPage");
         mainPanel.add(successfulLogIn, "successfulLogIn");
+        mainPanel.add(cardDetailsPage, "cardDetailsPage");
 
         frame.add(mainPanel);
         frame.setVisible(true);
