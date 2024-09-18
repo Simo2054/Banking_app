@@ -98,10 +98,10 @@ public class LogInSuccess extends JPanel
             {
                 if(rememberUser == true)
                 {
-                    //System.out.println("check: " + rememberUser);
                     userManager.RememberUser(loginPage.input_mail, loginPage.user_password);
+                    // by clicking the "remember me" checkbox, user's credentials will be 
+                    // kept in a file for future logging in
                 }
-                System.out.println("ch: " + rememberUser);
                 System.out.println("next>>>");
             }
         });
