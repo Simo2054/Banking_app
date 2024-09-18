@@ -20,7 +20,7 @@ class MainFrame
 
     // instance for the successful log in page
     LogInSuccess successfulLogIn;
-    
+
     // instance for successful sign up page (card details)
 
 

@@ -217,7 +217,7 @@ public class SignUpPage extends JPanel
     public void signUpCheck() throws IOException
     {
         JButton NextButton = new JButton("Next");
-        NextButton.setBounds(50, 670, 100, 40);
+        NextButton.setBounds(50, 710, 100, 40);
         
         warning = new JTextArea();
         warning.setEditable(false);
@@ -274,7 +274,7 @@ public class SignUpPage extends JPanel
                     {
                         safety_pass_field.setText(null); // clears the second password field
                     
-                        warning.setBounds(50, 565, 300, 20);
+                        warning.setBounds(50, 645, 300, 20);
                         warning.setText("Please reintroduce your password!"); // display the warning message
                         warning.setVisible(true);
                     
