@@ -15,7 +15,6 @@ class RoundedButton extends JButton
         setOpaque(false); // To ensure the background is not painted as a normal rectangle
         setContentAreaFilled(false); // To make the background transparent
         setFocusPainted(false); // To remove the focus outline
-        setBorder(new RoundedBorder(radius)); // Use the custom rounded border
     }
 
     @Override

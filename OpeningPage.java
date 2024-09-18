@@ -27,6 +27,7 @@ public class OpeningPage extends JPanel
         LogInButton.setFont(new Font("Arial", Font.BOLD, 18));
         LogInButton.setBackground(Color.white);
         LogInButton.setForeground(Color.black);
+        LogInButton.setBorder(new RoundedBorder(30, Color.BLACK, 4));
 
         LogInButton.addActionListener(new ActionListener()
         // attaches an action listener to the LogInButton 
@@ -64,6 +65,7 @@ public class OpeningPage extends JPanel
         SignUpButton.setFont(new Font("Arial", Font.BOLD, 18));
         SignUpButton.setBackground(Color.WHITE);
         SignUpButton.setForeground(Color.black);
+        SignUpButton.setBorder(new RoundedBorder(30, Color.BLACK, 4));
 
         SignUpButton.addActionListener(new ActionListener() 
         {
