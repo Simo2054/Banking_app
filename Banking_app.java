@@ -20,6 +20,10 @@ class MainFrame
 
     // instance for the successful log in page
     LogInSuccess successfulLogIn;
+    
+    // instance for successful sign up page (card details)
+
+
     /*
      * we create instances to keep the code for each page 
      * in a separate class and to use them for the card layout
