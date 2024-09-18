@@ -57,6 +57,8 @@ class MainFrame
         // when we close application, it will stop running in terminal too
         frame.setSize(400, 800);
         // 400 width and 800 length
+        frame.setResizable(false);
+        // making the frame unresizable
         frame.setLocationRelativeTo(null);
         // places the frame on the center of user display
     }
