@@ -45,7 +45,7 @@ public class SignUpPage extends JPanel
         mail_instr.setWrapStyleWord(true);
 
         JTextArea username_instr = new JTextArea("How would you like us to call you? Please introduce your username:");
-        username_instr.setBounds(50, 310, 300, 55);
+        username_instr.setBounds(50, 340, 300, 55);
         username_instr.setEditable(false);
         username_instr.setFont(new Font("Arial", Font.LAYOUT_LEFT_TO_RIGHT, 18));
         username_instr.setForeground(Color.WHITE);
@@ -54,7 +54,7 @@ public class SignUpPage extends JPanel
         username_instr.setWrapStyleWord(true);
 
         JTextArea pass_instr = new JTextArea("Please introduce a new password for your account:");
-        pass_instr.setBounds(50, 430, 300, 50);
+        pass_instr.setBounds(50, 450, 300, 50);
         pass_instr.setEditable(false);
         pass_instr.setFont(new Font("Arial", Font.LAYOUT_LEFT_TO_RIGHT, 18));
         pass_instr.setForeground(Color.WHITE);
@@ -63,7 +63,7 @@ public class SignUpPage extends JPanel
         pass_instr.setWrapStyleWord(true);
 
         JTextArea safety_pass_instr = new JTextArea("Please introduce your new password one more time:");
-        safety_pass_instr.setBounds(50, 540, 300, 50);
+        safety_pass_instr.setBounds(50, 560, 300, 50);
         safety_pass_instr.setEditable(false);
         safety_pass_instr.setFont(new Font("Arial", Font.LAYOUT_LEFT_TO_RIGHT, 18));
         safety_pass_instr.setForeground(Color.WHITE);
@@ -89,15 +89,15 @@ public class SignUpPage extends JPanel
         email_field.setFont(new Font("Arial", Font.LAYOUT_LEFT_TO_RIGHT, 18));
 
         username_field = new JTextField();
-        username_field.setBounds(50, 375, 300, 40);
+        username_field.setBounds(50, 400, 300, 40);
         username_field.setFont(new Font("Arial", Font.LAYOUT_LEFT_TO_RIGHT, 18));
 
         pass_field = new JPasswordField();
-        pass_field.setBounds(50, 490, 300, 40);
+        pass_field.setBounds(50, 510, 300, 40);
         pass_field.setFont(new Font("Arial", Font.LAYOUT_LEFT_TO_RIGHT, 18));
 
         safety_pass_field = new JPasswordField();
-        safety_pass_field.setBounds(50, 600 , 300, 40);
+        safety_pass_field.setBounds(50, 620, 300, 40);
         safety_pass_field.setFont(new Font("Arial", Font.LAYOUT_LEFT_TO_RIGHT, 18));
     
         email_field.addActionListener(new ActionListener()
@@ -217,7 +217,7 @@ public class SignUpPage extends JPanel
     public void signUpCheck() throws IOException
     {
         JButton NextButton = new JButton("Next");
-        NextButton.setBounds(50, 710, 100, 40);
+        NextButton.setBounds(50, 730, 100, 50);
         
         warning = new JTextArea();
         warning.setEditable(false);
@@ -244,7 +244,7 @@ public class SignUpPage extends JPanel
                     username_field.setText(null);
                     pass_field.setText(null);
                     safety_pass_field.setText(null);
-                    warning.setBounds(50, 305, 300, 45);
+                    warning.setBounds(50, 300, 300, 40);
                     warning.setText("An account with this e-mail adress already exists!");// display the warning message
                     warning.setVisible(true);
                     email_field.requestFocusInWindow();
@@ -274,7 +274,7 @@ public class SignUpPage extends JPanel
                     {
                         safety_pass_field.setText(null); // clears the second password field
                     
-                        warning.setBounds(50, 645, 300, 20);
+                        warning.setBounds(50, 660, 300, 20);
                         warning.setText("Please reintroduce your password!"); // display the warning message
                         warning.setVisible(true);
                     
