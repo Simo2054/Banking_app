@@ -8,8 +8,12 @@ public class CardDetailsPage extends JPanel
     private MainFrame mainFrame;
     private SignUpPage signUpPage;
 
+    //private DebitCardType debit_card_type;
+
     public CardDetailsPage(MainFrame mainFrame, SignUpPage signUpPage) //throws IOException
     {
+        //debit_card_type = new DebitCardType();
+
         this.mainFrame = mainFrame;
         //userManager = new UserManager();
         this.signUpPage = signUpPage;
@@ -18,6 +22,7 @@ public class CardDetailsPage extends JPanel
         setLayout(null);
 
         instructions_fields();
+        switch_buttons();
     }
 
     private void instructions_fields()
@@ -41,8 +46,38 @@ public class CardDetailsPage extends JPanel
         intro_text.setBounds(50, 50, 300, text_height);
 
 
-        
+        JTextArea card_propose = new JTextArea();
+        card_propose.setText("Please choose a plan for your new card:");
+        card_propose.setBounds(50, 200, 300, 55);
+        card_propose.setEditable(false);
+        card_propose.setFont(new Font("Arial", Font.LAYOUT_LEFT_TO_RIGHT, 20));
+        card_propose.setForeground(Color.WHITE);
+        card_propose.setBackground(new Color(0,0,0,0));
+        card_propose.setLineWrap(true);
+        card_propose.setWrapStyleWord(true);
 
         add(intro_text);
+        add(card_propose);
     }
+
+    private void switch_buttons()
+    {
+        JButton prev_type = new JButton();
+        prev_type.setBounds(25, 300, 50, 150);
+        prev_type.setText("《");
+        prev_type.setForeground(Color.BLACK);
+        prev_type.setFont(new Font("Arial", Font.BOLD, 16));
+
+        JButton next_type = new JButton();
+        next_type.setBounds(325, 300, 50, 150);
+        next_type.setText("》");
+        next_type.setForeground(Color.BLACK);
+        next_type.setFont(new Font("Arial", Font.BOLD, 16));
+
+        
+
+        add(prev_type);
+        add(next_type);
+    }
+    
 }
