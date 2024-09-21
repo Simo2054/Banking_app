@@ -256,18 +256,20 @@ public class SignUpPage extends JPanel
                     if(new_user_password.equals(new_safety_user_password))
                     // checking if first and second passwords match and if they are completed in the field
                     {
-                        // add user to the database(file)
                         try
                         {
+                            // add user to the database(file)
                             userManager.addUser(new_user_email, new_username, new_user_password);
+                            // switching to the card details screen
+                            mainFrame.cardLayout.show(mainFrame.mainPanel, "cardDetailsPage");
                         }
                         catch (IOException ex) 
                         {
                             ex.printStackTrace(); // printing the error for debugging purposes
-                            System.out.println("Error saving user credentials.");
+                            warning.setBounds(50, 700, 300, 20);
+                            warning.setText("Error saving user credentials!");
+                            warning.setVisible(true);
                         }
-                        System.out.println("next>>>");
-                        // gets to the next page
                     }
                     else
                     // the case where first pass field doesn't corespond with the second pass field

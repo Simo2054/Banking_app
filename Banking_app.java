@@ -35,7 +35,7 @@ class MainFrame
         loginPage = new LoginPage(this);
         signUpPage = new SignUpPage(this);
         successfulLogIn = new LogInSuccess(this, loginPage);
-        cardDetailsPage = new CardDetailsPage(this);
+        cardDetailsPage = new CardDetailsPage(this, signUpPage);
 
         startFrame();
         initMainPanel();
