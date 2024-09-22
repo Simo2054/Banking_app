@@ -29,7 +29,7 @@ public class DebitCardType extends JPanel
     {
         JTextArea debit_card_instructions;
         debit_card_instructions = new JTextArea();
-        debit_card_instructions.setText("this is debit card instructions...");
+        debit_card_instructions.setText("this is debit card instructions...bla bla blaaa");
         debit_card_instructions.setBounds(75, 190, 250, 150);
         debit_card_instructions.setEditable(false);
         debit_card_instructions.setFont(new Font("Arial", Font.LAYOUT_LEFT_TO_RIGHT, 15));
