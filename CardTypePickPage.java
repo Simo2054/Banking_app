@@ -11,6 +11,7 @@ public class CardTypePickPage extends JPanel
     private JPanel cardPanel; // dynamic card (refering to cardLayout) type
     private DebitCardType debitCardType;
     private CreditCardType creditCardType;
+    private CardLayout cardLayout; // using cardLayout for card switching
 
     public CardTypePickPage(MainFrame mainFrame, SignUpPage signUpPage) //throws IOException
     {
@@ -23,14 +24,22 @@ public class CardTypePickPage extends JPanel
 
         instructions_fields();
 
+        // initializing card panel with CardLayout
+        cardLayout = new CardLayout();
+        cardPanel = new JPanel(cardLayout); // using card layout for easy switching
+        cardPanel.setBounds(0, 270, 400, 400);
+        
+        // instances of card-types card panels
         debitCardType = new DebitCardType();
-        // instance of Debit card panel
         creditCardType = new CreditCardType();
 
-        // initialize card panel with debit card panel
-        cardPanel = new JPanel(null);
-        cardPanel.setBounds(0, 270, 400, 400);
-        cardPanel.add(debitCardType);
+        // adding card types to the cardPanel
+        cardPanel.add(debitCardType, "DebitCard");
+        cardPanel.add(creditCardType, "CreditCard");
+
+        // initially showing the debit card
+        cardLayout.show(cardPanel, "DebitCard");
+        
         add(cardPanel);
 
         switch_buttons();
@@ -90,11 +99,10 @@ public class CardTypePickPage extends JPanel
             @Override
             public void actionPerformed(ActionEvent e)
             {
-                // remove the current card type 
-            cardPanel.removeAll();
-            cardPanel.add(creditCardType);
-            cardPanel.revalidate();
-            cardPanel.repaint();
+                cardPanel.removeAll();
+                cardLayout.show(cardPanel, "CreditCard"); // switching card type
+                cardPanel.revalidate();
+                cardPanel.repaint();
             }
         });
 

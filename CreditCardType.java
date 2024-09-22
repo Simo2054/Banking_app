@@ -5,6 +5,7 @@ public class CreditCardType extends JPanel
 {
     public CreditCardType()
     {
+        setLayout(null);
         addTitle();
         addInstructions();
     }
@@ -14,7 +15,7 @@ public class CreditCardType extends JPanel
         JTextArea debit_card_title = new JTextArea("Credit card");
         debit_card_title.setEditable(false);
         debit_card_title.setFont(new Font("Arial", Font.BOLD, 20));
-        debit_card_title.setForeground(Color.WHITE);
+        debit_card_title.setForeground(Color.BLACK);
         debit_card_title.setBackground(new Color(0,0,0,0));
         debit_card_title.setLineWrap(true);
         debit_card_title.setWrapStyleWord(true);
