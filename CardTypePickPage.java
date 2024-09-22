@@ -2,18 +2,18 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 
-public class CardDetailsPage extends JPanel
+public class CardTypePickPage extends JPanel
 {
     private UserManager userManager;
-    private MainFrame mainFrame;
     private SignUpPage signUpPage;
 
-    //private DebitCardType debit_card_type;
+    private MainFrame mainFrame;
+    private JPanel cardPanel; // dynamic card (refering to cardLayout) type
+    private DebitCardType debitCardType;
+    private CreditCardType creditCardType;
 
-    public CardDetailsPage(MainFrame mainFrame, SignUpPage signUpPage) //throws IOException
+    public CardTypePickPage(MainFrame mainFrame, SignUpPage signUpPage) //throws IOException
     {
-        //debit_card_type = new DebitCardType();
-
         this.mainFrame = mainFrame;
         //userManager = new UserManager();
         this.signUpPage = signUpPage;
@@ -22,6 +22,17 @@ public class CardDetailsPage extends JPanel
         setLayout(null);
 
         instructions_fields();
+
+        debitCardType = new DebitCardType();
+        // instance of Debit card panel
+        creditCardType = new CreditCardType();
+
+        // initialize card panel with debit card panel
+        cardPanel = new JPanel(null);
+        cardPanel.setBounds(0, 270, 400, 400);
+        cardPanel.add(debitCardType);
+        add(cardPanel);
+
         switch_buttons();
     }
 
@@ -74,10 +85,20 @@ public class CardDetailsPage extends JPanel
         next_type.setForeground(Color.BLACK);
         next_type.setFont(new Font("Arial", Font.BOLD, 16));
 
-        
+        next_type.addActionListener(new ActionListener() 
+        {
+            @Override
+            public void actionPerformed(ActionEvent e)
+            {
+                // remove the current card type 
+            cardPanel.removeAll();
+            cardPanel.add(creditCardType);
+            cardPanel.revalidate();
+            cardPanel.repaint();
+            }
+        });
 
         add(prev_type);
         add(next_type);
     }
-    
 }

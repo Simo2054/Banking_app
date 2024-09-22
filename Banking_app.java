@@ -22,7 +22,7 @@ class MainFrame
     LogInSuccess successfulLogIn;
 
     // instance for successful sign up page (card details)
-    CardDetailsPage cardDetailsPage;
+    CardTypePickPage card_type_pick_page;
 
     /*
      * we create instances to keep the code for each page 
@@ -35,7 +35,7 @@ class MainFrame
         loginPage = new LoginPage(this);
         signUpPage = new SignUpPage(this);
         successfulLogIn = new LogInSuccess(this, loginPage);
-        cardDetailsPage = new CardDetailsPage(this, signUpPage);
+        card_type_pick_page = new CardTypePickPage(this, signUpPage);
 
         startFrame();
         initMainPanel();
@@ -44,7 +44,7 @@ class MainFrame
         mainPanel.add(loginPage, "loginPage");
         mainPanel.add(signUpPage, "signUpPage");
         mainPanel.add(successfulLogIn, "successfulLogIn");
-        mainPanel.add(cardDetailsPage, "cardDetailsPage");
+        mainPanel.add(card_type_pick_page, "card_type_pick_page");
 
         frame.add(mainPanel);
         frame.setVisible(true);

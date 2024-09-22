@@ -71,7 +71,7 @@ public class OpeningPage extends JPanel
             {
                 //mainFrame.cardLayout.show(mainFrame.mainPanel, "signUpPage");
                 // testing purposes:
-                mainFrame.cardLayout.show(mainFrame.mainPanel, "cardDetailsPage");
+                mainFrame.cardLayout.show(mainFrame.mainPanel, "card_type_pick_page");
             }
         });
 
