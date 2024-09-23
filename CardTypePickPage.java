@@ -4,18 +4,19 @@ import java.awt.event.*;
 
 public class CardTypePickPage extends JPanel
 {
-    private UserManager userManager;
+    //private UserManager userManager;
     private SignUpPage signUpPage;
 
-    private MainFrame mainFrame;
+    //private MainFrame mainFrame;
     private JPanel cardPanel; // dynamic card (refering to cardLayout) type
-    private DebitCardType debitCardType;
-    private CreditCardType creditCardType;
     private CardLayout cardLayout; // using cardLayout for card switching
+
+    private CardType[] cardTypes;// array to hold different card types
+    private int currentIndex = 0; // tracker for the current card type index
 
     public CardTypePickPage(MainFrame mainFrame, SignUpPage signUpPage) //throws IOException
     {
-        this.mainFrame = mainFrame;
+        //this.mainFrame = mainFrame;
         //userManager = new UserManager();
         this.signUpPage = signUpPage;
 
@@ -24,25 +25,38 @@ public class CardTypePickPage extends JPanel
 
         instructions_fields();
 
-        // initializing card panel with CardLayout
-        cardLayout = new CardLayout();
-        cardPanel = new JPanel(cardLayout); // using card layout for easy switching
-        cardPanel.setBounds(0, 270, 400, 400);
-        
-        // instances of card-types card panels
-        debitCardType = new DebitCardType();
-        creditCardType = new CreditCardType();
-
-        // adding card types to the cardPanel
-        cardPanel.add(debitCardType, "DebitCard");
-        cardPanel.add(creditCardType, "CreditCard");
-
-        // initially showing the debit card
-        cardLayout.show(cardPanel, "DebitCard");
-        
-        add(cardPanel);
+        initCardTypes();
+        initCardPanel();
 
         switch_buttons();
+        existent_card();
+    }
+
+    private void initCardTypes()
+    {
+        cardTypes = new CardType[]
+        {
+            new DebitCardType(),
+            new CreditCardType()
+            //new DigitalCardType()
+        };
+    }
+
+    private void initCardPanel()
+    {
+        cardLayout = new CardLayout();
+        cardPanel = new JPanel(cardLayout);
+        cardPanel.setBounds(0, 270, 400, 400);
+        //cardPanel.setBackground(new Color(0,0,0,0));
+
+        for(CardType cardType : cardTypes)
+        {
+            cardPanel.add(cardType, cardType.getTypeName());
+        }
+
+        // initially show the first card type
+        cardLayout.show(cardPanel, cardTypes[currentIndex].getTypeName());//show the first card type
+        add(cardPanel);
     }
 
     private void instructions_fields()
@@ -64,7 +78,6 @@ public class CardTypePickPage extends JPanel
         int text_height = lines_num* fontMetrics.getHeight();
 
         intro_text.setBounds(50, 50, 300, text_height);
-
 
         JTextArea card_propose = new JTextArea();
         card_propose.setText("Please choose a plan for your new card:");
@@ -99,14 +112,41 @@ public class CardTypePickPage extends JPanel
             @Override
             public void actionPerformed(ActionEvent e)
             {
-                cardPanel.removeAll();
-                cardLayout.show(cardPanel, "CreditCard"); // switching card type
-                cardPanel.revalidate();
-                cardPanel.repaint();
+                switchCard(1);
             }
         });
 
         add(prev_type);
         add(next_type);
     }
+
+    private void switchCard(int direction)
+    {
+        currentIndex += direction;
+        if(currentIndex < 0)
+        {
+            currentIndex = cardTypes.length-1;
+        }
+
+        if(currentIndex >= cardTypes.length)
+        {
+            currentIndex = 0;
+        }
+
+        
+        cardLayout.show(cardPanel, cardTypes[currentIndex].getTypeName());
+        cardPanel.revalidate();
+        cardPanel.repaint();
+    }
+
+    private void existent_card()
+    {
+        JButton existsCard = new JButton();
+        existsCard.setText("I already have a card");
+        existsCard.setFont(new Font("Arial", Font.BOLD, 20));
+        existsCard.setBounds(50, 730, 300, 50);
+
+        add(existsCard);
+    }
 }
+
