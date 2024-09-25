@@ -1,9 +1,14 @@
+package managers;
+
+import pages.*;
+import Card_types.*;
+
 import javax.swing.*;
 import java.awt.*;
 
 // Custom JButton with rounded corners and background
 // RoundedButton class inherits from JButton
-class RoundedButton extends JButton 
+public class RoundedButton extends JButton 
 {
     private int radius;
     // variable that will store the radius of the custom rounded corners

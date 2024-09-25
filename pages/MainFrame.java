@@ -1,8 +1,13 @@
+package pages;
+
+import Card_types.*;
+import managers.*;
+
 import javax.swing.*;
 import java.awt.*;
 import java.io.*;
 
-class MainFrame
+public class MainFrame
 // MainFrame is the main class that controls the window and the auth screens 
 // such as log in screens and sign up screens
 // it uses a card layout to do that
@@ -29,6 +34,8 @@ class MainFrame
     CardManager cardManager; // CardManager to handle bank card related logic
     public String username; // storing username after signing up
 
+    ExistentCardPage existentCardPage;// instance for a page where user can add their exitent card to their account
+
     MainFrame() throws IOException // constructor
     {
         openingPage = new OpeningPage(this);
@@ -36,6 +43,7 @@ class MainFrame
         signUpPage = new SignUpPage(this);
         successfulLogIn = new LogInSuccess(this, loginPage);
         cardManager = new CardManager(this);
+        existentCardPage = new ExistentCardPage(this);
 
         startFrame();
         initMainPanel();
@@ -44,6 +52,7 @@ class MainFrame
         mainPanel.add(loginPage, "loginPage");
         mainPanel.add(signUpPage, "signUpPage");
         mainPanel.add(successfulLogIn, "successfulLogIn");
+        mainPanel.add(existentCardPage, "existentCardPage");
 
         mainPanel.add(cardManager.getCardTypesPanel(), "cardTypesPanel"); // to add the container for all card types to the mainPanel
 
@@ -92,17 +101,3 @@ class MainFrame
     }
 }
 
-public class Banking_app
-{
-    public static void main(String[] args) 
-    {
-        try
-        {
-            new MainFrame();
-        }
-        catch (IOException e)
-        {
-            e.printStackTrace();
-        }
-    }
-}

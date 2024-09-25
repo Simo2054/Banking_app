@@ -1,3 +1,8 @@
+package pages;
+
+import Card_types.*;
+import managers.*;
+
 import javax.swing.*;
 import javax.swing.border.Border;
 import java.awt.*;

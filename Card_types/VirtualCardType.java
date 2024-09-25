@@ -1,4 +1,12 @@
-class VirtualCardType extends TypesOfCards
+package Card_types;
+
+import pages.*;
+import managers.*;
+
+import javax.swing.*;
+import java.awt.*;
+
+public class VirtualCardType extends TypesOfCards
 {
     public VirtualCardType(MainFrame mainFrame)
     {

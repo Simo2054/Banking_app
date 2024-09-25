@@ -1,3 +1,8 @@
+package managers;
+
+import pages.*;
+import Card_types.*;
+
 public class User
 {
     private String email;

@@ -1,4 +1,12 @@
-class DebitCardType extends TypesOfCards
+package Card_types;
+
+import pages.*;
+import managers.*;
+
+import javax.swing.*;
+import java.awt.*;
+
+public class DebitCardType extends TypesOfCards
 // each card type has its implementation in different classes (for code organization)
 {
     public DebitCardType(MainFrame mainFrame)

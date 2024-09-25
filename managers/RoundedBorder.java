@@ -1,3 +1,8 @@
+package managers;
+
+import pages.*;
+import Card_types.*;
+
 /* code belings to user @Lalchand on StackOverflow site
  * https://stackoverflow.com/questions/423950/rounded-swing-jbutton-using-java
  */

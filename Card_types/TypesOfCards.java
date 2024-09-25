@@ -1,9 +1,14 @@
+package Card_types;
+
+import pages.*;
+import managers.*;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 
 // some common methods for all pages containing types of cards
-abstract class TypesOfCards extends JPanel
+public abstract class TypesOfCards extends JPanel
 {
     private MainFrame mainFrame;
 
@@ -138,5 +143,25 @@ abstract class TypesOfCards extends JPanel
         scrollPane.setBounds(75, 460, 250, 150);
 
         add(scrollPane);
+    }
+
+    // method to let the user add a card they already have
+    protected void existent_card()
+    {
+        JButton existsCard = new JButton();
+        existsCard.setText("I already have a card");
+        existsCard.setFont(new Font("Arial", Font.BOLD, 20));
+        existsCard.setBounds(50, 730, 300, 50);
+
+        existsCard.addActionListener(new ActionListener() 
+        {
+            @Override
+            public void actionPerformed(ActionEvent e)
+            {
+                mainFrame.cardLayout.show(mainFrame.mainPanel, "existentCardPage");
+            }
+        });
+
+        add(existsCard);
     }
 }

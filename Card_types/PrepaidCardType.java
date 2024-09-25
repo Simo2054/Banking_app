@@ -1,4 +1,12 @@
-class PrepaidCardType extends TypesOfCards
+package Card_types;
+
+import pages.*;
+import managers.*;
+
+import javax.swing.*;
+import java.awt.*;
+
+public class PrepaidCardType extends TypesOfCards
 {
     public PrepaidCardType(MainFrame mainFrame)
     {

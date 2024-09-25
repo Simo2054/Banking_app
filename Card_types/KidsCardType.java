@@ -1,4 +1,12 @@
-class KidsCardType extends TypesOfCards
+package Card_types;
+
+import pages.*;
+import managers.*;
+
+import javax.swing.*;
+import java.awt.*;
+
+public class KidsCardType extends TypesOfCards
 {
     public KidsCardType(MainFrame mainFrame)
     {

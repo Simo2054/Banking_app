@@ -1,3 +1,8 @@
+package pages;
+
+import Card_types.*;
+import managers.*;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;

@@ -1,4 +1,12 @@
-class CreditCardType extends TypesOfCards
+package Card_types;
+
+import pages.*;
+import managers.*;
+
+import javax.swing.*;
+import java.awt.*;
+
+public class CreditCardType extends TypesOfCards
 {
     public CreditCardType(MainFrame mainFrame)
     {

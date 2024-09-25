@@ -1,3 +1,8 @@
+package managers;
+
+import pages.*;
+import Card_types.*;
+
 import java.io.*;
 import java.util.*;
 
