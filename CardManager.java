@@ -28,7 +28,9 @@ public class CardManager
         {
             new DebitCardType(mainFrame),
             new CreditCardType(mainFrame),
-            new KidsCardType(mainFrame)
+            new KidsCardType(mainFrame),
+            new PrepaidCardType(mainFrame),
+            new VirtualCardType(mainFrame)
         };
 
         for (TypesOfCards card : cardTypesArray)
