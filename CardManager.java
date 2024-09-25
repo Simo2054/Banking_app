@@ -14,15 +14,15 @@ public class CardManager
     public CardManager(MainFrame mainFrame)
     {
         this.mainFrame = mainFrame;
+
         this.cardLayout = new CardLayout();
-        initCardTypesPanel();
+        this.cardTypesPanel = new JPanel(cardLayout); // initalizing cardTypesPanel without populating it
+
+        cardTypesPanel.setBounds(0, 0, 400, 800);
     }
 
-    private void initCardTypesPanel()
+    public void initCardTypesPanel()
     {
-        cardTypesPanel = new JPanel(cardLayout);
-        cardTypesPanel.setBounds(0, 0, 400, 800);
-        
         cardTypesArray = new TypesOfCards[]
         {
             new DebitCardType(mainFrame),

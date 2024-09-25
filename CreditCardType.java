@@ -1,6 +1,3 @@
-import javax.swing.*;
-import java.awt.*;
-
 class CreditCardType extends TypesOfCards
 {
     public CreditCardType(MainFrame mainFrame)

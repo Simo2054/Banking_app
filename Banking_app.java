@@ -77,6 +77,8 @@ class MainFrame
     public void setUsername(String username)
     {
         this.username = username;
+
+        cardManager.initCardTypesPanel(); // init cardTypesPanel only after username is set
     }
 
     public String getUsername()

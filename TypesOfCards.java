@@ -19,7 +19,6 @@ abstract class TypesOfCards extends JPanel
 
     protected void greeting_fields()
     {
-        System.out.println("dejaaa?");
         JTextArea intro_text = new JTextArea();
         intro_text.setText("Hello, " + mainFrame.getUsername() + "!");
         intro_text.setEditable(false);
@@ -99,8 +98,7 @@ abstract class TypesOfCards extends JPanel
         card_title.setOpaque(true);
         card_title.setBackground(Color.WHITE);
 
-        // getting the panel's width dynamically
-        int panelWidth = this.getWidth();
+        int panelWidth = 400;
 
         // calculate the necessary width for the text
         FontMetrics fontMetrics = card_title.getFontMetrics(card_title.getFont());
