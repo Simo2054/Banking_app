@@ -81,12 +81,12 @@ class MainFrame
         cardManager.initCardTypesPanel(); // init cardTypesPanel only after username is set
     }
 
-    public String getUsername()
+    public String getUsername() // getter for username
     {
         return username;
     }
 
-    public CardManager getCardManager()
+    public CardManager getCardManager() // getter for CardManager class (returns an instance of the class)
     {
         return cardManager;
     }

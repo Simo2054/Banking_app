@@ -17,6 +17,7 @@ abstract class TypesOfCards extends JPanel
         switch_buttons();
     }
 
+    // method for creating the persomalized greetings, according to the username set by the user
     protected void greeting_fields()
     {
         JTextArea intro_text = new JTextArea();
@@ -35,8 +36,11 @@ abstract class TypesOfCards extends JPanel
         int lines_num = (int)Math.ceil((double)text_width/300);
         int text_height = lines_num* fontMetrics.getHeight();
 
-        intro_text.setBounds(50, 50, 300, text_height);
+        intro_text.setBounds(50, 50, 300, text_height); // setting the positioning of the greeting dynamically, 
+        // according to the username picked by the user
+        // if the username is longer, it might take more lines, therefore the bounds should be bigger
 
+        // instruction for letting the user know what they should do next
         JTextArea card_propose = new JTextArea();
         card_propose.setText("Please choose a plan for your new card:");
         card_propose.setBounds(50, 200, 300, 55);
@@ -51,14 +55,17 @@ abstract class TypesOfCards extends JPanel
         add(card_propose);
     }
 
+    // the buttons will let the user navigate through the available bank card types
     protected void switch_buttons()
     {
+        // previous card
         JButton prev_type = new JButton();
         prev_type.setBounds(25, 300, 50, 150);
         prev_type.setText("《");
         prev_type.setForeground(Color.BLACK);
         prev_type.setFont(new Font("Arial", Font.BOLD, 16));
 
+        // next card
         JButton next_type = new JButton();
         next_type.setBounds(325, 300, 50, 150);
         next_type.setText("》");
@@ -87,6 +94,7 @@ abstract class TypesOfCards extends JPanel
         add(next_type);
     }
 
+    // getter method for the name of each type (refering to cards)
     public abstract String getTypeName();
 
     protected void addTitle(String title)
@@ -111,6 +119,7 @@ abstract class TypesOfCards extends JPanel
         add(card_title);
     }
 
+    // scrollable text area for displaying information about each type of card 
     protected void addInstructions(String instructions)
     {
         JTextArea card_instructions;
