@@ -1,6 +1,7 @@
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+
 // some common methods for all pages containing types of cards
 abstract class TypesOfCards extends JPanel
 {
