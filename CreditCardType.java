@@ -1,19 +1,18 @@
 import javax.swing.*;
 import java.awt.*;
 
-class CreditCardType extends CardType
+class CreditCardType extends TypesOfCards
 {
-    public CreditCardType()
+    public CreditCardType(MainFrame mainFrame)
     {
-        setLayout(null);
-        setBackground(new Color(0,0,0,0));
+        super(mainFrame);
         addTitle("Credit Card");
-        addInstructions("Credit card instructions...");
+        addInstructions("this is a Credit card ...");
     }
 
     @Override
     public String getTypeName()
     {
-        return "Credit Card";
+        return "CreditCard";
     }
 }

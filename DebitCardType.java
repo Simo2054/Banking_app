@@ -1,20 +1,19 @@
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.*;
 
-class DebitCardType extends CardType
+class DebitCardType extends TypesOfCards
 {
-    public DebitCardType()
+    public DebitCardType(MainFrame mainFrame)
     {
-        removeAll();
-        setLayout(null);
-        setBackground(new Color(0,0,0,0));
+        super(mainFrame); // pass the MainFrame to the superclass
         addTitle("Debit Card");
-        addInstructions("Debit card instructions...");
+        addInstructions("this is a debit card ...");
     }
 
     @Override
     public String getTypeName()
     {
-        return "Debit Card";
+        return "DebitCard";
     }
 }

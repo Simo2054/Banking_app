@@ -8,8 +8,13 @@ class MainFrame
 // it uses a card layout to do that
 {
     private JFrame frame;
-    public JPanel mainPanel;
-    public CardLayout cardLayout;
+    public JPanel mainPanel; // a panel(container) to hold the pages
+    public CardLayout cardLayout; // using a card layout for easy switching between pages
+
+    /*
+     * we create instances to keep the code for each page 
+     * in a separate class and to use them for the card layout
+    */
 
     // creating an instance for the opening page
     OpeningPage openingPage;
@@ -21,13 +26,8 @@ class MainFrame
     // instance for the successful log in page
     LogInSuccess successfulLogIn;
 
-    // instance for successful sign up page (card details)
-    CardTypePickPage card_type_pick_page;
-
-    /*
-     * we create instances to keep the code for each page 
-     * in a separate class and to use them for the card layout
-    */
+    CardManager cardManager; // CardManager to handle bank card related logic
+    public String username; // storing username after signing up
 
     MainFrame() throws IOException // constructor
     {
@@ -35,7 +35,7 @@ class MainFrame
         loginPage = new LoginPage(this);
         signUpPage = new SignUpPage(this);
         successfulLogIn = new LogInSuccess(this, loginPage);
-        card_type_pick_page = new CardTypePickPage(this, signUpPage);
+        cardManager = new CardManager(this);
 
         startFrame();
         initMainPanel();
@@ -44,7 +44,8 @@ class MainFrame
         mainPanel.add(loginPage, "loginPage");
         mainPanel.add(signUpPage, "signUpPage");
         mainPanel.add(successfulLogIn, "successfulLogIn");
-        mainPanel.add(card_type_pick_page, "card_type_pick_page");
+
+        mainPanel.add(cardManager.getCardTypesPanel(), "cardTypesPanel"); // to add the container for all card types to the mainPanel
 
         frame.add(mainPanel);
         frame.setVisible(true);
@@ -71,6 +72,21 @@ class MainFrame
         // mainPanel will be used as a container that
         // will hold the other panels (or pages/frames)
         // a panel can hold multiple components
+    }
+
+    public void setUsername(String username)
+    {
+        this.username = username;
+    }
+
+    public String getUsername()
+    {
+        return username;
+    }
+
+    public CardManager getCardManager()
+    {
+        return cardManager;
     }
 }
 

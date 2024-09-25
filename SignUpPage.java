@@ -260,8 +260,11 @@ public class SignUpPage extends JPanel
                         {
                             // add user to the database(file)
                             userManager.addUser(new_user_email, new_username, new_user_password);
+                            
+                            // set username in MainFrame (that will be used in TypesOfCards)
+                            mainFrame.setUsername(new_username);
                             // switching to the card details screen
-                            mainFrame.cardLayout.show(mainFrame.mainPanel, "cardDetailsPage");
+                            mainFrame.cardLayout.show(mainFrame.mainPanel, "cardTypesPanel");
                         }
                         catch (IOException ex) 
                         {
