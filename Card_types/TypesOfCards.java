@@ -21,6 +21,7 @@ public abstract class TypesOfCards extends JPanel
 
         greeting_fields();
         switch_buttons();
+        existent_card();
     }
 
     // method for creating the persomalized greetings, according to the username set by the user
