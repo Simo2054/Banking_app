@@ -18,7 +18,6 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.ArrayList;
 
 public class ECPidentity extends JPanel
 {
@@ -27,8 +26,12 @@ public class ECPidentity extends JPanel
     public String user_tel_nr = ""; // phone number
     public String country = "";
 
+    private MainFrame mainFrame;
+
     public ECPidentity(MainFrame mainFrame) throws IOException
     {
+        this.mainFrame = mainFrame;
+
         setBackground(new Color(110, 20, 90));
         setLayout(null);
 
@@ -133,9 +136,80 @@ public class ECPidentity extends JPanel
 
         options = new String[195]; // google said there are 195 countries in the world :)
         countryReader(options);
-
         country_option = new JComboBox<>(options);
         country_option.setBounds(50, 480, 300, 30);
+
+        fnm_field.addActionListener(new ActionListener() 
+        {
+            @Override
+            public void actionPerformed(ActionEvent e)
+            {
+                user_first_name = fnm_field.getText();
+                lstnm_field.requestFocusInWindow();
+            }
+        });
+
+        fnm_field.addFocusListener(new FocusListener() 
+        {
+            @Override
+            public void focusGained(FocusEvent e)
+            {
+                // nothing yet
+            }
+            public void focusLost(FocusEvent e)
+            {
+                user_first_name = fnm_field.getText();
+                lstnm_field.requestFocusInWindow();
+            }
+        });
+
+        lstnm_field.addActionListener(new ActionListener() 
+        {
+            @Override
+            public void actionPerformed(ActionEvent e)
+            {
+                user_last_name = lstnm_field.getText();
+                tel_nr_field.requestFocusInWindow();
+            }
+        });
+
+        lstnm_field.addFocusListener(new FocusListener() 
+        {
+            @Override
+            public void focusGained(FocusEvent e)
+            {
+                // nothing yet
+            }
+            public void focusLost(FocusEvent e)
+            {
+                user_last_name = lstnm_field.getText();
+                tel_nr_field.requestFocusInWindow();
+            }
+        });
+
+        tel_nr_field.addActionListener(new ActionListener() 
+        {
+            @Override
+            public void actionPerformed(ActionEvent e)
+            {
+                user_tel_nr = tel_nr_field.getText();
+                country_option.requestFocusInWindow();
+            }
+        });
+
+        tel_nr_field.addFocusListener(new FocusListener() 
+        {
+            @Override
+            public void focusGained(FocusEvent e)
+            {
+                // nothing yet
+            }
+            public void focusLost(FocusEvent e)
+            {
+                user_tel_nr = tel_nr_field.getText();
+                country_option.requestFocusInWindow();
+            }
+        });
 
         country_option.addActionListener(new ActionListener() 
         {
@@ -145,7 +219,8 @@ public class ECPidentity extends JPanel
                 // get the selected item
                 String selectedOption = (String) country_option.getSelectedItem();
 
-                System.out.println("option: " + selectedOption);
+                country = selectedOption;
+                System.out.println("option: " + country);
             }
         });
 
@@ -178,34 +253,34 @@ public class ECPidentity extends JPanel
         }
     }
 
-    JButton backButton;
-    JButton nextButton;
+    private JButton backButton;
+    private JButton nextButton;
 
     private void nextAndBackButtons()
     {
         backButton = new JButton("Back");
         backButton.setBounds(20, 730, 80, 50);
 
-        //nextButton.addActionListener(new ActionListener() 
-        //{
-        //    @Override
-        //    public void actionPerformed(ActionEvent e)
-        //    {
-        //        // go to  the next page
-        //    }
-        //});
-//
-        //backButton.addActionListener(new ActionListener() 
-        //{
-        //    @Override
-        //    public void actionPerformed(ActionEvent e)
-        //    {
-        //        // go to  the previous page
-        //    }
-        //});
-
         nextButton = new JButton("Next");
         nextButton.setBounds(300, 730, 80, 50);
+
+        nextButton.addActionListener(new ActionListener() 
+        {
+            @Override
+            public void actionPerformed(ActionEvent e)
+            {
+                mainFrame.cardLayout.show(mainFrame.mainPanel, "ECPadress");
+            }
+        });
+
+        backButton.addActionListener(new ActionListener() 
+        {
+            @Override
+            public void actionPerformed(ActionEvent e)
+            {
+                mainFrame.cardLayout.show(mainFrame.mainPanel, "cardTypesPanel");
+            }
+        });
 
         add(backButton);
         add(nextButton);
