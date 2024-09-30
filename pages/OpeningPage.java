@@ -6,6 +6,7 @@ import managers.*;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.io.IOException;
 
 public class OpeningPage extends JPanel
 {
@@ -61,7 +62,7 @@ public class OpeningPage extends JPanel
         add(LogInButton);
     }
 
-    private void SignUpButton()
+    private void SignUpButton() 
     {
         RoundedButton SignUpButton = new RoundedButton("Sign Up", 30);
         SignUpButton.setBounds(50, 700, 300, 70);
@@ -77,7 +78,7 @@ public class OpeningPage extends JPanel
                 //mainFrame.cardLayout.show(mainFrame.mainPanel, "signUpPage");
                 // testing purposes:
 
-                mainFrame.cardLayout.show(mainFrame.mainPanel, "existentCardPage");
+                mainFrame.cardLayout.show(mainFrame.mainPanel, "ECPidentity");
             }
         });
 

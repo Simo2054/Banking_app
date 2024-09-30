@@ -34,7 +34,15 @@ public class MainFrame
     CardManager cardManager; // CardManager to handle bank card related logic
     public String username; // storing username after signing up
 
-    ExistentCardPage existentCardPage;// instance for a page where user can add their exitent card to their account
+    ECPidentity ECPidentity; 
+    // instance for a page where user will need to introduce their identity
+    // (first name, last name, phone number, country) for their bank account
+    // ("I already have a card" button response page 1)
+
+    ECPadress ECPadress; 
+    // // instance for a page where user will need to introduce their home adress
+    // (city, county, street name, home number) for their bank account
+    // ("I already have a card" button response page 2)
 
     MainFrame() throws IOException // constructor
     {
@@ -43,7 +51,8 @@ public class MainFrame
         signUpPage = new SignUpPage(this);
         successfulLogIn = new LogInSuccess(this, loginPage);
         cardManager = new CardManager(this);
-        existentCardPage = new ExistentCardPage(this);
+        ECPidentity = new ECPidentity(this);
+        ECPadress = new ECPadress(this);
 
         startFrame();
         initMainPanel();
@@ -52,7 +61,8 @@ public class MainFrame
         mainPanel.add(loginPage, "loginPage");
         mainPanel.add(signUpPage, "signUpPage");
         mainPanel.add(successfulLogIn, "successfulLogIn");
-        mainPanel.add(existentCardPage, "existentCardPage");
+        mainPanel.add(ECPidentity, "ECPidentity");
+        mainPanel.add(ECPadress, "ECPadress");
 
         mainPanel.add(cardManager.getCardTypesPanel(), "cardTypesPanel"); // to add the container for all card types to the mainPanel
 
