@@ -34,15 +34,20 @@ public class MainFrame
     CardManager cardManager; // CardManager to handle bank card related logic
     public String username; // storing username after signing up
 
-    ECPidentity ECPidentity; 
+    ExistCardPage ExistCardPage;
+    // instance for a page where user will introduce their card data
+    // (number, name, expiring date, CVC code)
+    // (response for "I already have a card" button)
+
+    BkAccIdentity BkAccIdentity; 
     // instance for a page where user will need to introduce their identity
     // (first name, last name, phone number, country) for their bank account
-    // ("I already have a card" button response page 1)
+    // (response for Credit, Debit, Virtual, Kids card types, page 1)
 
-    ECPadress ECPadress; 
+    BkAccAdress BkAccAdress; 
     // // instance for a page where user will need to introduce their home adress
     // (city, county, street name, home number) for their bank account
-    // ("I already have a card" button response page 2)
+    // (response for Credit, Debit, Virtual, Kids card types, page 2)
 
     MainFrame() throws IOException // constructor
     {
@@ -51,8 +56,9 @@ public class MainFrame
         signUpPage = new SignUpPage(this);
         successfulLogIn = new LogInSuccess(this, loginPage);
         cardManager = new CardManager(this);
-        ECPidentity = new ECPidentity(this);
-        ECPadress = new ECPadress(this);
+        ExistCardPage = new ExistCardPage(this);
+        BkAccIdentity = new BkAccIdentity(this);
+        BkAccAdress = new BkAccAdress(this);
 
         startFrame();
         initMainPanel();
@@ -61,8 +67,9 @@ public class MainFrame
         mainPanel.add(loginPage, "loginPage");
         mainPanel.add(signUpPage, "signUpPage");
         mainPanel.add(successfulLogIn, "successfulLogIn");
-        mainPanel.add(ECPidentity, "ECPidentity");
-        mainPanel.add(ECPadress, "ECPadress");
+        mainPanel.add(ExistCardPage, "ExistCardPage");
+        mainPanel.add(BkAccIdentity, "BkAccIdentity");
+        mainPanel.add(BkAccAdress, "BkAccAdress");
 
         mainPanel.add(cardManager.getCardTypesPanel(), "cardTypesPanel"); // to add the container for all card types to the mainPanel
 

@@ -1,9 +1,10 @@
 /* the page where user can introduce their identity 
     (first name, last name, phone number, country)
     for the bank account information
-    if the user already has a bank card
+    if the user wants to create a card
+    (supported by Credit, Debit, Kids, Virtual card types)
 
-    ECP - existent card page
+    BkAcc - bank account
 */
 
 package pages;
@@ -14,12 +15,9 @@ import managers.*;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 
-public class ECPidentity extends JPanel
+public class BkAccIdentity extends JPanel
 {
     public String user_first_name = "";
     public String user_last_name = "";
@@ -28,7 +26,7 @@ public class ECPidentity extends JPanel
 
     private MainFrame mainFrame;
 
-    public ECPidentity(MainFrame mainFrame) throws IOException
+    public BkAccIdentity(MainFrame mainFrame) throws IOException
     {
         this.mainFrame = mainFrame;
 
@@ -41,10 +39,10 @@ public class ECPidentity extends JPanel
         nextAndBackButtons();
     }
 
-    JTextArea fnm_instr;
-    JTextArea lstnm_instr;
-    JTextArea tel_nr_instr;
-    JTextArea country_instr;
+    private JTextArea fnm_instr;
+    private JTextArea lstnm_instr;
+    private JTextArea tel_nr_instr;
+    private JTextArea country_instr;
 
     private void instructions()
     {
@@ -231,6 +229,7 @@ public class ECPidentity extends JPanel
         add(country_option);
     }
 
+    // method to read counties available from a file
     private void countryReader(String[] array) throws IOException
     {
         File file = new File("user_files/countries_available.txt");
@@ -240,10 +239,11 @@ public class ECPidentity extends JPanel
             {
                 String line;
                 int pos = 0;
+                // reading line by line from the file
                 while((line = reader.readLine()) != null)
                 {
-                    array[pos] = line;
-                    pos++;
+                    array[pos] = line; // every line read will be placed in a string arrray
+                    pos++; // raising the index with every fill of the array
                 }
             }
             catch (IOException e)
@@ -264,15 +264,6 @@ public class ECPidentity extends JPanel
         nextButton = new JButton("Next");
         nextButton.setBounds(300, 730, 80, 50);
 
-        nextButton.addActionListener(new ActionListener() 
-        {
-            @Override
-            public void actionPerformed(ActionEvent e)
-            {
-                mainFrame.cardLayout.show(mainFrame.mainPanel, "ECPadress");
-            }
-        });
-
         backButton.addActionListener(new ActionListener() 
         {
             @Override
@@ -281,6 +272,26 @@ public class ECPidentity extends JPanel
                 mainFrame.cardLayout.show(mainFrame.mainPanel, "cardTypesPanel");
             }
         });
+
+        nextButton.addActionListener(new ActionListener() 
+        {
+            @Override
+            public void actionPerformed(ActionEvent e)
+            {
+                if(!(user_first_name.isEmpty()) && !(user_last_name.isEmpty()) && !(user_tel_nr.isEmpty()) && !(country.isEmpty()))
+                // checking if all of the fields are completed
+                {
+                    mainFrame.cardLayout.show(mainFrame.mainPanel, "ECPadress");
+                }
+                else
+                {
+                    System.out.println("please introduce your data");
+                }
+                
+            }
+        });
+
+        
 
         add(backButton);
         add(nextButton);

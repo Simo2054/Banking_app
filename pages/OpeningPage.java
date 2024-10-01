@@ -78,7 +78,7 @@ public class OpeningPage extends JPanel
                 //mainFrame.cardLayout.show(mainFrame.mainPanel, "signUpPage");
                 // testing purposes:
 
-                mainFrame.cardLayout.show(mainFrame.mainPanel, "ECPidentity");
+                mainFrame.cardLayout.show(mainFrame.mainPanel, "BkAccIdentity");
             }
         });
 

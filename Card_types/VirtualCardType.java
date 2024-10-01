@@ -12,7 +12,8 @@ public class VirtualCardType extends TypesOfCards
     {
         super(mainFrame);
         addTitle("Virtual Card");
-        addInstructions("Virtual cards are digital cards that are stored on your phone and don't have a physical form. Similar to in-person cards but are only available online.\n" + 
+        addInstructions("Virtual cards are digital cards that are stored on your phone and don't have a physical form. " +
+        "Similar to in-person cards but are only available online.\n" + 
         "> Purpose: Commonly used for ease of customer transactions and improved security.\n" + 
         "> Key Features: \n" + 
         " - improved security and immediate activation.\n" + 

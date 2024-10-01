@@ -1,9 +1,10 @@
 /* the page where user can introduce their home adress 
     (city, county, street name, home number)
     for the bank account information
-    if the user already has a bank card
+    if the user wants to create a card
+    (supported by Credit, Debit, Kids, Virtual card types)
 
-    ECP - existent card page
+    BkAcc - bank account
 */
 
 package pages;
@@ -14,16 +15,16 @@ import managers.*;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
-import java.io.IOException;
+import java.io.*;
 
-public class ECPadress extends JPanel
+public class BkAccAdress extends JPanel
 {
     public String city = ""; 
     public String county = "";
     public String street_name = "";
     public String home_nr = ""; // or apt. nr
 
-    public ECPadress(MainFrame mainFrame)
+    public BkAccAdress(MainFrame mainFrame)
     {
         setBackground(new Color(110, 20, 90));
         setLayout(null);
@@ -39,7 +40,7 @@ public class ECPadress extends JPanel
         street_nm_instr.setBackground(new Color(0,0,0,0));
         street_nm_instr.setLineWrap(true);
         street_nm_instr.setWrapStyleWord(true);
-        street_nm_instr.setBounds(50, 380, 300, 50);
+        street_nm_instr.setBounds(50, 50, 300, 50);
 
         JTextArea home_nr_instr = new JTextArea(); // instructions to ask the user to introduce the number of their house/appartment
         home_nr_instr.setText("> Please introduce the number of your home: ");

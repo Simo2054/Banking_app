@@ -159,7 +159,7 @@ public abstract class TypesOfCards extends JPanel
             @Override
             public void actionPerformed(ActionEvent e)
             {
-                mainFrame.cardLayout.show(mainFrame.mainPanel, "ECPidentity");
+                mainFrame.cardLayout.show(mainFrame.mainPanel, "BkAccIdentity");
             }
         });
 
