@@ -47,7 +47,7 @@ public class BkAccIdentity extends JPanel
     private void instructions()
     {
         JTextArea acc_details_instr = new JTextArea();
-        acc_details_instr.setText("We need some information about your bank account first");
+        acc_details_instr.setText("Please introduce your data for creating a bank account first: ");
         acc_details_instr.setEditable(false);
         acc_details_instr.setFont(new Font("Arial", Font.BOLD, 18));
         acc_details_instr.setForeground(Color.BLUE);
@@ -135,6 +135,7 @@ public class BkAccIdentity extends JPanel
         options = new String[195]; // google said there are 195 countries in the world :)
         countryReader(options);
         country_option = new JComboBox<>(options);
+        country_option.setFont(new Font("Arial", Font.LAYOUT_LEFT_TO_RIGHT, 18));
         country_option.setBounds(50, 480, 300, 30);
 
         fnm_field.addActionListener(new ActionListener() 
@@ -264,6 +265,7 @@ public class BkAccIdentity extends JPanel
         nextButton = new JButton("Next");
         nextButton.setBounds(300, 730, 80, 50);
 
+        // goes back to card type selection page
         backButton.addActionListener(new ActionListener() 
         {
             @Override
@@ -273,6 +275,7 @@ public class BkAccIdentity extends JPanel
             }
         });
 
+        // goes to the page 2 of the bank account creation
         nextButton.addActionListener(new ActionListener() 
         {
             @Override
@@ -281,7 +284,7 @@ public class BkAccIdentity extends JPanel
                 if(!(user_first_name.isEmpty()) && !(user_last_name.isEmpty()) && !(user_tel_nr.isEmpty()) && !(country.isEmpty()))
                 // checking if all of the fields are completed
                 {
-                    mainFrame.cardLayout.show(mainFrame.mainPanel, "ECPadress");
+                    mainFrame.cardLayout.show(mainFrame.mainPanel, "BkAccAdress");
                 }
                 else
                 {

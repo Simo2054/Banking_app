@@ -13,6 +13,12 @@ public class UserManager
     // the key is the user’s email (String), and the value is a User object 
     // that contains the user’s details (email, name, password)
 
+    public Map<String, Account> BkAccMap = new HashMap<>();
+    // a map that will be used to store bank account infornation
+    // the key is user's email (String) and the value is an Account object
+    // that contains information: first name, last name, telephone number, 
+    // country, city, county, street name, home number
+
     private final String filePath = "user_files/user_credentials.txt";
     // the file in which we will store user credentials
 
@@ -20,9 +26,15 @@ public class UserManager
     // the file in which we will store the user credentials for them to not need to
     // authenticate each time the app opens
 
+    private final String BkAccFilPath = "user_files/bank_acc_info.txt";
+    // the file in which we will store bank account credentials
+    // like in a database, we will use the email as a primary key
+    // to link every user to a bank account
+
     public UserManager() throws IOException 
     {
         loadUsers(); // Load users from file on initialization
+        loadBkAcc(); // load bank accounts file on init
     }
 
     // add a new user
@@ -94,6 +106,38 @@ public class UserManager
         }
     }
 
+    private void loadBkAcc() throws IOException
+    {
+        File file = new File(BkAccFilPath);
+        if (file.exists()) 
+        {
+            // using BufferedReader because we are reading a line at a time
+            try (BufferedReader reader = new BufferedReader(new FileReader(file)))
+            {
+                String line;
+                while ((line = reader.readLine()) != null) // reading line by line
+                {
+                    String[] parts = line.split(",");// is splits each line into parts using split(",")
+                    if (parts.length == 9) // Only consider valid entries with first name, 
+                                        // last name, telephone number, country, city, county, street name, home number
+                    {   
+                        String email = parts[0];
+                        String fs_name = parts[1];
+                        String ls_name = parts[2];
+                        String tel_nr = parts[3];
+                        String country = parts[4];
+                        String city = parts[5];
+                        String county = parts[6];
+                        String street_nm = parts[7];
+                        String home_nr = parts[8];
+                        BkAccMap.put(email, new Account(email, fs_name, ls_name, tel_nr, country, city, county, street_nm, home_nr)); 
+                        // Store information in map
+                    }
+                }
+            }
+        }
+    }
+
     // Method to save the current map of users to the file
     private void saveUsers() throws IOException
     {
@@ -113,9 +157,34 @@ public class UserManager
         }
     }
 
+    private void saveBkAcc() throws IOException 
+    {
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(BkAccFilPath)))
+        {
+            for (Account account : BkAccMap.values()) 
+            // for each acc in the map
+            {
+                writer.write(account.getEmail() + "," + 
+                            account.getFsNm() + "," + 
+                            account.getLsNm() + "," + 
+                            account.getTelNr() + "," + 
+                            account.getCountry() + "," + 
+                            account.getCity() + "," +
+                            account.getCounty() + "," + 
+                            account.getStreetName() + "," + 
+                            account.getHomeNr());
+                writer.newLine();
+            }
+        }
+        catch (IOException e)
+        {
+            e.printStackTrace();
+        }
+    }
+
     //---------------------------------------------------------------------------
 
-    // Method to write user credentials into a file if user wants to be
+    // Method to write user credentials into a file if user wants to be remembered by the app
     public void RememberUser(String email, String password)
     {
         User user = userMap.get(email);// get the User object by email
@@ -130,6 +199,14 @@ public class UserManager
         {
             e.printStackTrace();
         }
+    }
+
+    // method to add every credentials about bank account
+    public void AddBankAcc(String email, String first_name, String last_name, String tel_nr, String country, 
+                            String city, String county, String street_name, String home_nr) throws IOException
+    {
+        BkAccMap.put(email, new Account(email, first_name, last_name, tel_nr, country, city, county, street_name, home_nr));
+        saveBkAcc();
     }
 
 }
