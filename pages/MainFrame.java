@@ -58,7 +58,7 @@ public class MainFrame
         cardManager = new CardManager(this);
         ExistCardPage = new ExistCardPage(this);
         BkAccIdentity = new BkAccIdentity(this);
-        BkAccAdress = new BkAccAdress(this);
+        BkAccAdress = new BkAccAdress(this, BkAccIdentity);
 
         startFrame();
         initMainPanel();

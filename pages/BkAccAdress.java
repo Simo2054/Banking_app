@@ -28,10 +28,11 @@ public class BkAccAdress extends JPanel
     private AdressManager adressManager;
     private BkAccIdentity bkAccIdentity;
 
-    public BkAccAdress(MainFrame mainFrame)
+    public BkAccAdress(MainFrame mainFrame, BkAccIdentity bkAccIdentity)
     {
         this.mainFrame = mainFrame;
         adressManager = new AdressManager();
+        this.bkAccIdentity = bkAccIdentity;
 
         setBackground(new Color(110, 20, 90));
         setLayout(null);
@@ -92,7 +93,7 @@ public class BkAccAdress extends JPanel
     
     private void user_fields() throws IOException
     {   
-        cities = adressManager.getCitiesByCountry();
+        cities = adressManager.getCitiesByCountry(bkAccIdentity.country);
 
         street_nm_field = new JTextField();
         street_nm_field.setFont(new Font("Arial", Font.LAYOUT_LEFT_TO_RIGHT, 18));
