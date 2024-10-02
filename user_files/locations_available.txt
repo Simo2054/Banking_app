@@ -1,0 +1,65 @@
+Austria:Vienna:Innere Stadt
+Austria:Vienna:Leopolstadt
+Austria:Graz:Innere Stadt
+Austria:Graz:Ries
+Austria:Linz:Kaplanhof
+Austria:Linz:Bulgariplatz
+Austria:Kufstein:Kufstein
+Austria:Wels:Wels-Land
+Austria:Amstetten:Amstetten
+Bulgaria:Sofia:Lyulin
+Bulgaria:Sofia:Vitosha
+Bulgaria:Varna:Beloslav
+Bulgaria:Varna:Avren
+Bulgaria:Burgas:Burgas
+Bulgaria:Lovech:Lovech
+Bulgaria:Gabrovo:Gabrovo
+Croatia:Zagreb:Donji Grad
+Croatia:Zagreb:Novi Zagreb
+Croatia:Split:Kman
+Croatia:Split:Ravne Njive
+Croatia:Zadar:Zadar
+Croatia:Karlovac:Karlovac
+France:Paris:Champs-Elysees
+France:Paris:Montmartre
+France:Nice:Nice
+France:Lyon:Lyon
+France:Marseille:Marseille
+France:Strasbourg:Strassbourg
+Greece:Athens:Plaka
+Greece:Athens:Kolonaki
+Greece:Athens:Acropolis
+Greece:Piraeus:Agia Sophia
+Greece:Piraeus:Maniatika
+Greece:Volos:Volos
+Greece:Kavala:Kavala
+Italy:Florence:Centro Storico
+Italy:Florence:Isolotto-Legnaia
+Italy:Rome:Trevi
+Italy:Rome:Colonna
+Italy:Rome:Regola
+Italy:Bologna:Bologna
+Italy:Milan:Brera
+Italy:Milan:Guastalla
+Japan:Tokyo:Akihabara
+Japan:Tokyo:Shinagawa
+Japan:Tokyo:Shibuya
+Japan:Kyoto:Kyoto
+Japan:Osaka:Kita
+Japan:Osaka:Minami
+Japan:Hiroshima:Hiroshima
+Luxembourg:Luxembourg:Luxembourg
+Luxembourg:Diekirch:Diekirch
+Luxembourg:Vianden:Vianden
+Norway:Oslo:Agder
+Norway:Oslo:Bergen
+Norway:Trondheim:Trondheim
+Norway:Bergen:Bergen
+Romania:Brasov:Brasov
+Romania:Brasov:Sf. Gheorghe
+Romania:Iasi:Iasi
+Romania:Iasi:Pascani
+Romania:Cluj:Cluj-Napoca
+Romania:Cluj:Dej
+Romania:Ilfov:Bucuresti
+Romania:Ilfov:Ilfov

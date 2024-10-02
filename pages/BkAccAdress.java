@@ -24,15 +24,37 @@ public class BkAccAdress extends JPanel
     public String street_name = "";
     public String home_nr = ""; // or apt. nr
 
+    private MainFrame mainFrame;
+
     public BkAccAdress(MainFrame mainFrame)
     {
+        this.mainFrame = mainFrame;
+
         setBackground(new Color(110, 20, 90));
         setLayout(null);
+        
+        instructions();
+        user_fields();
     }
+
+    private JTextArea city_instr;
+    private JTextArea county_instr;
+    private JTextArea street_nm_instr;
+    private JTextArea home_nr_instr;
 
     private void instructions()
     {
-        JTextArea street_nm_instr = new JTextArea(); // instructions to ask the user to introduce their phone number
+        city_instr = new JTextArea(); // instructions to ask the user to introduce their residency city
+        city_instr.setText("> Please introduce the name of your city of residency:");
+        city_instr.setEditable(false);
+        city_instr.setFont(new Font("Arial", Font.LAYOUT_LEFT_TO_RIGHT, 18));
+        city_instr.setForeground(Color.WHITE);
+        city_instr.setBackground(new Color(0,0,0,0));
+        city_instr.setLineWrap(true);
+        city_instr.setWrapStyleWord(true);
+        city_instr.setBounds(50, 50, 300, 50);
+
+        street_nm_instr = new JTextArea(); // instructions to ask the user to introduce their phone number
         street_nm_instr.setText("> Please introduce the name of the street where your home is located: ");
         street_nm_instr.setEditable(false);
         street_nm_instr.setFont(new Font("Arial", Font.LAYOUT_LEFT_TO_RIGHT, 18));
@@ -42,7 +64,7 @@ public class BkAccAdress extends JPanel
         street_nm_instr.setWrapStyleWord(true);
         street_nm_instr.setBounds(50, 50, 300, 50);
 
-        JTextArea home_nr_instr = new JTextArea(); // instructions to ask the user to introduce the number of their house/appartment
+        home_nr_instr = new JTextArea(); // instructions to ask the user to introduce the number of their house/appartment
         home_nr_instr.setText("> Please introduce the number of your home: ");
         home_nr_instr.setEditable(false);
         home_nr_instr.setFont(new Font("Arial", Font.LAYOUT_LEFT_TO_RIGHT, 18));
@@ -56,10 +78,13 @@ public class BkAccAdress extends JPanel
         add(home_nr_instr);
     }
 
+    //private JComboBox<String> city_field; 
+    //private JComboBox<String> county_field;
     private JTextField street_nm_field; // street name field
     private JTextField home_nr_field; // nome or apartment number
-    private JTextField city_field; 
-    private JTextField county_field;
+
+    //private String[] cities;
+    //private String[] counties;
     
     private void user_fields()
     {
@@ -74,4 +99,6 @@ public class BkAccAdress extends JPanel
         add(street_nm_field);
         add(home_nr_field);
     }
+
+
 }

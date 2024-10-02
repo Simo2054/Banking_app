@@ -16,6 +16,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 import java.io.*;
+import java.util.Arrays;
 
 public class BkAccIdentity extends JPanel
 {
@@ -25,10 +26,12 @@ public class BkAccIdentity extends JPanel
     public String country = "";
 
     private MainFrame mainFrame;
+    private adressManager adressManager;
 
     public BkAccIdentity(MainFrame mainFrame) throws IOException
     {
         this.mainFrame = mainFrame;
+        adressManager = new adressManager();
 
         setBackground(new Color(110, 20, 90));
         setLayout(null);
@@ -109,12 +112,14 @@ public class BkAccIdentity extends JPanel
         add(country_instr);
     }
 
+    // ----------------------------------------------------------------------------------------------------------------
     private JTextField fnm_field; // first name field
     private JTextField lstnm_field; // last name field
     private JTextField tel_nr_field; // phone number field
-    private JComboBox<String> country_option; // lets user select their country
+    private JComboBox<String> country_option; // lets user select their country from a dropdown list
     // "<String>" means that this combo box will only allow options of type string
-    private String[] options;
+    private String[] options; // an array that will hold all available countries
+    // ----------------------------------------------------------------------------------------------------------------
 
     private void user_fields() throws IOException
     {
@@ -132,9 +137,9 @@ public class BkAccIdentity extends JPanel
         tel_nr_field.setFont(new Font("Arial", Font.LAYOUT_LEFT_TO_RIGHT, 18));
         tel_nr_field.setBounds(50, 380, 300, 30);
 
-        options = new String[195]; // google said there are 195 countries in the world :)
-        countryReader(options);
-        country_option = new JComboBox<>(options);
+        options = adressManager.getCountries();// initializing the options array using getCountries method
+        Arrays.sort(options); // sort the array alphabetically
+        country_option = new JComboBox<>(options); // using the array to create a dropdown list of all countries available
         country_option.setFont(new Font("Arial", Font.LAYOUT_LEFT_TO_RIGHT, 18));
         country_option.setBounds(50, 480, 300, 30);
 
@@ -223,35 +228,10 @@ public class BkAccIdentity extends JPanel
             }
         });
 
-
         add(fnm_field);
         add(lstnm_field);
         add(tel_nr_field);
         add(country_option);
-    }
-
-    // method to read counties available from a file
-    private void countryReader(String[] array) throws IOException
-    {
-        File file = new File("user_files/countries_available.txt");
-        if(file.exists())
-        {
-            try(BufferedReader reader = new BufferedReader(new FileReader(file)))
-            {
-                String line;
-                int pos = 0;
-                // reading line by line from the file
-                while((line = reader.readLine()) != null)
-                {
-                    array[pos] = line; // every line read will be placed in a string arrray
-                    pos++; // raising the index with every fill of the array
-                }
-            }
-            catch (IOException e)
-            {
-                e.printStackTrace();
-            }
-        }
     }
 
     private JButton backButton;
