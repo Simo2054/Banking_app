@@ -26,12 +26,12 @@ public class BkAccIdentity extends JPanel
     public String country = "";
 
     private MainFrame mainFrame;
-    private adressManager adressManager;
+    private AdressManager adressManager;
 
     public BkAccIdentity(MainFrame mainFrame) throws IOException
     {
         this.mainFrame = mainFrame;
-        adressManager = new adressManager();
+        adressManager = new AdressManager();
 
         setBackground(new Color(110, 20, 90));
         setLayout(null);

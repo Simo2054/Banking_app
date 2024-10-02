@@ -6,7 +6,7 @@ import Card_types.*;
 import java.io.*;
 import java.util.*;
 
-public class adressManager 
+public class AdressManager 
 {
     // Nested map structure: Country -> City -> List of Counties
     private Map<String, Map<String, List<String> > > addressData = new HashMap<>();
@@ -19,7 +19,7 @@ public class adressManager
     // the file with all countries, cities and counties/districts available
 
     // Constructor that takes the file path and loads data from it
-    public adressManager() 
+    public AdressManager() 
     {
         try 
         {

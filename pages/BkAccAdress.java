@@ -25,10 +25,13 @@ public class BkAccAdress extends JPanel
     public String home_nr = ""; // or apt. nr
 
     private MainFrame mainFrame;
+    private AdressManager adressManager;
+    private BkAccIdentity bkAccIdentity;
 
     public BkAccAdress(MainFrame mainFrame)
     {
         this.mainFrame = mainFrame;
+        adressManager = new AdressManager();
 
         setBackground(new Color(110, 20, 90));
         setLayout(null);
@@ -78,16 +81,19 @@ public class BkAccAdress extends JPanel
         add(home_nr_instr);
     }
 
-    //private JComboBox<String> city_field; 
+    private JComboBox<String> city_field; 
     //private JComboBox<String> county_field;
     private JTextField street_nm_field; // street name field
     private JTextField home_nr_field; // nome or apartment number
 
-    //private String[] cities;
+    private String[] cities; // an array that will hold all available 
+                            //cities for the previously selected country
     //private String[] counties;
     
-    private void user_fields()
-    {
+    private void user_fields() throws IOException
+    {   
+        cities = adressManager.getCitiesByCountry();
+
         street_nm_field = new JTextField();
         street_nm_field.setFont(new Font("Arial", Font.LAYOUT_LEFT_TO_RIGHT, 18));
         street_nm_field.setBounds(50, 440, 300, 30);
