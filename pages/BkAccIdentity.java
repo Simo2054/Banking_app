@@ -237,7 +237,7 @@ public class BkAccIdentity extends JPanel
     private JButton backButton;
     private JButton nextButton;
 
-    private void nextAndBackButtons()
+    private void nextAndBackButtons() throws IOException
     {
         backButton = new JButton("Back");
         backButton.setBounds(20, 730, 80, 50);
@@ -264,7 +264,15 @@ public class BkAccIdentity extends JPanel
                 if(!(user_first_name.isEmpty()) && !(user_last_name.isEmpty()) && !(user_tel_nr.isEmpty()) && !(country.isEmpty()))
                 // checking if all of the fields are completed
                 {
-                    mainFrame.cardLayout.show(mainFrame.mainPanel, "BkAccAdress");
+                    try
+                    {
+                        mainFrame.BkAccAdress.updateField();
+                        mainFrame.cardLayout.show(mainFrame.mainPanel, "BkAccAdress");
+                    }
+                    catch(IOException ex)
+                    {
+                        ex.printStackTrace();
+                    }
                 }
                 else
                 {
@@ -273,8 +281,6 @@ public class BkAccIdentity extends JPanel
                 
             }
         });
-
-        
 
         add(backButton);
         add(nextButton);

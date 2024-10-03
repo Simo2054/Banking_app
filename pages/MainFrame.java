@@ -100,14 +100,14 @@ public class MainFrame
         // a panel can hold multiple components
     }
 
-    public void setUsername(String username)
+    public void setUsername(String username) // setter for username (used in SignUpPage.java)
     {
         this.username = username;
 
         cardManager.initCardTypesPanel(); // init cardTypesPanel only after username is set
     }
 
-    public String getUsername() // getter for username
+    public String getUsername() // getter for username (used in TypesOfCards.java)
     {
         return username;
     }
