@@ -30,10 +30,15 @@ public class BkAccAdress extends JPanel
     private String tel_nr;
     private String country_chosen;
 
+    private String LIPemail; // email from log in page
+    private String SUPemail; // email from sign up page
+
     private MainFrame mainFrame;
     private AdressManager adressManager;
     private BkAccIdentity bkAccIdentity;
     private UserManager userManager;
+    private LoginPage loginPage;
+    private SignUpPage signUpPage;
 
     public BkAccAdress(MainFrame mainFrame, BkAccIdentity bkAccIdentity) throws IOException
     {
@@ -41,6 +46,8 @@ public class BkAccAdress extends JPanel
         adressManager = new AdressManager();
         this.bkAccIdentity = bkAccIdentity;
         userManager = new UserManager();
+        loginPage = new LoginPage(mainFrame);
+        signUpPage = new SignUpPage(mainFrame);
 
         setBackground(new Color(110, 20, 90));
         setLayout(null);
@@ -49,12 +56,17 @@ public class BkAccAdress extends JPanel
     // method to update the page when a country is chosen
     public void updateField() throws IOException
     {
+        LIPemail = loginPage.input_mail;
+        SUPemail = signUpPage.new_user_email;
+
         first_name = bkAccIdentity.user_first_name;
         last_name = bkAccIdentity.user_last_name;
         tel_nr = bkAccIdentity.user_tel_nr;
         country_chosen = bkAccIdentity.country;
+
         instructions();
         user_fields();
+        nextAndBackButtons();
     }
 
     private JTextArea city_instr;
@@ -131,6 +143,51 @@ public class BkAccAdress extends JPanel
         home_nr_field = new JTextField();
         home_nr_field.setFont(new Font("Arial", Font.LAYOUT_LEFT_TO_RIGHT, 18));
         home_nr_field.setBounds(50, 410, 300, 30);
+
+        street_nm_field.addActionListener(new ActionListener() 
+        {
+            @Override
+            public void actionPerformed(ActionEvent e)
+            {
+                street_name = street_nm_field.getText();
+                home_nr_field.requestFocusInWindow();
+            }
+        });
+
+        street_nm_field.addFocusListener(new FocusListener() 
+        {
+            @Override
+            public void focusGained(FocusEvent e)
+            {
+                // nothing yet
+            }
+            public void focusLost(FocusEvent e)
+            {
+                street_name = street_nm_field.getText();
+            }
+        });
+
+        home_nr_field.addActionListener(new ActionListener() 
+        {
+            @Override
+            public void actionPerformed(ActionEvent e)
+            {
+                home_nr = home_nr_field.getText();
+            }
+        });
+
+        home_nr_field.addFocusListener(new FocusListener() 
+        {
+            @Override
+            public void focusGained(FocusEvent e)
+            {
+                // nothing yet
+            }
+            public void focusLost(FocusEvent e)
+            {
+                home_nr = home_nr_field.getText();
+            }
+        });
 
         add(street_nm_field);
         add(home_nr_field);
@@ -238,18 +295,35 @@ public class BkAccAdress extends JPanel
                 // checking if all of the fields are completed
                 {
                     System.out.println("ceva");
-                    /* 
-                    try
+
+                    if(LIPemail.isEmpty())
                     {
-                        //UserManager.AddBankAcc();
-                        // next page
-                        // mainFrame.cardLayout.show(mainFrame.mainPanel, "");
+                        try
+                        {
+                            userManager.AddBankAcc(SUPemail, first_name, last_name, tel_nr, country_chosen, city, county, street_name, home_nr);
+                            // next page
+                            // mainFrame.cardLayout.show(mainFrame.mainPanel, "");
+                        }
+                        catch(IOException ex)
+                        {
+                            ex.printStackTrace();
+                        }
                     }
-                    catch(IOException ex)
+                    else if(SUPemail.isEmpty())
                     {
-                        ex.printStackTrace();
+                        try
+                        {
+                            userManager.AddBankAcc(LIPemail, first_name, last_name, tel_nr, country_chosen, city, county, street_name, home_nr);
+                            // method to add the bank account credentials to the database (a file)
+
+                            // next page
+                            // mainFrame.cardLayout.show(mainFrame.mainPanel, "");
+                        }
+                        catch(IOException ex)
+                        {
+                            ex.printStackTrace();
+                        }
                     }
-                    */
                 }
                 else
                 {
