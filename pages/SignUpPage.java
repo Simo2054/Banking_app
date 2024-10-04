@@ -11,7 +11,7 @@ import java.io.IOException;
 public class SignUpPage extends JPanel 
 {
     public String new_user_email = "";
-    public String new_username = "test";
+    public String new_username = "";
     public String new_user_password = "";
     public String new_safety_user_password = "";
 

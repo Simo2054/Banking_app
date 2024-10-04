@@ -25,25 +25,33 @@ public class BkAccAdress extends JPanel
     public String street_name = "";
     public String home_nr = ""; // or apt. nr
 
+    private String first_name;
+    private String last_name;
+    private String tel_nr;
+    private String country_chosen;
+
     private MainFrame mainFrame;
     private AdressManager adressManager;
     private BkAccIdentity bkAccIdentity;
+    private UserManager userManager;
 
     public BkAccAdress(MainFrame mainFrame, BkAccIdentity bkAccIdentity) throws IOException
     {
         this.mainFrame = mainFrame;
         adressManager = new AdressManager();
         this.bkAccIdentity = bkAccIdentity;
+        userManager = new UserManager();
 
         setBackground(new Color(110, 20, 90));
         setLayout(null);
     }
 
-    private String country_chosen;
-
-    // method to update the page when a county is chosen
+    // method to update the page when a country is chosen
     public void updateField() throws IOException
     {
+        first_name = bkAccIdentity.user_first_name;
+        last_name = bkAccIdentity.user_last_name;
+        tel_nr = bkAccIdentity.user_tel_nr;
         country_chosen = bkAccIdentity.country;
         instructions();
         user_fields();
@@ -197,5 +205,61 @@ public class BkAccAdress extends JPanel
         // revalidate and repaint the GUI elements
         revalidate();
         repaint();
+    }
+
+    private JButton backButton;
+    private JButton nextButton;
+
+    private void nextAndBackButtons() throws IOException
+    {
+        backButton = new JButton("Back");
+        backButton.setBounds(20, 730, 80, 50);
+
+        nextButton = new JButton("Next");
+        nextButton.setBounds(300, 730, 80, 50);
+
+        // goes back to card type selection page
+        backButton.addActionListener(new ActionListener() 
+        {
+            @Override
+            public void actionPerformed(ActionEvent e)
+            {
+                mainFrame.cardLayout.show(mainFrame.mainPanel, "BkAccIdentity");
+            }
+        });
+
+        // goes to the page 2 of the bank account creation
+        nextButton.addActionListener(new ActionListener() 
+        {
+            @Override
+            public void actionPerformed(ActionEvent e)
+            {
+                if(!(city.isEmpty()) && !(county.isEmpty()) && !(street_name.isEmpty()) && !(home_nr.isEmpty()))
+                // checking if all of the fields are completed
+                {
+                    System.out.println("ceva");
+                    /* 
+                    try
+                    {
+                        //UserManager.AddBankAcc();
+                        // next page
+                        // mainFrame.cardLayout.show(mainFrame.mainPanel, "");
+                    }
+                    catch(IOException ex)
+                    {
+                        ex.printStackTrace();
+                    }
+                    */
+                }
+                else
+                {
+                    System.out.println("please introduce your data");
+                }
+                
+            }
+        });
+
+        add(backButton);
+        add(nextButton);
     }
 }

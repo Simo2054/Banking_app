@@ -159,11 +159,13 @@ public class BkAccIdentity extends JPanel
             public void focusGained(FocusEvent e)
             {
                 // nothing yet
+                warning.setVisible(false);
             }
             public void focusLost(FocusEvent e)
             {
                 user_first_name = fnm_field.getText();
-                lstnm_field.requestFocusInWindow();
+                
+                //lstnm_field.requestFocusInWindow();
             }
         });
 
@@ -183,11 +185,13 @@ public class BkAccIdentity extends JPanel
             public void focusGained(FocusEvent e)
             {
                 // nothing yet
+                warning.setVisible(false);
             }
             public void focusLost(FocusEvent e)
             {
                 user_last_name = lstnm_field.getText();
-                tel_nr_field.requestFocusInWindow();
+                
+                //tel_nr_field.requestFocusInWindow();
             }
         });
 
@@ -207,11 +211,13 @@ public class BkAccIdentity extends JPanel
             public void focusGained(FocusEvent e)
             {
                 // nothing yet
+                warning.setVisible(false);
             }
             public void focusLost(FocusEvent e)
             {
                 user_tel_nr = tel_nr_field.getText();
-                country_option.requestFocusInWindow();
+                
+                //country_option.requestFocusInWindow();
             }
         });
 
@@ -237,6 +243,9 @@ public class BkAccIdentity extends JPanel
     private JButton backButton;
     private JButton nextButton;
 
+    private JTextArea warning; 
+    // a warning to let the user know they still have to complete fields
+
     private void nextAndBackButtons() throws IOException
     {
         backButton = new JButton("Back");
@@ -244,6 +253,17 @@ public class BkAccIdentity extends JPanel
 
         nextButton = new JButton("Next");
         nextButton.setBounds(300, 730, 80, 50);
+
+        warning = new JTextArea();
+        warning.setText("Please complete all fields!");// display the warning message
+        warning.setEditable(false);
+        warning.setFont(new Font("Arial", Font.LAYOUT_LEFT_TO_RIGHT, 15));
+        warning.setForeground(Color.PINK);
+        warning.setBackground(new Color(0,0,0,0));
+        warning.setLineWrap(true);
+        warning.setWrapStyleWord(true);
+        warning.setVisible(false);
+        warning.setBounds(110, 730, 180, 50);
 
         // goes back to card type selection page
         backButton.addActionListener(new ActionListener() 
@@ -268,6 +288,7 @@ public class BkAccIdentity extends JPanel
                     {
                         mainFrame.BkAccAdress.updateField();
                         mainFrame.cardLayout.show(mainFrame.mainPanel, "BkAccAdress");
+                        System.out.println("ce ma?");
                     }
                     catch(IOException ex)
                     {
@@ -276,12 +297,18 @@ public class BkAccIdentity extends JPanel
                 }
                 else
                 {
-                    System.out.println("please introduce your data");
+                    System.out.println("first name: " + user_first_name);
+                    System.out.println("last name: " + user_last_name);
+                    System.out.println("phone number: " + user_tel_nr);
+                    System.out.println("country chosen: " + country);
+                    warning.setVisible(true);
+                    System.out.println("altceva");
                 }
                 
             }
         });
 
+        add(warning);
         add(backButton);
         add(nextButton);
     }
