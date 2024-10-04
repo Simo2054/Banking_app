@@ -19,6 +19,8 @@ public class VirtualCardType extends TypesOfCards
         " - improved security and immediate activation.\n" + 
         " - used for primary customer.\n" + 
         " - customizations such as transactional limit, appearance, currency type.\n");
+
+        chooseCardButton("BkAccIdentity");
     }
 
     @Override

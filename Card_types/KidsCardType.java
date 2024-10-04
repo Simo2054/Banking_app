@@ -19,6 +19,8 @@ public class KidsCardType extends TypesOfCards
         " - Being in control of your child's account while also allowing them freedom of spending.\n" + 
         " - Age limit.\n" + 
         " - Improved security.\n");
+
+        chooseCardButton("BkAccIdentity");
     }
 
     @Override

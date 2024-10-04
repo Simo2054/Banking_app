@@ -22,6 +22,8 @@ public class DebitCardType extends TypesOfCards
         " - Uses money from your account.\n" +
         " - Can be used for both in-person and online transactions.\n" + 
         " - Limited to the balance in your bank account.\n");
+
+        chooseCardButton("BkAccIdentity");
     }
 
     // since the method is general for each type and it's abstract, it has its implementation in each card type class

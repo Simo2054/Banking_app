@@ -159,10 +159,29 @@ public abstract class TypesOfCards extends JPanel
             @Override
             public void actionPerformed(ActionEvent e)
             {
-                mainFrame.cardLayout.show(mainFrame.mainPanel, "BkAccIdentity");
+                mainFrame.cardLayout.show(mainFrame.mainPanel, "CardDataPage");
             }
         });
 
         add(existsCard);
+    }
+
+    protected void chooseCardButton(String page)
+    {
+        JButton chooseCard = new JButton();
+        chooseCard.setText("Choose Card Type");
+        chooseCard.setFont(new Font("Arial", Font.BOLD, 20));
+        chooseCard.setBounds(75, 620, 250, 50);
+
+        chooseCard.addActionListener(new ActionListener() 
+        {
+            @Override
+            public void actionPerformed(ActionEvent e)
+            {
+                mainFrame.cardLayout.show(mainFrame.mainPanel, page);
+            }
+        });
+
+        add(chooseCard);
     }
 }

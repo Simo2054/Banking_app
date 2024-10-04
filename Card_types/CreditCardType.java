@@ -19,6 +19,8 @@ public class CreditCardType extends TypesOfCards
         " - Borrowed money must be repaid (with interest if not paid in full by due date).\n" + 
         " - Offers rewards like cash-back, points or travel miles.\n" + 
         " - Helps build credit scores.\n");
+        
+        chooseCardButton("BkAccIdentity");
     }
 
     @Override

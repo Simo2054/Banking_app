@@ -34,7 +34,7 @@ public class MainFrame
     CardManager cardManager; // CardManager to handle bank card related logic
     public String username; // storing username after signing up
 
-    ExistCardPage ExistCardPage;
+    CardDataPage CardDataPage;
     // instance for a page where user will introduce their card data
     // (number, name, expiring date, CVC code)
     // (response for "I already have a card" button)
@@ -56,7 +56,7 @@ public class MainFrame
         signUpPage = new SignUpPage(this);
         successfulLogIn = new LogInSuccess(this, loginPage);
         cardManager = new CardManager(this);
-        ExistCardPage = new ExistCardPage(this);
+        CardDataPage = new CardDataPage(this);
         BkAccIdentity = new BkAccIdentity(this);
         BkAccAdress = new BkAccAdress(this, BkAccIdentity);
 
@@ -67,7 +67,7 @@ public class MainFrame
         mainPanel.add(loginPage, "loginPage");
         mainPanel.add(signUpPage, "signUpPage");
         mainPanel.add(successfulLogIn, "successfulLogIn");
-        mainPanel.add(ExistCardPage, "ExistCardPage");
+        mainPanel.add(CardDataPage, "CardDataPage");
         mainPanel.add(BkAccIdentity, "BkAccIdentity");
         mainPanel.add(BkAccAdress, "BkAccAdress");
 
