@@ -3,9 +3,11 @@ package pages;
 import Card_types.*;
 import managers.*;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.awt.image.BufferedImage;
 import java.io.IOException;
 
 public class OpeningPage extends JPanel
@@ -13,17 +15,23 @@ public class OpeningPage extends JPanel
     private MainFrame mainFrame; // a field to hold the reference (connection) to the MainFrame class
     // this is allowing the OpeningPage to store the MainFrame instance and use it in the class
 
+    private ImageManager imageManager;
+
     public OpeningPage(MainFrame mainFrame) // constructor
     // an object/parameter (mainFrame) of type MainFrame is being passed to OpeningPage class
     {
         this.mainFrame = mainFrame; // storing the reference to MainFrame class 
         // this.mainframe referes to the field mentioned first and mainFrame is the parameter
         // elements from the MainFrame class will be used in the methods of OpeningPage class
+
+        imageManager = new ImageManager();
+
         setLayout(null);
         setBackground(new Color(50, 52, 88));
 
         LoginButton();
         SignUpButton();
+        image();
     }
 
     private void LoginButton()
@@ -84,5 +92,13 @@ public class OpeningPage extends JPanel
         });
 
         add(SignUpButton);
+    }
+
+    private void image()
+    {
+        JLabel logoPhoto;
+        logoPhoto = imageManager.createImgLabel("images/circle.png", 300, 300);
+        logoPhoto.setBounds(50, 50, 300, 300);
+        add(logoPhoto);
     }
 }
