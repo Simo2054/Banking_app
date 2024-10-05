@@ -209,5 +209,18 @@ public class UserManager
         saveBkAcc();
     }
 
+    // checks if the introduced email adress contains a substring domain
+    public boolean checkValidMail(String email)
+    {
+        if(email.contains("@gmail.com") || email.contains("@yahoo.com") || email.contains("@outlook.com"))
+        {
+            return true; // valid format
+        }
+        else
+        {
+            return false; // invalid format
+        }
+    }
+
 }
 

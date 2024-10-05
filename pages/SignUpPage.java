@@ -254,6 +254,14 @@ public class SignUpPage extends JPanel
                     warning.setVisible(true);
                     email_field.requestFocusInWindow();
                 }
+                else if(!(userManager.checkValidMail(new_user_email)))
+                // checks if the introduced email contains a domain
+                {
+                    warning.setBounds(50, 300, 300, 40);
+                    warning.setText("E-Mail adress not available");// display the warning message
+                    warning.setVisible(true);
+                    email_field.requestFocusInWindow();
+                }
                 else if(!(new_user_email.isEmpty()) && !(new_username.isEmpty()) && 
                 !(new_user_password.isEmpty()) && !(new_safety_user_password.isEmpty()))
                 // checking if all of the fields are completed
