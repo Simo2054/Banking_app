@@ -187,7 +187,7 @@ public class IBAN_creator
     }
 
     // maybe make this a String method and return IBAN as a string :)
-    private String IBAN_composer(String country_chosen)
+    public String IBAN_composer(String country_chosen)
     {
         // 1. get the country code
         String countryCode = getCCode(country_chosen);
