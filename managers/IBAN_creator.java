@@ -83,8 +83,9 @@ public class IBAN_creator
         // iterating through the map's keys to find the key that is the country introduced
         for(String i: countries.keySet())
         {
-            if(i == country)
+            if(i.equals(country))
             {
+                // return the coresponding value
                 return countries.get(i);
             }
         }
