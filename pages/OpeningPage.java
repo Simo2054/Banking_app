@@ -88,6 +88,7 @@ public class OpeningPage extends JPanel
 
                 //mainFrame.cardLayout.show(mainFrame.mainPanel, "CardDataPage");
                 //mainFrame.cardLayout.show(mainFrame.mainPanel, "cardTypesPanel");
+                //mainFrame.cardLayout.show(mainFrame.mainPanel, "PrepCardPage");
             }
         });
 

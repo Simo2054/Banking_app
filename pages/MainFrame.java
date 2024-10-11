@@ -49,6 +49,15 @@ public class MainFrame
     // (city, county, street name, home number) for their bank account
     // (response for Credit, Debit, Virtual, Kids card types, page 2)
 
+    PrepCardPage PrepCardPage;
+    // instance for a page where user will need to introduce some data 
+    // (first name, last name, sum of money wanted) for the prepaid card
+    // (response for Prepaid card type)
+
+    CardObtained cardObtained;
+    // instance for a page where the app will let the user know that they 
+    // got the card type they selected
+
     MainFrame() throws IOException // constructor
     {
         openingPage = new OpeningPage(this);
@@ -59,6 +68,8 @@ public class MainFrame
         CardDataPage = new CardDataPage(this);
         BkAccIdentity = new BkAccIdentity(this);
         BkAccAdress = new BkAccAdress(this, BkAccIdentity);
+        PrepCardPage = new PrepCardPage(this);
+        cardObtained = new CardObtained(this);
 
         startFrame();
         initMainPanel();
@@ -70,6 +81,8 @@ public class MainFrame
         mainPanel.add(CardDataPage, "CardDataPage");
         mainPanel.add(BkAccIdentity, "BkAccIdentity");
         mainPanel.add(BkAccAdress, "BkAccAdress");
+        mainPanel.add(PrepCardPage, "PrepCardPage");
+        mainPanel.add(cardObtained, "cardObtained");
 
         mainPanel.add(cardManager.getCardTypesPanel(), "cardTypesPanel"); // to add the container for all card types to the mainPanel
 
