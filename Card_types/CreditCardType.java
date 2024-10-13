@@ -28,4 +28,10 @@ public class CreditCardType extends TypesOfCards
     {
         return "CreditCard";
     }
+
+    @Override
+    public String getCardType()
+    {
+        return "Credit";
+    }
 }

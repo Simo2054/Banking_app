@@ -300,9 +300,11 @@ public class BkAccAdress extends JPanel
                     {
                         try
                         {
+                            System.out.println("lip");
                             userManager.AddBankAcc(SUPemail, first_name, last_name, tel_nr, country_chosen, city, county, street_name, home_nr);
+                            
                             // next page
-                            // mainFrame.cardLayout.show(mainFrame.mainPanel, "");
+                            mainFrame.cardLayout.show(mainFrame.mainPanel, "cardObtained");
                         }
                         catch(IOException ex)
                         {
@@ -313,11 +315,12 @@ public class BkAccAdress extends JPanel
                     {
                         try
                         {
+                            System.out.println("sup");
                             userManager.AddBankAcc(LIPemail, first_name, last_name, tel_nr, country_chosen, city, county, street_name, home_nr);
                             // method to add the bank account credentials to the database (a file)
 
                             // next page
-                            // mainFrame.cardLayout.show(mainFrame.mainPanel, "");
+                            mainFrame.cardLayout.show(mainFrame.mainPanel, "cardObtained");
                         }
                         catch(IOException ex)
                         {

@@ -54,7 +54,7 @@ public class MainFrame
     // (first name, last name, sum of money wanted) for the prepaid card
     // (response for Prepaid card type)
 
-    CardObtained cardObtained;
+    public CardObtained cardObtained;
     // instance for a page where the app will let the user know that they 
     // got the card type they selected
 
@@ -128,6 +128,20 @@ public class MainFrame
     public CardManager getCardManager() // getter for CardManager class (returns an instance of the class)
     {
         return cardManager;
+    }
+
+    private String selectedCardType; // string to store the seelcted card type
+
+    // setter for the card type
+    public void setSelectedCardType(String type)
+    {
+        this.selectedCardType = type;
+    }
+
+    // getter for the selected card type
+    public String getSelectedCardType()
+    {
+        return selectedCardType;
     }
 }
 

@@ -28,4 +28,10 @@ public class KidsCardType extends TypesOfCards
     {
         return "KidsCard";
     }
+
+    @Override
+    public String getCardType()
+    {
+        return "Kids";
+    }
 }

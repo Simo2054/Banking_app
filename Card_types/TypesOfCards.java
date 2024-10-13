@@ -11,10 +11,12 @@ import java.awt.event.*;
 public abstract class TypesOfCards extends JPanel
 {
     private MainFrame mainFrame;
+    CardObtained cardObtained;
 
     public TypesOfCards(MainFrame mainFrame)
     {
         this.mainFrame = mainFrame;
+        cardObtained = new CardObtained(mainFrame);
 
         setLayout(null);
         setBackground(new Color(110, 20, 90));
@@ -104,6 +106,10 @@ public abstract class TypesOfCards extends JPanel
     // getter method for the name of each type (refering to cards)
     public abstract String getTypeName();
 
+    // getter method to get the type name of the chosen card
+    // (utilitary, will be used to show the user the type of card they chose)
+    public abstract String getCardType();
+
     protected void addTitle(String title)
     {
         JLabel card_title = new JLabel();
@@ -178,6 +184,11 @@ public abstract class TypesOfCards extends JPanel
             @Override
             public void actionPerformed(ActionEvent e)
             {
+                String cardType = getCardType();
+                System.out.println("Selected card type is: " + cardType);
+                mainFrame.setSelectedCardType(getCardType()); // to set the selected card type in MainFrame
+                mainFrame.cardObtained.refreshDisplay();
+                // show the next page
                 mainFrame.cardLayout.show(mainFrame.mainPanel, page);
             }
         });

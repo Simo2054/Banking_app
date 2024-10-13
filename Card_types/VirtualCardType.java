@@ -28,4 +28,10 @@ public class VirtualCardType extends TypesOfCards
     {
         return "VirtualCard";
     }
+
+    @Override
+    public String getCardType()
+    {
+        return "Virtual";
+    }
 }

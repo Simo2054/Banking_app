@@ -32,4 +32,10 @@ public class DebitCardType extends TypesOfCards
     {
         return "DebitCard";
     }
+
+    @Override
+    public String getCardType()
+    {
+        return "Debit";
+    }
 }

@@ -25,4 +25,10 @@ public class PrepaidCardType extends TypesOfCards
     {
         return "PrepaidCard";
     }
+
+    @Override
+    public String getCardType()
+    {
+        return "Prepaid";
+    }
 }
