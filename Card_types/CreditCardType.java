@@ -5,10 +5,11 @@ import managers.*;
 
 import javax.swing.*;
 import java.awt.*;
+import java.io.IOException;
 
 public class CreditCardType extends TypesOfCards
 {
-    public CreditCardType(MainFrame mainFrame)
+    public CreditCardType(MainFrame mainFrame) throws IOException
     {
         super(mainFrame);
         addTitle("Credit Card");

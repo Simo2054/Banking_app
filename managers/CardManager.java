@@ -5,6 +5,7 @@ import Card_types.*;
 
 import javax.swing.*;
 import java.awt.*;
+import java.io.IOException;
 
 // class to handle the card pick page
 public class CardManager
@@ -27,7 +28,7 @@ public class CardManager
         cardTypesPanel.setBounds(0, 0, 400, 800); // the panel will be as big as the frame
     }
 
-    public void initCardTypesPanel()
+    public void initCardTypesPanel() throws IOException
     {
         cardTypesArray = new TypesOfCards[] // populating the array of bank card types
         {

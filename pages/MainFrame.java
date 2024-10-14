@@ -127,7 +127,7 @@ public class MainFrame
         return introducedEmail;
     }
 
-    public void setUsername(String username) // setter for username (used in SignUpPage.java)
+    public void setUsername(String username) throws IOException// setter for username (used in SignUpPage.java)
     {
         this.username = username;
 

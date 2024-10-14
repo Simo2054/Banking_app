@@ -6,6 +6,7 @@ import managers.*;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.io.IOException;
 
 // some common methods for all pages containing types of cards
 public abstract class TypesOfCards extends JPanel
@@ -13,7 +14,7 @@ public abstract class TypesOfCards extends JPanel
     private MainFrame mainFrame;
     CardObtained cardObtained;
 
-    public TypesOfCards(MainFrame mainFrame)
+    public TypesOfCards(MainFrame mainFrame) throws IOException
     {
         this.mainFrame = mainFrame;
         cardObtained = new CardObtained(mainFrame);
@@ -187,7 +188,7 @@ public abstract class TypesOfCards extends JPanel
                 String cardType = getCardType();
                 System.out.println("Selected card type is: " + cardType);
                 mainFrame.setSelectedCardType(getCardType()); // to set the selected card type in MainFrame
-                mainFrame.cardObtained.refreshDisplay();
+                mainFrame.cardObtained.updateField();
                 // show the next page
                 mainFrame.cardLayout.show(mainFrame.mainPanel, page);
             }

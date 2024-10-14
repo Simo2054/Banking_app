@@ -5,11 +5,12 @@ import managers.*;
 
 import javax.swing.*;
 import java.awt.*;
+import java.io.IOException;
 
 public class DebitCardType extends TypesOfCards
 // each card type has its implementation in different classes (for code organization)
 {
-    public DebitCardType(MainFrame mainFrame)
+    public DebitCardType(MainFrame mainFrame) throws IOException
     {
         super(mainFrame); // pass the MainFrame to the superclass 
         // for invoking the constructor of the parent class and accessing its variables

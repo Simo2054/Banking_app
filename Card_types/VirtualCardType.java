@@ -5,10 +5,11 @@ import managers.*;
 
 import javax.swing.*;
 import java.awt.*;
+import java.io.IOException;
 
 public class VirtualCardType extends TypesOfCards
 {
-    public VirtualCardType(MainFrame mainFrame)
+    public VirtualCardType(MainFrame mainFrame) throws IOException
     {
         super(mainFrame);
         addTitle("Virtual Card");

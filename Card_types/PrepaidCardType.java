@@ -5,10 +5,11 @@ import managers.*;
 
 import javax.swing.*;
 import java.awt.*;
+import java.io.IOException;
 
 public class PrepaidCardType extends TypesOfCards
 {
-    public PrepaidCardType(MainFrame mainFrame)
+    public PrepaidCardType(MainFrame mainFrame) throws IOException
     {
         super(mainFrame);
         addTitle("Prepaid Card");

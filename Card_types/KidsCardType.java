@@ -5,10 +5,11 @@ import managers.*;
 
 import javax.swing.*;
 import java.awt.*;
+import java.io.IOException;
 
 public class KidsCardType extends TypesOfCards
 {
-    public KidsCardType(MainFrame mainFrame)
+    public KidsCardType(MainFrame mainFrame) throws IOException
     {
         super(mainFrame);
         addTitle("Kids Card");

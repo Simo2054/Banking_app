@@ -11,16 +11,18 @@ import java.util.Arrays;
 
 public class CardObtained extends JPanel
 {
-    private MainFrame mainFrame;
 
-    public CardObtained(MainFrame mainFrame)
+
+    private MainFrame mainFrame;
+    private BkAccIdentity bkAccIdentity;
+
+    public CardObtained(MainFrame mainFrame) throws IOException
     {
         this.mainFrame = mainFrame;
+        bkAccIdentity = new BkAccIdentity(mainFrame);
 
         setBackground(new Color(110, 20, 90));
         setLayout(null);
-
-        displayTypeChosen();
     }
 
     // Your [type] card is 
@@ -31,12 +33,33 @@ public class CardObtained extends JPanel
     // Valid until [exp_month / exp_year]
     // CVV: [CVV number]
 
+    private String CardType; // chosen card type
+    private String first_name; // beneficiary's first name
+    private String last_name; // beneficiary's last name
+    private String AccIBAN; // IBAN of the connected account
+    private String cardNumber; // card number of the generated card
+    private String exp_month; // expiration month of the card
+    private String exp_year; // expiration year of the card
+    private String CVC_num; // CVC number for the generated card
+
+    // utilitary method to update the needed fields according to user's choices
+    public void updateField() //throws IOException
+    {
+        CardType = mainFrame.getSelectedCardType();
+        first_name = bkAccIdentity.user_first_name;
+        last_name = bkAccIdentity.user_last_name;
+
+        displayTypeChosen();
+    }
+
+
     JTextArea card_type_instr; // text area to show the type of card chosen
     JTextArea owner_instr; // text area to show the name of the beneficiary
 
     private void displayTypeChosen()
     {
         card_type_instr = new JTextArea();
+        card_type_instr.setText("Your " + CardType + " card is");
         card_type_instr.setEditable(false);
         card_type_instr.setFont(new Font("Arial", Font.BOLD, 18));
         card_type_instr.setForeground(Color.BLUE);
@@ -48,27 +71,19 @@ public class CardObtained extends JPanel
         add(card_type_instr);
     }
 
-    // utilitary method to refresh the display the chosen card type
-    public void refreshDisplay()
+    private void displayBeneficiary()
     {
-        String type = mainFrame.getSelectedCardType();
-        if(type != null)
-        {
-            card_type_instr.setText("Your " + type + " card is");
-        }
-        else
-        {
-            card_type_instr.setText("no card selected!");
-        }
-    }
+        owner_instr = new JTextArea();
+        owner_instr.setText("Beneficiary: " + first_name + " " + last_name);
+        owner_instr.setEditable(false);
+        owner_instr.setFont(new Font("Arial", Font.BOLD, 18));
+        owner_instr.setForeground(Color.BLUE);
+        owner_instr.setBackground(new Color(165, 202, 255));
+        owner_instr.setLineWrap(true);
+        owner_instr.setWrapStyleWord(true);
+        owner_instr.setBounds(50, 50, 300, 50);
 
-    //public void updateField() throws IOException
-    //{
-    //    
-    //}
-//
-    //private void displayBeneficiary()
-    //{
-    //    
-    //}
+        add(owner_instr);
+    }
+    
 }
