@@ -113,6 +113,20 @@ public class MainFrame
         // a panel can hold multiple components
     }
 
+    // ------------------------------- getters and setters -------------------------------
+
+    private String introducedEmail;
+
+    public void setEmail(String email) // setter for e-mail (used in SignUpPage.java)
+    {
+        this.introducedEmail = email;
+    }
+
+    public String getEmail() // getter for e-mail (used in )
+    {
+        return introducedEmail;
+    }
+
     public void setUsername(String username) // setter for username (used in SignUpPage.java)
     {
         this.username = username;
@@ -132,13 +146,13 @@ public class MainFrame
 
     private String selectedCardType; // string to store the seelcted card type
 
-    // setter for the card type
+    // setter for the card type (used in TypesOfCards.java)
     public void setSelectedCardType(String type)
     {
         this.selectedCardType = type;
     }
 
-    // getter for the selected card type
+    // getter for the selected card type  (used in CardObtained.java)
     public String getSelectedCardType()
     {
         return selectedCardType;

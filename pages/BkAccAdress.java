@@ -57,7 +57,8 @@ public class BkAccAdress extends JPanel
     public void updateField() throws IOException
     {
         LIPemail = loginPage.input_mail;
-        SUPemail = signUpPage.new_user_email;
+        SUPemail = mainFrame.getEmail();
+        System.out.println("sign up: " + SUPemail + " and log in: " + LIPemail);
 
         first_name = bkAccIdentity.user_first_name;
         last_name = bkAccIdentity.user_last_name;
@@ -300,7 +301,8 @@ public class BkAccAdress extends JPanel
                     {
                         try
                         {
-                            System.out.println("lip");
+                            System.out.println("log in empty");
+                            System.out.println("the introduced email is: " + SUPemail);
                             userManager.AddBankAcc(SUPemail, first_name, last_name, tel_nr, country_chosen, city, county, street_name, home_nr);
                             
                             // next page
@@ -315,7 +317,7 @@ public class BkAccAdress extends JPanel
                     {
                         try
                         {
-                            System.out.println("sup");
+                            System.out.println("sign up empty");
                             userManager.AddBankAcc(LIPemail, first_name, last_name, tel_nr, country_chosen, city, county, street_name, home_nr);
                             // method to add the bank account credentials to the database (a file)
 

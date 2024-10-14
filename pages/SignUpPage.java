@@ -273,7 +273,8 @@ public class SignUpPage extends JPanel
                         {
                             // add user to the database(file)
                             userManager.addUser(new_user_email, new_username, new_user_password);
-                            
+                            // set email in MainFrame (will be used in "BkAccAdress.java")
+                            mainFrame.setEmail(new_user_email);
                             // set username in MainFrame (that will be used in file "TypesOfCards.java")
                             mainFrame.setUsername(new_username);
                             // switching to the card pick screen

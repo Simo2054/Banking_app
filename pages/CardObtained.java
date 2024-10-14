@@ -31,7 +31,8 @@ public class CardObtained extends JPanel
     // Valid until [exp_month / exp_year]
     // CVV: [CVV number]
 
-    JTextArea card_type_instr;
+    JTextArea card_type_instr; // text area to show the type of card chosen
+    JTextArea owner_instr; // text area to show the name of the beneficiary
 
     private void displayTypeChosen()
     {
@@ -47,6 +48,7 @@ public class CardObtained extends JPanel
         add(card_type_instr);
     }
 
+    // utilitary method to refresh the display the chosen card type
     public void refreshDisplay()
     {
         String type = mainFrame.getSelectedCardType();
@@ -56,7 +58,17 @@ public class CardObtained extends JPanel
         }
         else
         {
-            card_type_instr.setText("no card!");
+            card_type_instr.setText("no card selected!");
         }
     }
+
+    //public void updateField() throws IOException
+    //{
+    //    
+    //}
+//
+    //private void displayBeneficiary()
+    //{
+    //    
+    //}
 }
