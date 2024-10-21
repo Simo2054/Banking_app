@@ -304,6 +304,13 @@ public class BkAccAdress extends JPanel
                             System.out.println("log in empty");
                             System.out.println("the introduced email is: " + SUPemail);
                             userManager.AddBankAcc(SUPemail, first_name, last_name, tel_nr, country_chosen, city, county, street_name, home_nr);
+                            // method to add the bank account credentials to the database (a file)
+
+                            // setters for the first name and last name to use them for other pages
+                            mainFrame.setFirstName(first_name);
+                            mainFrame.setLastName(last_name);
+
+                            mainFrame.cardObtained.updateField();
                             
                             // next page
                             mainFrame.cardLayout.show(mainFrame.mainPanel, "cardObtained");
@@ -320,6 +327,12 @@ public class BkAccAdress extends JPanel
                             System.out.println("sign up empty");
                             userManager.AddBankAcc(LIPemail, first_name, last_name, tel_nr, country_chosen, city, county, street_name, home_nr);
                             // method to add the bank account credentials to the database (a file)
+
+                            // setters for the first name and last name to use them for other pages
+                            mainFrame.setFirstName(first_name);
+                            mainFrame.setLastName(last_name);
+
+                            mainFrame.cardObtained.updateField();
 
                             // next page
                             mainFrame.cardLayout.show(mainFrame.mainPanel, "cardObtained");

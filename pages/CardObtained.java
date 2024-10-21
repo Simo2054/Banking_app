@@ -46,10 +46,12 @@ public class CardObtained extends JPanel
     public void updateField() //throws IOException
     {
         CardType = mainFrame.getSelectedCardType();
-        first_name = bkAccIdentity.user_first_name;
-        last_name = bkAccIdentity.user_last_name;
+        first_name = mainFrame.getFirstName();
+        last_name = mainFrame.getLastName();
+        System.out.println("first name: " + first_name + " last name: " + last_name);
 
         displayTypeChosen();
+        displayBeneficiary();
     }
 
 
@@ -81,7 +83,7 @@ public class CardObtained extends JPanel
         owner_instr.setBackground(new Color(165, 202, 255));
         owner_instr.setLineWrap(true);
         owner_instr.setWrapStyleWord(true);
-        owner_instr.setBounds(50, 50, 300, 50);
+        owner_instr.setBounds(50, 110, 300, 50);
 
         add(owner_instr);
     }

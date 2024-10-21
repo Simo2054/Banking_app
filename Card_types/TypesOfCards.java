@@ -188,7 +188,6 @@ public abstract class TypesOfCards extends JPanel
                 String cardType = getCardType();
                 System.out.println("Selected card type is: " + cardType);
                 mainFrame.setSelectedCardType(getCardType()); // to set the selected card type in MainFrame
-                mainFrame.cardObtained.updateField();
                 // show the next page
                 mainFrame.cardLayout.show(mainFrame.mainPanel, page);
             }

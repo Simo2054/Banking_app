@@ -122,7 +122,7 @@ public class MainFrame
         this.introducedEmail = email;
     }
 
-    public String getEmail() // getter for e-mail (used in )
+    public String getEmail() // getter for e-mail (used in BkAccAdress.java)
     {
         return introducedEmail;
     }
@@ -144,7 +144,7 @@ public class MainFrame
         return cardManager;
     }
 
-    private String selectedCardType; // string to store the seelcted card type
+    private String selectedCardType; // string to store the selected card type
 
     // setter for the card type (used in TypesOfCards.java)
     public void setSelectedCardType(String type)
@@ -157,5 +157,33 @@ public class MainFrame
     {
         return selectedCardType;
     }
+
+    private String first_name;
+    private String last_name;
+
+    // setter for the first name (used in "BkAccIdentity.java")
+    public void setFirstName(String fsnm)
+    {
+        this.first_name = fsnm;
+    }
+
+    // setter for the last name (used in "BkAccIdentity.java")
+    public void setLastName(String lsnm)
+    {
+        this.last_name = lsnm;
+    }
+
+    // getter for the first name (used in "CardObtained.java")
+    public String getFirstName()
+    {
+        return first_name;
+    }
+    
+    // getter for the last name (used in "CardObtained.java")
+    public String getLastName()
+    {
+        return last_name;
+    }
+
 }
 

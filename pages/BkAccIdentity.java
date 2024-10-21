@@ -286,9 +286,10 @@ public class BkAccIdentity extends JPanel
                 {
                     try
                     {
+                        // method to update the aspects linked to country when a country is chosen
                         mainFrame.BkAccAdress.updateField();
+                        // shows the next page
                         mainFrame.cardLayout.show(mainFrame.mainPanel, "BkAccAdress");
-                        System.out.println("ce ma?");
                     }
                     catch(IOException ex)
                     {
