@@ -1,0 +1,9 @@
+Austria,AT
+Bulgaria,BG
+Croatia,HR
+France,FR
+Greece,GR
+Italy,IT
+Luxembourg,LU
+Norway,NO
+Romania,RO

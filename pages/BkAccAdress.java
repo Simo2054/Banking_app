@@ -306,9 +306,10 @@ public class BkAccAdress extends JPanel
                             userManager.AddBankAcc(SUPemail, first_name, last_name, tel_nr, country_chosen, city, county, street_name, home_nr);
                             // method to add the bank account credentials to the database (a file)
 
-                            // setters for the first name and last name to use them for other pages
+                            // setters for data used in other pages
                             mainFrame.setFirstName(first_name);
                             mainFrame.setLastName(last_name);
+                            mainFrame.setChosenCountry(country_chosen);
 
                             mainFrame.cardObtained.updateField();
                             

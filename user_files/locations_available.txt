@@ -41,13 +41,6 @@ Italy:Rome:Regola
 Italy:Bologna:Bologna
 Italy:Milan:Brera
 Italy:Milan:Guastalla
-Japan:Tokyo:Akihabara
-Japan:Tokyo:Shinagawa
-Japan:Tokyo:Shibuya
-Japan:Kyoto:Kyoto
-Japan:Osaka:Kita
-Japan:Osaka:Minami
-Japan:Hiroshima:Hiroshima
 Luxembourg:Luxembourg:Luxembourg
 Luxembourg:Diekirch:Diekirch
 Luxembourg:Vianden:Vianden

@@ -161,13 +161,13 @@ public class MainFrame
     private String first_name;
     private String last_name;
 
-    // setter for the first name (used in "BkAccIdentity.java")
+    // setter for the first name (used in "BkAccAdress.java")
     public void setFirstName(String fsnm)
     {
         this.first_name = fsnm;
     }
 
-    // setter for the last name (used in "BkAccIdentity.java")
+    // setter for the last name (used in "BkAccAdress.java")
     public void setLastName(String lsnm)
     {
         this.last_name = lsnm;
@@ -183,6 +183,20 @@ public class MainFrame
     public String getLastName()
     {
         return last_name;
+    }
+
+    private String chosenCountry;
+
+    // setter for the chosen country (used in "BkAccAdress.java")
+    public void setChosenCountry(String country)
+    {
+        this.chosenCountry = country;
+    }
+
+    // getter for the chosen country (used in "")
+    public String getCountry()
+    {
+        return chosenCountry;
     }
 
 }

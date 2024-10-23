@@ -187,7 +187,7 @@ public class IBAN_creator
         return 98 - mod97.intValue();
     }
 
-    // maybe make this a String method and return IBAN as a string :)
+    // a String method that returns the created IBAN as a string 
     public String IBAN_composer(String country_chosen)
     {
         // 1. get the country code
@@ -198,7 +198,7 @@ public class IBAN_creator
 
         // 3. get the account number
         String account_number = generateAccountNumber(12);
-        // we are going with an account number of 12 cahracters
+        // we are going with an account number of 12 characters
         // as a standard for IBAN format
 
         // checking if the generated account number is unique
@@ -232,5 +232,76 @@ public class IBAN_creator
         return IBAN;
     }
 
+    // -----------------------------------------------------------------------------------------
+    // these will be aspects of the card 
 
+    // card number is usually of 16 digit length
+    // issuer identification number (IIN) : 6 digits - mastercard starts with 5, Visa with 4
+    // account number: 6 to 12 digits, depending on the lenghth of the card number
+    // check digit - Luhn algorithm
+
+    // iin: 5
+    // accnr: 10
+    // check digit: 1
+
+    // method to calculate the check digit using Luhn algorithm
+    private int calcCheckDigit(String numeric_cnr)
+    {
+        int sum = 0;
+        boolean doubleDigit = true;
+
+        // traverse the numebr from right to left
+        for(int i = numeric_cnr.length() - 1; i >= 0; i--)
+        {
+            int digit = Character.getNumericValue(numeric_cnr.charAt(i));
+
+            if(doubleDigit)
+            {
+                digit = digit * 2; // double the digit
+                if(digit > 9)
+                    digit = digit - 9; // substract 9 if the result is greater than 9
+                    // equivalent to adding the two digits of the result
+            }
+
+            sum = sum + digit; // add the digit to the sum
+            doubleDigit = !doubleDigit; // toggling the doubleDigit flag 
+                                        //to only calculate every second digit
+        }
+
+        // how the check digit is calculated after all steps
+        int checkDigit = (10 - (sum % 10)) % 10;
+        return checkDigit;
+    }
+    
+    // method to generate the card number
+    public String generateCardNumber(String country_chosen, String IBAN)
+    {
+        // 1. get the country code
+        String countryCode = getCCode(country_chosen);
+
+        // 2. get the bank identifier
+        String bank_identifier = bankID(countryCode);
+
+        // 3. place number 5 in front of the bank identifier to create IIN for the card
+        // number 5 will be used because it's the standard for mastercard
+        String IIN = "5" + bank_identifier;
+
+        // 4. get 10 digits from the already generated account number
+        String acc_nr = IBAN.substring(8, 18); // getting the account number calculated for the iban
+        // we only get characters starting from index 8 (inclusive) to index 18 (exclusive)
+        // only selecting 10 characters from the generated account number
+        
+        // 5. concatenate the digits obtained
+        String concatenated = IIN + acc_nr;
+        // we sould have a 15 digit string until now
+
+        // 6. calculating the check digit using Luhn's algorithm
+        int check_digit = calcCheckDigit(concatenated);
+        // and convert to string
+        String checkDigitString = Integer.toString(check_digit);
+
+        // 7. assemble everything
+        String CardNumber = concatenated + checkDigitString;
+        return CardNumber;
+    }
 }
