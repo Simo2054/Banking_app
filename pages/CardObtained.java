@@ -210,4 +210,24 @@ public class CardObtained extends JPanel
 
         add(CVV_instr);
     }
+
+    private JButton nextButton;
+
+    private void nextButton()
+    {
+        nextButton = new JButton("Got it !");
+        nextButton.setBounds(300, 730, 80, 50);
+
+        nextButton.addActionListener(new ActionListener() 
+        {
+            @Override
+            public void actionPerformed(ActionEvent e)
+            {
+                // next page 
+                mainFrame.cardLayout.show(mainFrame.mainPanel, "bkAccountPage");
+            }
+        });
+
+        add(nextButton);
+    }
 }

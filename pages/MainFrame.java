@@ -58,6 +58,11 @@ public class MainFrame
     // instance for a page where the app will let the user know that they 
     // got the card type they selected
 
+    BkAccountPage bkAccountPage;
+    // instance for a page where the user will see their bank account
+    // and information about it
+    // (money, currency, details about card, functions, transaction history)
+
     MainFrame() throws IOException // constructor
     {
         openingPage = new OpeningPage(this);
@@ -70,6 +75,7 @@ public class MainFrame
         BkAccAdress = new BkAccAdress(this, BkAccIdentity);
         PrepCardPage = new PrepCardPage(this);
         cardObtained = new CardObtained(this);
+        bkAccountPage = new BkAccountPage(this);
 
         startFrame();
         initMainPanel();
@@ -83,6 +89,7 @@ public class MainFrame
         mainPanel.add(BkAccAdress, "BkAccAdress");
         mainPanel.add(PrepCardPage, "PrepCardPage");
         mainPanel.add(cardObtained, "cardObtained");
+        mainPanel.add(bkAccountPage, "bkAccountPage");
 
         mainPanel.add(cardManager.getCardTypesPanel(), "cardTypesPanel"); // to add the container for all card types to the mainPanel
 
@@ -193,7 +200,7 @@ public class MainFrame
         this.chosenCountry = country;
     }
 
-    // getter for the chosen country (used in "")
+    // getter for the chosen country (used in "CardObtained.java")
     public String getCountry()
     {
         return chosenCountry;
