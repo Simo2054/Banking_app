@@ -129,7 +129,7 @@ public class MainFrame
         this.introducedEmail = email;
     }
 
-    public String getEmail() // getter for e-mail (used in BkAccAdress.java)
+    public String getEmail() // getter for e-mail (used in BkAccAdress.java, CardObtained.java)
     {
         return introducedEmail;
     }
@@ -200,10 +200,24 @@ public class MainFrame
         this.chosenCountry = country;
     }
 
-    // getter for the chosen country (used in "CardObtained.java")
+    // getter for the chosen country (used in "CardObtained.java", "BkAccountPage.java")
     public String getCountry()
     {
         return chosenCountry;
+    }
+
+    private String IBAN;
+
+    // setter for the generated IBAN (used in "CardObtained.java")
+    public void setIBAN(String iban)
+    {
+        this.IBAN = iban;
+    }
+
+    // getter for the generated IBAN (used in "BkAccountPage.java")
+    public String getIBAN()
+    {
+        return IBAN;
     }
 
 }

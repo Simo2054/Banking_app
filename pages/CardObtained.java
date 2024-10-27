@@ -15,12 +15,14 @@ public class CardObtained extends JPanel
     private MainFrame mainFrame;
     private BkAccIdentity bkAccIdentity;
     private IBAN_creator iban_creator;
+    private UserManager userManager;
 
     public CardObtained(MainFrame mainFrame) throws IOException
     {
         this.mainFrame = mainFrame;
         bkAccIdentity = new BkAccIdentity(mainFrame);
         iban_creator = new IBAN_creator();
+        userManager = new UserManager();
 
         setBackground(new Color(110, 20, 90));
         setLayout(null);
@@ -51,16 +53,16 @@ public class CardObtained extends JPanel
 
     private String CVV_num; // CVV number for the generated card
 
+    private String email; // email will be used to add information to the database file
+
     // utilitary method to update the needed fields according to user's choices
-    public void updateField() //throws IOException
+    public void updateField() throws IOException
     {
+        email = mainFrame.getEmail();
         CardType = mainFrame.getSelectedCardType();
         first_name = mainFrame.getFirstName();
         last_name = mainFrame.getLastName();
         chosen_country = mainFrame.getCountry();
-
-        System.out.println("first name: " + first_name + " last name: " + last_name);
-        System.out.println("country: " + chosen_country);
 
         displayTypeChosen();
         displayBeneficiary();
@@ -68,6 +70,7 @@ public class CardObtained extends JPanel
         displayCardNr();
         calcAndDisplayDates();
         displayCVV();
+        nextButton();
     }
 
 
@@ -213,7 +216,7 @@ public class CardObtained extends JPanel
 
     private JButton nextButton;
 
-    private void nextButton()
+    private void nextButton() throws IOException
     {
         nextButton = new JButton("Got it !");
         nextButton.setBounds(300, 730, 80, 50);
@@ -223,6 +226,18 @@ public class CardObtained extends JPanel
             @Override
             public void actionPerformed(ActionEvent e)
             {
+                try 
+                {
+                    userManager.addCard(email, CardType, first_name, last_name, AccIBAN, cardNumber, CVV_num);
+                } 
+                catch (IOException e1) 
+                {
+                    e1.printStackTrace();
+                }
+
+                mainFrame.setIBAN(AccIBAN); // setter for the generated IBAN
+                
+                mainFrame.bkAccountPage.updateFields();
                 // next page 
                 mainFrame.cardLayout.show(mainFrame.mainPanel, "bkAccountPage");
             }

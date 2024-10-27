@@ -44,7 +44,7 @@ public class IBAN_creator
                 while ((line = reader.readLine()) != null)
                 {
                     String[] parts = line.split(",");
-                    if(parts.length == 2)
+                    if(parts.length == 3)
                     {
                         String country = parts[0];
                         String country_code = parts[1];

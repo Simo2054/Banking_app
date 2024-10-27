@@ -19,6 +19,11 @@ public class UserManager
     // that contains information: first name, last name, telephone number, 
     // country, city, county, street name, home number
 
+    public Map<String, CardInf> CardMap = new HashMap<>();
+    // a map that will be used to store information about every card
+    // the key will be user's email (String) and the value is a CardInf object
+    // that contains information: card type, first name, last name, IBAN, card number, CVV
+
     private final String filePath = "user_files/user_credentials.txt";
     // the file in which we will store user credentials
 
@@ -31,10 +36,16 @@ public class UserManager
     // like in a database, we will use the email as a primary key
     // to link every user to a bank account
 
+    private final String cardInfoFilePath = "user_files/card_info.txt";
+    // the file in which we will store information about card
+    // like in a database, we will use the email as a primary key
+    // to link every user to a bank account and a card
+
     public UserManager() throws IOException 
     {
         loadUsers(); // Load users from file on initialization
         loadBkAcc(); // load bank accounts file on init
+        loadCardInfo(); // load card information file on init
     }
 
     // add a new user
@@ -106,6 +117,7 @@ public class UserManager
         }
     }
 
+    // method to load bank account information for every user from file into the map
     private void loadBkAcc() throws IOException
     {
         File file = new File(BkAccFilPath);
@@ -117,7 +129,7 @@ public class UserManager
                 String line;
                 while ((line = reader.readLine()) != null) // reading line by line
                 {
-                    String[] parts = line.split(",");// is splits each line into parts using split(",")
+                    String[] parts = line.split(",");// it splits each line into parts using split(",")
                     if (parts.length == 9) // Only consider valid entries with first name, 
                                         // last name, telephone number, country, city, county, street name, home number
                     {   
@@ -132,6 +144,37 @@ public class UserManager
                         String home_nr = parts[8];
                         BkAccMap.put(email, new Account(email, fs_name, ls_name, tel_nr, country, city, county, street_nm, home_nr)); 
                         // Store information in map
+                    }
+                }
+            }
+        }
+    }
+
+    // method to load every card from the file into the map
+    private void loadCardInfo() throws IOException
+    {
+        File file = new File(cardInfoFilePath);
+        if(file.exists())
+        {
+            // using BufferedReader because we are reading a line at a time
+            try(BufferedReader reader = new BufferedReader(new FileReader(file)))
+            {
+                String line;
+                while((line = reader.readLine()) != null) // reading line by line
+                {
+                    String[] parts = line.split(","); // splits each line into parts
+                    if(parts.length == 7) // only consider valid entries with
+                                        // email, card type, first name, last name, IBAN, card number, CVV
+                    {
+                        String email = parts[0];
+                        String card_type = parts[1];
+                        String fs_name = parts[2];
+                        String ls_name = parts[3];
+                        String iban = parts[4];
+                        String card_number = parts[5];
+                        String cvv = parts[6];
+                        CardMap.put(email,new CardInf(email, card_type, fs_name, ls_name, iban, card_number, cvv));
+                        // store information in the map
                     }
                 }
             }
@@ -157,6 +200,7 @@ public class UserManager
         }
     }
 
+    // method to save the current map of bank accounts to the file
     private void saveBkAcc() throws IOException 
     {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(BkAccFilPath)))
@@ -173,6 +217,25 @@ public class UserManager
                             account.getCounty() + "," + 
                             account.getStreetName() + "," + 
                             account.getHomeNr());
+                writer.newLine();
+            }
+        }
+        catch (IOException e)
+        {
+            e.printStackTrace();
+        }
+    }
+
+    // method to save the current map of card information to the file
+    private void saveCardInfo() throws IOException
+    {
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(cardInfoFilePath)))
+        {
+            for(CardInf cinfo : CardMap.values())
+            // for each card in the map
+            {
+                writer.write( cinfo.getEmail() + "," + cinfo.getCardType() + "," + cinfo.getFsNm() + "," + cinfo.getLsNm() + "," +
+                            cinfo.getIban() + "," +cinfo.getCardNr() + "," + cinfo.getCVV() );
                 writer.newLine();
             }
         }
@@ -220,6 +283,14 @@ public class UserManager
         {
             return false; // invalid format
         }
+    }
+
+    // method to add card information about every card
+    public void addCard(String email, String cardType, String fnm, String lnm,
+                        String iban, String cardNr, String CVV) throws IOException
+    {
+        CardMap.put(email, new CardInf(email, cardType, fnm, lnm, iban, cardNr, CVV));
+        saveCardInfo();
     }
 
 }
