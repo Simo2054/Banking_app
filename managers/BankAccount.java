@@ -96,5 +96,17 @@ public class BankAccount
         return "";
     }
 
-    
+    public int showMoney(String IBAN)
+    {
+        // iterating through the map's keys to find the key that is the coresponding IBAN
+        for(String i: accMap.keySet())
+        {
+            if(i.equals(IBAN))
+            {
+                return accMap.get(i).getSum();
+            }
+        }
+        // if the introduced iban doesn't exist in the map
+        return 0;
+    }
 }
