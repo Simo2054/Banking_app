@@ -2,10 +2,12 @@ package pages;
 
 import Card_types.*;
 import managers.*;
+import sechiule.*;
 
 import javax.swing.*;
 import java.awt.*;
 import java.io.*;
+import java.util.*;
 
 public class MainFrame
 // MainFrame is the main class that controls the window and the auth screens 
@@ -58,13 +60,25 @@ public class MainFrame
     // instance for a page where the app will let the user know that they 
     // got the card type they selected
 
-    BkAccountPage bkAccountPage;
+    //BkAccountPage bkAccountPage;
     // instance for a page where the user will see their bank account
     // and information about it
     // (money, currency, details about card, functions, transaction history)
 
     MainFrame() throws IOException // constructor
     {
+        try
+        {
+            sechiule.DatabaseManager.getInstance().createUsersTable();
+            sechiule.DatabaseManager.getInstance().createCardsTable();
+            //sechiule.DatabaseManager.getInstance().createTransactionsTable();
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();//handles any database realted issues
+        }
+        
+
         openingPage = new OpeningPage(this);
         loginPage = new LoginPage(this);
         signUpPage = new SignUpPage(this);
@@ -75,7 +89,7 @@ public class MainFrame
         BkAccAdress = new BkAccAdress(this, BkAccIdentity);
         PrepCardPage = new PrepCardPage(this);
         cardObtained = new CardObtained(this);
-        bkAccountPage = new BkAccountPage(this);
+        //bkAccountPage = new BkAccountPage(this);
 
         startFrame();
         initMainPanel();
@@ -89,7 +103,7 @@ public class MainFrame
         mainPanel.add(BkAccAdress, "BkAccAdress");
         mainPanel.add(PrepCardPage, "PrepCardPage");
         mainPanel.add(cardObtained, "cardObtained");
-        mainPanel.add(bkAccountPage, "bkAccountPage");
+        //mainPanel.add(bkAccountPage, "bkAccountPage");
 
         mainPanel.add(cardManager.getCardTypesPanel(), "cardTypesPanel"); // to add the container for all card types to the mainPanel
 

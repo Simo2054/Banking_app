@@ -1,3 +1,0 @@
-user3@email.com,Gersohn,Joon,0542,Austria,Vienna,Leopolstadt,oneStreet,07
-user1@yahoo.com,Sofiya,Ursa,0398,Bulgaria,Varna,Avren,ThatStreet,54
-user2@gmail.com,Felix,Azad,0561,Romania,Brasov,Brasov,Castanilor,03

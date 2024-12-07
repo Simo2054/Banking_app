@@ -27,7 +27,6 @@ public class BkAccAdress extends JPanel
 
     private String first_name;
     private String last_name;
-    private String tel_nr;
     private String country_chosen;
 
     private String LIPemail; // email from log in page
@@ -36,7 +35,6 @@ public class BkAccAdress extends JPanel
     private MainFrame mainFrame;
     private AdressManager adressManager;
     private BkAccIdentity bkAccIdentity;
-    private UserManager userManager;
     private LoginPage loginPage;
     private SignUpPage signUpPage;
 
@@ -45,7 +43,6 @@ public class BkAccAdress extends JPanel
         this.mainFrame = mainFrame;
         adressManager = new AdressManager();
         this.bkAccIdentity = bkAccIdentity;
-        userManager = new UserManager();
         loginPage = new LoginPage(mainFrame);
         signUpPage = new SignUpPage(mainFrame);
 
@@ -56,13 +53,12 @@ public class BkAccAdress extends JPanel
     // method to update the page when a country is chosen
     public void updateField() throws IOException
     {
-        LIPemail = loginPage.input_mail;
+        LIPemail = loginPage.input_mail; // remember to correct this!!!
         SUPemail = mainFrame.getEmail();
         System.out.println("sign up: " + SUPemail + " and log in: " + LIPemail);
 
         first_name = bkAccIdentity.user_first_name;
         last_name = bkAccIdentity.user_last_name;
-        tel_nr = bkAccIdentity.user_tel_nr;
         country_chosen = bkAccIdentity.country;
 
         instructions();
@@ -268,6 +264,9 @@ public class BkAccAdress extends JPanel
     private JButton backButton;
     private JButton nextButton;
 
+    private JTextArea warning; 
+    // a warning to let the user know they still have to complete fields
+
     private void nextAndBackButtons() throws IOException
     {
         backButton = new JButton("Back");
@@ -275,6 +274,17 @@ public class BkAccAdress extends JPanel
 
         nextButton = new JButton("Next");
         nextButton.setBounds(300, 730, 80, 50);
+
+        warning = new JTextArea();
+        warning.setText("Please complete all fields!");// display the warning message
+        warning.setEditable(false);
+        warning.setFont(new Font("Arial", Font.LAYOUT_LEFT_TO_RIGHT, 15));
+        warning.setForeground(Color.PINK);
+        warning.setBackground(new Color(0,0,0,0));
+        warning.setLineWrap(true);
+        warning.setWrapStyleWord(true);
+        warning.setVisible(false);
+        warning.setBounds(110, 730, 180, 50);
 
         // goes back to card type selection page
         backButton.addActionListener(new ActionListener() 
@@ -296,14 +306,14 @@ public class BkAccAdress extends JPanel
                 // checking if all of the fields are completed
                 {
                     System.out.println("ceva");
-
+                    // used in signing up for the first time
                     if(LIPemail.isEmpty())
                     {
                         try
                         {
                             System.out.println("log in empty");
                             System.out.println("the introduced email is: " + SUPemail);
-                            userManager.AddBankAcc(SUPemail, first_name, last_name, tel_nr, country_chosen, city, county, street_name, home_nr);
+                            //userManager.AddBankAcc(SUPemail, first_name, last_name, tel_nr, country_chosen, city, county, street_name, home_nr);
                             // method to add the bank account credentials to the database (a file)
 
                             // setters for data used in other pages
@@ -312,21 +322,24 @@ public class BkAccAdress extends JPanel
                             mainFrame.setChosenCountry(country_chosen);
 
                             mainFrame.cardObtained.updateField();
+
+                            sechiule.DatabaseManager.getInstance().updateBkAccAddress(SUPemail, city, county, street_name, home_nr);
                             
                             // next page
                             mainFrame.cardLayout.show(mainFrame.mainPanel, "cardObtained");
                         }
-                        catch(IOException ex)
+                        catch(Exception ex)
                         {
                             ex.printStackTrace();
                         }
                     }
+                    // will be used when user already logged in but wants to add a new card/account
                     else if(SUPemail.isEmpty())
                     {
                         try
                         {
                             System.out.println("sign up empty");
-                            userManager.AddBankAcc(LIPemail, first_name, last_name, tel_nr, country_chosen, city, county, street_name, home_nr);
+                            //userManager.AddBankAcc(LIPemail, first_name, last_name, tel_nr, country_chosen, city, county, street_name, home_nr);
                             // method to add the bank account credentials to the database (a file)
 
                             // setters for the first name and last name to use them for other pages
@@ -346,6 +359,7 @@ public class BkAccAdress extends JPanel
                 }
                 else
                 {
+                    warning.setVisible(true);
                     System.out.println("please introduce your data");
                 }
                 

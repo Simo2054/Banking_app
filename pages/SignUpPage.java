@@ -2,6 +2,7 @@ package pages;
 
 import Card_types.*;
 import managers.*;
+import sechiule.*;
 
 import javax.swing.*;
 import java.awt.*;
@@ -111,7 +112,8 @@ public class SignUpPage extends JPanel
             public void actionPerformed(ActionEvent press)
             {
                 new_user_email = email_field.getText();
-                System.out.println("user: " + new_user_email);
+                System.out.println("act. perf. -> user: " + new_user_email);
+                warning.setVisible(false);
                 username_field.requestFocusInWindow();
             }
         });
@@ -126,8 +128,33 @@ public class SignUpPage extends JPanel
             public void focusLost(FocusEvent e)
             {
                 new_user_email = email_field.getText();
-                System.out.println("user: " + new_user_email);
-                warning.setVisible(false);
+                System.out.println("focus lost -> user: " + new_user_email);
+
+                try
+                {
+                    //checking if an account with the same e-mail adress already exists
+                    if(sechiule.DatabaseManager.getInstance().userExists(new_user_email))
+                    {
+                        warning.setBounds(50, 300, 300, 40);
+                        warning.setText("An account with this e-mail adress already exists!");// display the warning message
+                        warning.setVisible(true);
+                        email_field.requestFocusInWindow();
+                    }
+
+                    // checks if the introduced email contains a domain
+                    if(!(userManager.checkValidMail(new_user_email)))
+                    {
+                        warning.setBounds(50, 300, 300, 40);
+                        warning.setText("E-Mail adress not available");// display the warning message
+                        warning.setVisible(true);
+                        email_field.requestFocusInWindow();
+                    }
+                }
+                catch (Exception ex)
+                {
+                    ex.printStackTrace();
+                }
+
             }
         });
 
@@ -138,6 +165,7 @@ public class SignUpPage extends JPanel
             {
                 new_username = username_field.getText();
                 System.out.println("username: " + new_username);
+                warning.setVisible(false);
                 pass_field.requestFocusInWindow();
             }
         });
@@ -165,6 +193,7 @@ public class SignUpPage extends JPanel
                 char[] passwordChars = pass_field.getPassword();
                 new_user_password = new String(passwordChars);
                 System.out.println("password: " + new_user_password);
+                warning.setVisible(false);
                 safety_pass_field.requestFocusInWindow();
             }
         });
@@ -192,6 +221,8 @@ public class SignUpPage extends JPanel
                 char[] safetyPassChars = safety_pass_field.getPassword();
                 new_safety_user_password = new String(safetyPassChars);
                 System.out.println("2nd pass: " + new_safety_user_password);
+                warning.setVisible(false);
+                
             }
         });
 
@@ -222,7 +253,7 @@ public class SignUpPage extends JPanel
     public void signUpCheck() throws IOException
     {
         JButton NextButton = new JButton("Next");
-        NextButton.setBounds(50, 730, 100, 50);
+        NextButton.setBounds(300, 730, 80, 50);
         
         warning = new JTextArea();
         warning.setEditable(false);
@@ -243,26 +274,8 @@ public class SignUpPage extends JPanel
                 System.out.println("password: " + new_user_password);
                 System.out.println("Safe pass: " + new_safety_user_password);
 
-                if(userManager.checkExistentAcc(new_user_email))
-                //checking if an account with the same e-mail adress already exists
-                {
-                    username_field.setText(null);
-                    pass_field.setText(null);
-                    safety_pass_field.setText(null);
-                    warning.setBounds(50, 300, 300, 40);
-                    warning.setText("An account with this e-mail adress already exists!");// display the warning message
-                    warning.setVisible(true);
-                    email_field.requestFocusInWindow();
-                }
-                else if(!(userManager.checkValidMail(new_user_email)))
-                // checks if the introduced email contains a domain
-                {
-                    warning.setBounds(50, 300, 300, 40);
-                    warning.setText("E-Mail adress not available");// display the warning message
-                    warning.setVisible(true);
-                    email_field.requestFocusInWindow();
-                }
-                else if(!(new_user_email.isEmpty()) && !(new_username.isEmpty()) && 
+
+                if(!(new_user_email.isEmpty()) && !(new_username.isEmpty()) && 
                 !(new_user_password.isEmpty()) && !(new_safety_user_password.isEmpty()))
                 // checking if all of the fields are completed
                 {
@@ -271,16 +284,16 @@ public class SignUpPage extends JPanel
                     {
                         try
                         {
-                            // add user to the database(file)
-                            userManager.addUser(new_user_email, new_username, new_user_password);
-                            // set email in MainFrame (will be used in "BkAccAdress.java")
+                            // add user to the database
+                            sechiule.DatabaseManager.getInstance().insertUserStep1(new_user_email, new_username, new_user_password);
+                            // set email in MainFrame (will be used for linking user to information in the DB)
                             mainFrame.setEmail(new_user_email);
                             // set username in MainFrame (that will be used in file "TypesOfCards.java")
                             mainFrame.setUsername(new_username);
                             // switching to the card pick screen
                             mainFrame.cardLayout.show(mainFrame.mainPanel, "cardTypesPanel");
                         }
-                        catch (IOException ex) 
+                        catch (Exception ex) 
                         {
                             ex.printStackTrace(); // printing the error for debugging purposes
                             warning.setBounds(50, 700, 300, 20);
@@ -302,7 +315,9 @@ public class SignUpPage extends JPanel
                 }
                 else // if one or more of the credentials are missing
                 {
-                    System.out.println("please introduce your credentials!");
+                    warning.setBounds(70, 685, 300, 40);
+                    warning.setText("Please introduce all your credentials!");
+                    warning.setVisible(true);
                 }
             }
         });
@@ -314,7 +329,7 @@ public class SignUpPage extends JPanel
     private void BackButton()
     {
         JButton backButton = new JButton("Back");
-        backButton.setBounds(300, 730, 80, 50);
+        backButton.setBounds(20, 730, 80, 50);
 
         backButton.addActionListener(new ActionListener() 
         {

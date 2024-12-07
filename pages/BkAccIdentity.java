@@ -288,10 +288,14 @@ public class BkAccIdentity extends JPanel
                     {
                         // method to update the aspects linked to country when a country is chosen
                         mainFrame.BkAccAdress.updateField();
+
+                        String email = mainFrame.getEmail();
+                        sechiule.DatabaseManager.getInstance().updateBkAccDataIdentity(email, user_first_name, user_last_name, user_tel_nr, country);
+
                         // shows the next page
                         mainFrame.cardLayout.show(mainFrame.mainPanel, "BkAccAdress");
                     }
-                    catch(IOException ex)
+                    catch(Exception ex)
                     {
                         ex.printStackTrace();
                     }

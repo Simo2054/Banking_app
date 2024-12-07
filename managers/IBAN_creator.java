@@ -14,7 +14,7 @@ public class IBAN_creator
     // the key will be the country name 
     // the values will be the country code
 
-    public ArrayList<String> IBANs = new ArrayList<>();
+    public ArrayList<String> IBANs;
     // a String ArrayList will be used to keep IBANs found in the database
     // it's utilitary and will be used to get the account number
     // of each IBAN to ensure each account number generated is unique
@@ -22,13 +22,9 @@ public class IBAN_creator
     private final String filePath = "user_files/country_codes.txt";
     // the file used to store the countries with specific country codes for each
 
-    private final String cardInfoFilePath = "user_files/card_info.txt";
-    // the file used to store the card information for each user
-
     public IBAN_creator() throws IOException
     {
         loadCountries();
-        loadIBANs();
     }
 
     // method to load countries with their specific countyr code 
@@ -55,28 +51,6 @@ public class IBAN_creator
         }
     }
 
-    // method to load each IBAN found in the file into the ArrayList
-    private void loadIBANs() throws IOException
-    {
-        File file = new File(cardInfoFilePath);
-        if(file.exists())
-        {
-            try(BufferedReader reader = new BufferedReader(new FileReader(file)))
-            {
-                String line;
-                while ((line = reader.readLine()) != null)
-                {
-                    String[] parts = line.split(",");
-                    if(parts.length == 5)
-                    {
-                        String IBAN = parts[4];
-                        IBANs.add(IBAN);
-                    }
-                }
-            }
-        }
-    }
-    
     // method to return the specific country code for the given country
     private String getCCode(String country)
     {
@@ -131,10 +105,21 @@ public class IBAN_creator
         return accNr.toString();
     }
 
+    
+
     // method to ensure unicity of account number
     // checks if the given account number
     private boolean isUnique(String accNum)
     {   
+        try 
+        {
+            IBANs = sechiule.DatabaseManager.getInstance().getIBANs();
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+
         // iterating through the ArrayList containing the IBANs from the file
         for(String i: IBANs)
         {

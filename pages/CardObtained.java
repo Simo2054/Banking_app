@@ -42,6 +42,7 @@ public class CardObtained extends JPanel
 
     private String chosen_country; // will be used to create the IBAN
     private String AccIBAN; // IBAN of the connected account
+    private String currency; // will be used to put the information in the file
 
     private String cardNumber; // card number of the generated card
     
@@ -228,18 +229,44 @@ public class CardObtained extends JPanel
             {
                 try 
                 {
-                    userManager.addCard(email, CardType, first_name, last_name, AccIBAN, cardNumber, CVV_num);
+                    mainFrame.setIBAN(AccIBAN); // setter for the generated IBAN
+                    System.out.println("ceva2");
+
+                    //mainFrame.bkAccountPage.updateFields(); // updater for the information passed
+                    //System.out.println("ceva3");
+
+                    System.out.println("IBAN: " + AccIBAN);
+                    System.out.println("card number: " + cardNumber);
+                    System.out.println("CVV: " + CVV_num);
+
+                    sechiule.DatabaseManager.getInstance().dataCompleted(email);
+                    System.out.println("data completed for user: " + email);
+
+                    String expdate = exp_month + "/" + exp_year;
+                    System.out.println("expir. date: " + expdate);
+
+                    int id = sechiule.DatabaseManager.getInstance().getUserID(email);
+                    System.out.println("the requested id is: " + id );
+
+                    String type = sechiule.DatabaseManager.getInstance().getCardType(email);
+                    System.out.println("the requested card type is: " + type);
+
+                    String currency = userManager.chooseCurrency(chosen_country);
+                    System.out.println("currecy: " + currency);
+
+                    sechiule.DatabaseManager.getInstance().insertCardInfo(id, type, AccIBAN, currency, cardNumber, expdate, CVV_num);
+                    System.out.println("inserted a new card with number: " + cardNumber);
+
+                    
                 } 
-                catch (IOException e1) 
+                catch (Exception e1) 
                 {
                     e1.printStackTrace();
                 }
+                System.out.println("ceva4");
 
-                mainFrame.setIBAN(AccIBAN); // setter for the generated IBAN
-                
-                mainFrame.bkAccountPage.updateFields();
                 // next page 
-                mainFrame.cardLayout.show(mainFrame.mainPanel, "bkAccountPage");
+                //mainFrame.cardLayout.show(mainFrame.mainPanel, "bkAccountPage");
             }
         });
 
