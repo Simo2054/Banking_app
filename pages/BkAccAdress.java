@@ -323,7 +323,8 @@ public class BkAccAdress extends JPanel
 
                             mainFrame.cardObtained.updateField();
 
-                            sechiule.DatabaseManager.getInstance().updateBkAccAddress(SUPemail, city, county, street_name, home_nr);
+                            int userID = mainFrame.getCurrentUserID();
+                            sechiule.DatabaseManager.getInstance().updateBkAccAddress(userID, city, county, street_name, home_nr);
                             
                             // next page
                             mainFrame.cardLayout.show(mainFrame.mainPanel, "cardObtained");

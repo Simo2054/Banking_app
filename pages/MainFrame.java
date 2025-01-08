@@ -60,7 +60,7 @@ public class MainFrame
     // instance for a page where the app will let the user know that they 
     // got the card type they selected
 
-    //BkAccountPage bkAccountPage;
+    BkAccountPage bkAccountPage;
     // instance for a page where the user will see their bank account
     // and information about it
     // (money, currency, details about card, functions, transaction history)
@@ -71,7 +71,7 @@ public class MainFrame
         {
             sechiule.DatabaseManager.getInstance().createUsersTable();
             sechiule.DatabaseManager.getInstance().createCardsTable();
-            //sechiule.DatabaseManager.getInstance().createTransactionsTable();
+            sechiule.DatabaseManager.getInstance().createTransactionsTable();
         }
         catch (Exception e)
         {
@@ -89,7 +89,7 @@ public class MainFrame
         BkAccAdress = new BkAccAdress(this, BkAccIdentity);
         PrepCardPage = new PrepCardPage(this);
         cardObtained = new CardObtained(this);
-        //bkAccountPage = new BkAccountPage(this);
+        bkAccountPage = new BkAccountPage(this);
 
         startFrame();
         initMainPanel();
@@ -103,7 +103,7 @@ public class MainFrame
         mainPanel.add(BkAccAdress, "BkAccAdress");
         mainPanel.add(PrepCardPage, "PrepCardPage");
         mainPanel.add(cardObtained, "cardObtained");
-        //mainPanel.add(bkAccountPage, "bkAccountPage");
+        mainPanel.add(bkAccountPage, "bkAccountPage");
 
         mainPanel.add(cardManager.getCardTypesPanel(), "cardTypesPanel"); // to add the container for all card types to the mainPanel
 
@@ -146,6 +146,18 @@ public class MainFrame
     public String getEmail() // getter for e-mail (used in BkAccAdress.java, CardObtained.java)
     {
         return introducedEmail;
+    }
+
+    private int currentUserID;
+
+    public void setCurrentUserID(int userID) // setter for the current user ID (used in SignUpPage.java)
+    {
+        this.currentUserID = userID;
+    }
+
+    public int getCurrentUserID() // getter for the current user ID (used in )
+    {
+        return currentUserID;
     }
 
     public void setUsername(String username) throws IOException// setter for username (used in SignUpPage.java)
@@ -220,19 +232,32 @@ public class MainFrame
         return chosenCountry;
     }
 
-    private String IBAN;
+    private String card_nr;
 
-    // setter for the generated IBAN (used in "CardObtained.java")
-    public void setIBAN(String iban)
+    // setter for the generated card number (used in "CardObtainedPage")
+    public void setCNr(String cardNr)
     {
-        this.IBAN = iban;
+        this.card_nr = cardNr;
     }
 
-    // getter for the generated IBAN (used in "BkAccountPage.java")
-    public String getIBAN()
+    // getter for the generated card number (used in "BkAccountPage.java")
+    public String getCNr()
     {
-        return IBAN;
+        return card_nr;
     }
+    
+    private int current_card_ID;
+
+    public void setCurrentCardID(int currCID)
+    {
+        this.current_card_ID = currCID;
+    }
+
+    public int getCurrentCardID()
+    {
+        return current_card_ID;
+    }
+    
 
 }
 

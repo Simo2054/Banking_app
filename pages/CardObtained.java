@@ -7,6 +7,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 import java.io.*;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.time.*;
 
@@ -215,6 +216,7 @@ public class CardObtained extends JPanel
         add(CVV_instr);
     }
 
+    private ArrayList<Integer> card_IDs;
     private JButton nextButton;
 
     private void nextButton() throws IOException
@@ -229,35 +231,43 @@ public class CardObtained extends JPanel
             {
                 try 
                 {
-                    mainFrame.setIBAN(AccIBAN); // setter for the generated IBAN
-                    System.out.println("ceva2");
-
-                    //mainFrame.bkAccountPage.updateFields(); // updater for the information passed
-                    //System.out.println("ceva3");
-
-                    System.out.println("IBAN: " + AccIBAN);
-                    System.out.println("card number: " + cardNumber);
-                    System.out.println("CVV: " + CVV_num);
-
-                    sechiule.DatabaseManager.getInstance().dataCompleted(email);
-                    System.out.println("data completed for user: " + email);
+                    int userID = mainFrame.getCurrentUserID();
+                    sechiule.DatabaseManager.getInstance().dataCompleted(userID);
+                    System.out.println("data completed for user: " + userID);
 
                     String expdate = exp_month + "/" + exp_year;
                     System.out.println("expir. date: " + expdate);
 
-                    int id = sechiule.DatabaseManager.getInstance().getUserID(email);
-                    System.out.println("the requested id is: " + id );
-
-                    String type = sechiule.DatabaseManager.getInstance().getCardType(email);
+                    String type = sechiule.DatabaseManager.getInstance().getCardType(userID);
                     System.out.println("the requested card type is: " + type);
 
                     String currency = userManager.chooseCurrency(chosen_country);
                     System.out.println("currecy: " + currency);
 
-                    sechiule.DatabaseManager.getInstance().insertCardInfo(id, type, AccIBAN, currency, cardNumber, expdate, CVV_num);
+                    sechiule.DatabaseManager.getInstance().insertCardInfo(userID, type, AccIBAN, currency, cardNumber, expdate, CVV_num);
                     System.out.println("inserted a new card with number: " + cardNumber);
 
-                    
+                    mainFrame.setCNr(cardNumber);
+
+                    card_IDs = sechiule.DatabaseManager.getInstance().getCardIdByUserID(userID);
+                    System.out.println("debug la array cu marimea: " + card_IDs.size() );
+                    if(card_IDs.size() == 1)
+                    {
+                        int currCID = card_IDs.get(0);
+                        mainFrame.setCurrentCardID(currCID);
+
+                        mainFrame.bkAccountPage.updateFields();
+
+                        mainFrame.cardLayout.show(mainFrame.mainPanel, "bkAccountPage");
+                    }
+                    /* 
+                    else
+                    {
+                        // when there are more cards, there will be an extra page where user can select
+                        // a card to show
+
+                    }
+                    */
                 } 
                 catch (Exception e1) 
                 {

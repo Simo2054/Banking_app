@@ -16,6 +16,8 @@ public class SignUpPage extends JPanel
     public String new_user_password = "";
     public String new_safety_user_password = "";
 
+    public int currentID;
+
     private UserManager userManager;
 
     private MainFrame mainFrame;
@@ -289,6 +291,11 @@ public class SignUpPage extends JPanel
                             // set email in MainFrame (will be used for linking user to information in the DB)
                             mainFrame.setEmail(new_user_email);
                             // set username in MainFrame (that will be used in file "TypesOfCards.java")
+
+                            // getting the current user ID to link further credentials to the DB
+                            currentID = sechiule.DatabaseManager.getInstance().getUserID(new_user_email);
+                            mainFrame.setCurrentUserID(currentID); 
+                            
                             mainFrame.setUsername(new_username);
                             // switching to the card pick screen
                             mainFrame.cardLayout.show(mainFrame.mainPanel, "cardTypesPanel");

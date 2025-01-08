@@ -105,10 +105,7 @@ public class IBAN_creator
         return accNr.toString();
     }
 
-    
-
     // method to ensure unicity of account number
-    // checks if the given account number
     private boolean isUnique(String accNum)
     {   
         try 

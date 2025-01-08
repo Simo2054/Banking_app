@@ -1,1 +1,3 @@
 *.class
+mariadb-java-client-3.5.1.jar
+.gitignore

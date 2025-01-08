@@ -191,8 +191,8 @@ public abstract class TypesOfCards extends JPanel
 
                 try
                 {
-                    String email = mainFrame.getEmail();
-                    sechiule.DatabaseManager.getInstance().updateCardType(email, cardType);
+                    int UID = mainFrame.getCurrentUserID();
+                    sechiule.DatabaseManager.getInstance().updateCardType(UID, cardType);
                 }
                 catch (Exception ex)
                 {

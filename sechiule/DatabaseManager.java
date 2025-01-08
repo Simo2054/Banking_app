@@ -2,6 +2,7 @@ package sechiule;
 
 import pages.*;
 import Card_types.*;
+import managers.Product;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -9,6 +10,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.List;
+
 
 public class DatabaseManager
 {
@@ -23,8 +26,8 @@ public class DatabaseManager
         // jdbc:mariadb://<host>:<port>/<database_name>
 
         // credentials for logging into the database:
-        String username = "username";
-        String password = "password";
+        String username = "";
+        String password = "";
 
         // establish connection to the database
         this.connection = DriverManager.getConnection(url, username, password);
@@ -113,10 +116,12 @@ public class DatabaseManager
                                   "user_id INT, " +
                                   "card_type VARCHAR(20) DEFAULT '', " +
                                   "iban VARCHAR(34) UNIQUE DEFAULT '', " +
-                                  "currency VARCHAR(3) DEFAULT '', " +
                                   "card_number VARCHAR(17) UNIQUE DEFAULT '', " +
                                   "expiration_date VARCHAR(8) DEFAULT '', " + 
                                   "cvv CHAR(3) DEFAULT '', " +
+                                  "acc_sum INT DEFAULT 0, " + 
+                                   // sum of money on the current card
+                                  "currency VARCHAR(3) DEFAULT '', " +
                                   "FOREIGN KEY (user_id) REFERENCES users(user_id) ON DELETE CASCADE" + 
                                   // user_id in cards must match an existing user_id in users (ensures referential integrity)
                                   // "ON DELETE CASCADE automatically deletes all cards when the associated user is deleted"
@@ -142,8 +147,6 @@ public class DatabaseManager
                                          // transaction ID
                                          "card_id INT, " + 
                                          // card id to link each card to transactions
-                                         "acc_sum INT DEFAULT 0, " + 
-                                         // sum of money on the current card
                                          "tsc_title VARCHAR(50) DEFAULT '', " +
                                          // transaction title 
                                          "tsc_sum INT DEFAULT 0, " +
@@ -167,6 +170,7 @@ public class DatabaseManager
 
 
     // Insert a new user into the 'users' table
+    // used in "SignUpPage"
     public void insertUserStep1(String email, String username, String password) throws Exception
     {
         String insertUserQuery = "INSERT INTO users (email, username, password) VALUES (?, ?, ?);";
@@ -197,6 +201,7 @@ public class DatabaseManager
     }
 
     // checks if a user with this email already exists
+    // used in SignUpPage
     public boolean userExists(String email) throws Exception
     {
         String checkQuery = "SELECT COUNT(*) FROM users WHERE email = ?";
@@ -216,149 +221,8 @@ public class DatabaseManager
         }
     }
 
-    public void updateCardType(String email, String card_type) 
-    {
-        String updateQuery = "UPDATE users SET card_type = ? WHERE email = ?";
-
-        try ( PreparedStatement preparedStatement = connection.prepareStatement(updateQuery) ) 
-        {
-            preparedStatement.setString(1, card_type);
-            preparedStatement.setString(2, email);
-            
-            int rowsAffected = preparedStatement.executeUpdate();
-            if(rowsAffected > 0)
-            {
-                System.out.println("Inserted a new card type: " + card_type);
-            }
-            else
-            {
-                System.out.println("no user found with email " + email);
-            } 
-                
-        } 
-        catch (Exception e) 
-        {
-            System.out.println("Error updating user: " + e.getMessage());
-        }
-    }
-
-    public void updateBkAccDataIdentity(String email, String first_name, String last_name, String phone_nr, String country)
-    {
-        String updateQuery = "UPDATE users SET first_name = ?, last_name = ?, phone_number = ?, country = ? WHERE email = ?";
-
-        try ( PreparedStatement preparedStatement = connection.prepareStatement(updateQuery) ) 
-        {
-            preparedStatement.setString(1, first_name);
-            preparedStatement.setString(2, last_name);
-            preparedStatement.setString(3, phone_nr);
-            preparedStatement.setString(4, country);
-            preparedStatement.setString(5, email);
-            
-            int rowsAffected = preparedStatement.executeUpdate();
-            if(rowsAffected > 0)
-            {
-                System.out.println("updated identity data");
-                System.out.println("user " + email + " is named " + first_name + " " + last_name);
-                System.out.println("they live in: " + country + " and have the phone: " + phone_nr);
-            }
-            else
-            {
-                System.out.println("no user found with email " + email);
-            } 
-                
-        } 
-        catch (Exception e) 
-        {
-            System.out.println("Error updating user: " + e.getMessage());
-        }
-    }
-
-    public void updateBkAccAddress(String email, String city, String county, String street_name, String home_nr)
-    {
-        String updateQuery = "UPDATE users SET city = ?, county = ?, street_name = ?, home_number = ? WHERE email = ?";
-
-        try ( PreparedStatement preparedStatement = connection.prepareStatement(updateQuery) ) 
-        {
-            preparedStatement.setString(1, city);
-            preparedStatement.setString(2, county);
-            preparedStatement.setString(3, street_name);
-            preparedStatement.setString(4, home_nr);
-            preparedStatement.setString(5, email);
-            
-            int rowsAffected = preparedStatement.executeUpdate();
-            if(rowsAffected > 0)
-            {
-                System.out.println("updated address data");
-                System.out.println("user: " + email + " lives in: " + city + " " + county);
-                System.out.println("on " + street_name + " at " + home_nr);
-            }
-            else
-            {
-                System.out.println("no user found with email " + email);
-            } 
-                
-        } 
-        catch (Exception e) 
-        {
-            System.out.println("Error updating user: " + e.getMessage());
-        }
-    }
-
-    public void dataCompleted(String email)
-    {
-        String updateQuery = "UPDATE users SET status = 'completed' WHERE email = ?";
-        
-        try (//Connection connection = getConnection();
-            PreparedStatement preparedStatement = connection.prepareStatement(updateQuery)) 
-        {
-            preparedStatement.setString(1, email);
-            
-            int rowsAffected = preparedStatement.executeUpdate();
-            if(rowsAffected > 0)
-            {
-                System.out.println("data completed!!");
-            }
-            else
-            {
-                System.out.println("no user found with email " + email);
-            } 
-                
-        } 
-        catch (Exception e) 
-        {
-            System.out.println("Error updating user: " + e.getMessage());
-        }
-    }
-
-    public void insertCardInfo(int user_ID, String cardType, String IBAN, String currency, String card_nr, String exp_date, String cvv)
-    {
-        String insertCardQuery = "INSERT INTO cards (user_id, card_type, iban, currency, card_number, expiration_date, cvv) VALUES (?, ?, ?, ?, ?, ?, ?);";
-
-        try ( PreparedStatement preparedStatement = connection.prepareStatement(insertCardQuery) ) 
-        {
-            preparedStatement.setInt(1, user_ID);
-            preparedStatement.setString(2, cardType);
-            preparedStatement.setString(3, IBAN);
-            preparedStatement.setString(4, currency);
-            preparedStatement.setString(5, card_nr);
-            preparedStatement.setString(6, exp_date);
-            preparedStatement.setString(7, cvv);
-            
-            preparedStatement.executeUpdate();
-            
-            // debugging helpers:
-            System.out.println("inserted a new " + cardType + " card!");
-            System.out.println("IBAN: " + IBAN);
-            System.out.println("card nr.: " + card_nr);
-            System.out.println("CVV: " + cvv); 
-            System.out.println("expiration date: " + exp_date);
-        } 
-        catch (Exception e) 
-        {
-            System.out.println("Error inserting card: " + e.getMessage());
-        }
-    }
-
+    // getter for the current user ID
+    // used in SignUpPage 
     public int getUserID(String email)
     {
         String getterQuery = "SELECT user_id FROM users WHERE email = ?";
@@ -389,13 +253,165 @@ public class DatabaseManager
         }
     }
 
-    public String getCardType(String email)
+    // introducing a new card associated with a user
+    // used in TypesOfCards
+    public void updateCardType(int userID, String card_type) 
     {
-        String getterQuery = "SELECT card_type FROM users WHERE email = ?";
+        String updateQuery = "UPDATE users SET card_type = ? WHERE user_id = ?";
+
+        try ( PreparedStatement preparedStatement = connection.prepareStatement(updateQuery) ) 
+        {
+            preparedStatement.setString(1, card_type);
+            preparedStatement.setInt(2, userID);
+            
+            int rowsAffected = preparedStatement.executeUpdate();
+            if(rowsAffected > 0)
+            {
+                System.out.println("Inserted a new card type: " + card_type);
+            }
+            else
+            {
+                System.out.println("no user found with ID: " + userID);
+            } 
+                
+        } 
+        catch (Exception e) 
+        {
+            System.out.println("Error updating user: " + e.getMessage());
+        }
+    }
+
+    // used in BkAccIdentity
+    public void updateBkAccDataIdentity(int userID, String first_name, String last_name, String phone_nr, String country)
+    {
+        String updateQuery = "UPDATE users SET first_name = ?, last_name = ?, phone_number = ?, country = ? WHERE user_id = ?";
+
+        try ( PreparedStatement preparedStatement = connection.prepareStatement(updateQuery) ) 
+        {
+            preparedStatement.setString(1, first_name);
+            preparedStatement.setString(2, last_name);
+            preparedStatement.setString(3, phone_nr);
+            preparedStatement.setString(4, country);
+            preparedStatement.setInt(5, userID);
+            
+            int rowsAffected = preparedStatement.executeUpdate();
+            if(rowsAffected > 0)
+            {
+                System.out.println("updated identity data");
+                System.out.println("user " + userID + " is named " + first_name + " " + last_name);
+                System.out.println("they live in: " + country + " and have the phone: " + phone_nr);
+            }
+            else
+            {
+                System.out.println("no user found with ID " + userID);
+            } 
+                
+        } 
+        catch (Exception e) 
+        {
+            System.out.println("Error updating user: " + e.getMessage());
+        }
+    }
+
+    // used in BkAccAdress
+    public void updateBkAccAddress(int userID, String city, String county, String street_name, String home_nr)
+    {
+        String updateQuery = "UPDATE users SET city = ?, county = ?, street_name = ?, home_number = ? WHERE user_id = ?";
+
+        try ( PreparedStatement preparedStatement = connection.prepareStatement(updateQuery) ) 
+        {
+            preparedStatement.setString(1, city);
+            preparedStatement.setString(2, county);
+            preparedStatement.setString(3, street_name);
+            preparedStatement.setString(4, home_nr);
+            preparedStatement.setInt(5, userID);
+            
+            int rowsAffected = preparedStatement.executeUpdate();
+            if(rowsAffected > 0)
+            {
+                System.out.println("updated address data");
+                System.out.println("user: " + userID + " lives in: " + city + " " + county);
+                System.out.println("on " + street_name + " at " + home_nr);
+            }
+            else
+            {
+                System.out.println("no user found with ID " + userID);
+            } 
+                
+        } 
+        catch (Exception e) 
+        {
+            System.out.println("Error updating user: " + e.getMessage());
+        }
+    }
+
+    // used in CardObtained
+    // utility method to mark the current user data as completed
+    public void dataCompleted(int userID)
+    {
+        String updateQuery = "UPDATE users SET status = 'completed' WHERE user_id = ?";
+        
+        try (//Connection connection = getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement(updateQuery)) 
+        {
+            preparedStatement.setInt(1, userID);
+            
+            int rowsAffected = preparedStatement.executeUpdate();
+            if(rowsAffected > 0)
+            {
+                System.out.println("data completed!!");
+            }
+            else
+            {
+                System.out.println("no user found with ID " + userID);
+            } 
+                
+        } 
+        catch (Exception e) 
+        {
+            System.out.println("Error updating user: " + e.getMessage());
+        }
+    }
+
+    // used in CardObtained
+    public void insertCardInfo(int user_ID, String cardType, String IBAN, String currency, String card_nr, String exp_date, String cvv)
+    {
+        String insertCardQuery = "INSERT INTO cards (user_id, card_type, iban, currency, card_number, expiration_date, cvv) VALUES (?, ?, ?, ?, ?, ?, ?);";
+
+        try ( PreparedStatement preparedStatement = connection.prepareStatement(insertCardQuery) ) 
+        {
+            preparedStatement.setInt(1, user_ID);
+            preparedStatement.setString(2, cardType);
+            preparedStatement.setString(3, IBAN);
+            preparedStatement.setString(4, currency);
+            preparedStatement.setString(5, card_nr);
+            preparedStatement.setString(6, exp_date);
+            preparedStatement.setString(7, cvv);
+            
+            preparedStatement.executeUpdate();
+            
+            // debugging helpers:
+            System.out.println("inserted a new " + cardType + " card!");
+            System.out.println("IBAN: " + IBAN);
+            System.out.println("card nr.: " + card_nr);
+            System.out.println("CVV: " + cvv); 
+            System.out.println("expiration date: " + exp_date);
+        } 
+        catch (Exception e) 
+        {
+            System.out.println("Error inserting card: " + e.getMessage());
+        }
+    }
+
+    // utility method to get the card type of the current user
+    // used in CardObtained
+    public String getCardType(int userID)
+    {
+        String getterQuery = "SELECT card_type FROM users WHERE user_id = ?";
         
         try (PreparedStatement preparedStatement = connection.prepareStatement(getterQuery))
         {
-            preparedStatement.setString(1, email);
+            preparedStatement.setInt(1, userID);
 
             try(ResultSet resultSet = preparedStatement.executeQuery())
             {
@@ -407,7 +423,7 @@ public class DatabaseManager
                 }
                 else 
                 {
-                    System.out.println("no user found with the introduced email");
+                    System.out.println("no user found with the introduced ID");
                     return "";
                 }
             }
@@ -419,6 +435,8 @@ public class DatabaseManager
         }
     }
 
+    // utility method to get all ibans from the DB and put them in an array list
+    // used in IBAN_creator in the method isUnique
     public ArrayList<String> getIBANs()
     {
         String getQuery = "SELECT iban FROM cards";
@@ -439,6 +457,187 @@ public class DatabaseManager
         }
         
         return ibans;
+    }
+
+    // used in BkAccountPage
+    public String getUsername(String email)
+    {
+        String getterQuery = "SELECT username FROM users WHERE email = ?";
+
+        try (PreparedStatement preparedStatement = connection.prepareStatement(getterQuery))
+        {
+            preparedStatement.setString(1, email);
+
+            try(ResultSet resultSet = preparedStatement.executeQuery())
+            {
+                if(resultSet.next())
+                {
+                    String username = resultSet.getString("username");
+                    System.out.println("Username-ul este: " + username);
+                    return username;
+                }
+                else
+                {
+                    System.out.println("no user found with the introduced email");
+                    return "";
+                }
+            }
+        }
+        catch (Exception e)
+        {
+            System.out.println("Eroare: " + e.getMessage());
+            return "";
+        }
+
+    }
+
+    // get card_id by user_id
+    public ArrayList<Integer> getCardIdByUserID(int user_ID)
+    {
+        String getQuery = "SELECT card_id FROM cards WHERE user_id = ?";
+
+        ArrayList<Integer> ids = new ArrayList<>();
+
+        try (PreparedStatement preparedStatement = connection.prepareStatement(getQuery))
+        {
+            preparedStatement.setInt(1, user_ID);
+
+            try (ResultSet resultSet = preparedStatement.executeQuery())
+            {
+                while( resultSet.next() )
+                {
+                    ids.add( resultSet.getInt("card_id"));
+                }
+            }
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+
+        return ids;
+    }
+    // how we proceed: - count the lenggth of the list
+    // in the file that will use this method :)
+    // if the length is 1, return as int (list.get(0))
+    // if the lenght is >1, return as list
+
+    public String getCurrency(int card_ID)
+    {
+        String getterQuery = "SELECT currency FROM cards WHERE card_id = ?";
+
+        try (PreparedStatement preparedStatement = connection.prepareStatement(getterQuery))
+        {
+            preparedStatement.setInt(1, card_ID);
+
+            try(ResultSet resultSet = preparedStatement.executeQuery())
+            {
+                if(resultSet.next())
+                {
+                    String currency = resultSet.getString("currency");
+                    System.out.println("currency-ul este: " + currency);
+                    return currency;
+                }
+                else
+                {
+                    System.out.println("no card found with the introduced id");
+                    return "";
+                }
+            }
+        }
+        catch (Exception e)
+        {
+            System.out.println("Eroare: " + e.getMessage());
+            return "";
+        }
+    }
+
+    public int getSum(int card_ID)
+    {
+        String getterQuery = "SELECT acc_sum FROM cards WHERE card_id = ?";
+
+        try (PreparedStatement preparedStatement = connection.prepareStatement(getterQuery))
+        {
+            preparedStatement.setInt(1, card_ID);
+
+            try(ResultSet resultSet = preparedStatement.executeQuery())
+            {
+                if(resultSet.next())
+                {
+                    int sumOfMoney = resultSet.getInt("acc_sum");
+                    System.out.println("user has " + sumOfMoney + " money in the acc");
+                    return sumOfMoney;
+                }
+                else
+                {
+                    System.out.println("no card found with the introduced id");
+                    return -1;
+                }
+            }
+        }
+        catch (Exception e)
+        {
+            System.out.println("Eroare: " + e.getMessage());
+            return -1;
+        }
+    }
+    
+    public ArrayList<Integer> tscIDs(int card_ID)
+    {
+        String getQuery = "SELECT tsc_id FROM transactions WHERE card_id = ?";
+
+        ArrayList<Integer> ids = new ArrayList<>();
+
+        try(PreparedStatement preparedStatement = connection.prepareStatement(getQuery))
+        {
+            preparedStatement.setInt(1, card_ID);
+
+            try(ResultSet resultSet = preparedStatement.executeQuery())
+            {
+                while(resultSet.next())
+                {
+                    ids.add(resultSet.getInt("tsc_id"));
+                }
+            }
+        }
+        catch(Exception e)
+        {
+            e.printStackTrace();
+        }
+        
+        return ids;
+    }
+
+    public List<Product> getTransactionDetails(int card_ID)
+    {
+        String getQuery = "SELECT tsc_title, tsc_sum, tsc_details FROM transactions WHERE card_id = ?";
+
+        List<Product> trs = new ArrayList<>();
+
+        try(PreparedStatement preparedStatement = connection.prepareStatement(getQuery))
+        {
+            preparedStatement.setInt(1, card_ID);
+
+            try(ResultSet resultSet = preparedStatement.executeQuery())
+            {
+                while(resultSet.next())
+                {
+                    String name = resultSet.getString("tsc_title");
+                    double price = resultSet.getDouble("tsc_sum");
+                    String details = resultSet.getString("tsc_details");
+
+                    Product product = new Product(name, price, details);
+                    trs.add(product);
+                }
+            }
+        }
+        catch(Exception e)
+        {
+            e.printStackTrace();
+            System.out.println("Error while fetching transactions from DB! " + e.getMessage());
+        }
+
+        return trs;
     }
 
 /* 
