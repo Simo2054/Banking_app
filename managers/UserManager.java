@@ -2,6 +2,7 @@ package managers;
 
 import pages.*;
 import Card_types.*;
+import sechiule.*;
 
 import java.io.*;
 import java.util.*;
@@ -66,15 +67,14 @@ public class UserManager
     }
 
     //---------------------------------------------------------------------------
-/* 
+
     // Method to write user credentials into a file if user wants to be remembered by the app
     public void RememberUser(String email, String password)
     {
-        //User user = userMap.get(email);// get the User object by email
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(RememberCredPath)))
         {
-            writer.write(email + "," + user.getName() + "," + password);
-            // writes user details(email, name, password) in a single line using a format
+            writer.write(email + "," + password);
+            // writes user details(email, password) in a single line using a format
             // writing will be done in the file that holds credentials for remembering 
             writer.newLine();
         }
@@ -83,13 +83,24 @@ public class UserManager
             e.printStackTrace();
         }
     }
-*/
+
 
 // NEEDS WORK HERE!!
 // later used in LoginPage
-    public boolean authenticate(String email, String password)
+    public boolean authenticate(String email, String password) throws Exception
     {
-        return true;
+        String returnedPass = sechiule.DatabaseManager.getInstance().accountExists(email);
+
+        if(returnedPass.equals(password))
+        {
+            System.out.println("correct acc");
+            return true; 
+        }
+        else
+        {
+            System.out.println("wrong acc");
+            return false;
+        }
     }
 
 // used in SignUpPage

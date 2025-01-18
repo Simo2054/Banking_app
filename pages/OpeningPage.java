@@ -27,7 +27,7 @@ public class OpeningPage extends JPanel
         imageManager = new ImageManager();
 
         setLayout(null);
-        setBackground(new Color(50, 52, 88));
+        setBackground(new Color(250, 243, 221));
 
         LoginButton();
         SignUpButton();
@@ -39,9 +39,9 @@ public class OpeningPage extends JPanel
         RoundedButton LogInButton = new RoundedButton("Log in", 30);
         LogInButton.setBounds(50, 600, 300, 70);
         LogInButton.setFont(new Font("Arial", Font.BOLD, 18));
-        LogInButton.setBackground(Color.white);
-        LogInButton.setForeground(Color.black);
-        LogInButton.setBorder(new RoundedBorder(30, Color.BLACK, 4));
+        LogInButton.setBackground(new Color(107, 170, 239));
+        LogInButton.setForeground(Color.WHITE);
+        LogInButton.setBorder(new RoundedBorder(30, Color.GRAY, 4));
 
         LogInButton.addActionListener(new ActionListener()
         // attaches an action listener to the LogInButton 
@@ -67,6 +67,23 @@ public class OpeningPage extends JPanel
          *  pressed if there are more buttons)
          */
 
+        // using mouseAdaper to change colors of the button at hover
+        LogInButton.addMouseListener(new MouseAdapter() 
+        {
+            @Override
+            public void mouseEntered(MouseEvent e) 
+            {
+                LogInButton.setBackground(new Color(90, 152, 214)); // Hover color
+            }
+        
+            @Override
+            public void mouseExited(MouseEvent e) 
+            {
+                LogInButton.setBackground(new Color(107, 170, 239)); // Original color
+            }
+        });
+        
+
         add(LogInButton);
     }
 
@@ -75,9 +92,9 @@ public class OpeningPage extends JPanel
         RoundedButton SignUpButton = new RoundedButton("Sign Up", 30);
         SignUpButton.setBounds(50, 700, 300, 70);
         SignUpButton.setFont(new Font("Arial", Font.BOLD, 18));
-        SignUpButton.setBackground(Color.WHITE);
-        SignUpButton.setForeground(Color.black);
-        SignUpButton.setBorder(new RoundedBorder(30, Color.BLACK, 4));
+        SignUpButton.setBackground(new Color(143, 214, 148));
+        SignUpButton.setForeground(Color.WHITE);
+        SignUpButton.setBorder(new RoundedBorder(30, Color.gray, 4));
 
         SignUpButton.addActionListener(new ActionListener() 
         {
@@ -90,6 +107,22 @@ public class OpeningPage extends JPanel
                 //mainFrame.cardLayout.show(mainFrame.mainPanel, "cardTypesPanel");
                 //mainFrame.cardLayout.show(mainFrame.mainPanel, "PrepCardPage");
                 //mainFrame.cardLayout.show(mainFrame.mainPanel, "bkAccountPage");
+            }
+        });
+
+        // using mouseAdaper to change colors of the button at hover
+        SignUpButton.addMouseListener(new MouseAdapter() 
+        {
+            @Override
+            public void mouseEntered(MouseEvent e) 
+            {
+                SignUpButton.setBackground(new Color(122, 203, 128)); // Hover color
+            }
+        
+            @Override
+            public void mouseExited(MouseEvent e) 
+            {
+                SignUpButton.setBackground(new Color(143, 214, 148)); // Original color
             }
         });
 

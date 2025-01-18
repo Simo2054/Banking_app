@@ -5,6 +5,7 @@ import managers.*;
 import sechiule.*;
 
 import javax.swing.*;
+import javax.swing.border.*;
 import java.awt.*;
 import java.awt.event.*;
 import java.io.IOException;
@@ -29,7 +30,7 @@ public class SignUpPage extends JPanel
         userManager = new UserManager();
         // initializing user manager to handle users
 
-        setBackground(new Color(110, 20, 90));
+        setBackground(new Color(250, 243, 221));
         setLayout(null);
 
         // components of the Sign up page:
@@ -41,13 +42,18 @@ public class SignUpPage extends JPanel
         BackButton(); // a button to go back to previous page
     }
 
+    public void updateFields()
+    {
+        
+    }
+
     private void instructions_fields()
     {
         JTextArea mail_instr = new JTextArea("Please introduce an e-mail adress for your account:");
         mail_instr.setBounds(50, 200, 300, 50);
         mail_instr.setEditable(false);
         mail_instr.setFont(new Font("Arial", Font.BOLD, 18));
-        mail_instr.setForeground(Color.WHITE);
+        mail_instr.setForeground(Color.BLACK);
         mail_instr.setBackground(new Color(0,0,0,0));
         mail_instr.setLineWrap(true);
         mail_instr.setWrapStyleWord(true);
@@ -56,7 +62,7 @@ public class SignUpPage extends JPanel
         username_instr.setBounds(50, 340, 300, 55);
         username_instr.setEditable(false);
         username_instr.setFont(new Font("Arial", Font.LAYOUT_LEFT_TO_RIGHT, 18));
-        username_instr.setForeground(Color.WHITE);
+        username_instr.setForeground(Color.BLACK);
         username_instr.setBackground(new Color(0,0,0,0));
         username_instr.setLineWrap(true);
         username_instr.setWrapStyleWord(true);
@@ -65,7 +71,7 @@ public class SignUpPage extends JPanel
         pass_instr.setBounds(50, 450, 300, 50);
         pass_instr.setEditable(false);
         pass_instr.setFont(new Font("Arial", Font.LAYOUT_LEFT_TO_RIGHT, 18));
-        pass_instr.setForeground(Color.WHITE);
+        pass_instr.setForeground(Color.BLACK);
         pass_instr.setBackground(new Color(0,0,0,0));
         pass_instr.setLineWrap(true);
         pass_instr.setWrapStyleWord(true);
@@ -74,7 +80,7 @@ public class SignUpPage extends JPanel
         safety_pass_instr.setBounds(50, 560, 300, 50);
         safety_pass_instr.setEditable(false);
         safety_pass_instr.setFont(new Font("Arial", Font.LAYOUT_LEFT_TO_RIGHT, 18));
-        safety_pass_instr.setForeground(Color.WHITE);
+        safety_pass_instr.setForeground(Color.BLACK);
         safety_pass_instr.setBackground(new Color(0,0,0,0));
         safety_pass_instr.setLineWrap(true);
         safety_pass_instr.setWrapStyleWord(true);
@@ -92,22 +98,28 @@ public class SignUpPage extends JPanel
 
     private void user_input_fields()
     {
+        Border lineBorder = BorderFactory.createLineBorder(Color.BLACK,4);
+
         email_field = new JTextField();
         email_field.setBounds(50, 260 , 300, 40);
         email_field.setFont(new Font("Arial", Font.LAYOUT_LEFT_TO_RIGHT, 18));
+        email_field.setBorder(lineBorder);
 
         username_field = new JTextField();
         username_field.setBounds(50, 400, 300, 40);
         username_field.setFont(new Font("Arial", Font.LAYOUT_LEFT_TO_RIGHT, 18));
+        username_field.setBorder(lineBorder);
 
         pass_field = new JPasswordField();
         pass_field.setBounds(50, 510, 300, 40);
         pass_field.setFont(new Font("Arial", Font.LAYOUT_LEFT_TO_RIGHT, 18));
+        pass_field.setBorder(lineBorder);
 
         safety_pass_field = new JPasswordField();
         safety_pass_field.setBounds(50, 620, 300, 40);
         safety_pass_field.setFont(new Font("Arial", Font.LAYOUT_LEFT_TO_RIGHT, 18));
-    
+        safety_pass_field.setBorder(lineBorder);
+
         email_field.addActionListener(new ActionListener()
         {
             @Override
@@ -254,13 +266,20 @@ public class SignUpPage extends JPanel
 
     public void signUpCheck() throws IOException
     {
-        JButton NextButton = new JButton("Next");
-        NextButton.setBounds(300, 730, 80, 50);
+        RoundedButton NextButton = new RoundedButton("Next", 20);
+        NextButton.setBounds(280, 730, 100, 50);
+        NextButton.setFont(new Font("Arial", Font.BOLD, 13));
+        NextButton.setBackground(new Color(127, 200, 214));
+        NextButton.setForeground(new Color(51, 51, 51));
+        NextButton.setBorder(new RoundedBorder(20, Color.GRAY, 3));
+
+        NextButton.setHorizontalAlignment(SwingConstants.CENTER);
+        NextButton.setVerticalAlignment(SwingConstants.CENTER);
         
         warning = new JTextArea();
         warning.setEditable(false);
         warning.setFont(new Font("Arial", Font.LAYOUT_LEFT_TO_RIGHT, 15));
-        warning.setForeground(Color.PINK);
+        warning.setForeground(Color.RED);
         warning.setBackground(new Color(0,0,0,0));
         warning.setLineWrap(true);
         warning.setWrapStyleWord(true);
@@ -329,14 +348,37 @@ public class SignUpPage extends JPanel
             }
         });
 
+        NextButton.addMouseListener(new MouseAdapter()
+        {
+            @Override
+            public void mouseEntered(MouseEvent e) 
+            {
+                NextButton.setBackground(new Color(107, 175, 195)); // Hover color
+            }
+        
+            @Override
+            public void mouseExited(MouseEvent e) 
+            {
+                NextButton.setBackground(new Color(127, 200, 214)); // Original color
+            }
+        });
+
         add(NextButton);
         add(warning);
     }
 
     private void BackButton()
     {
-        JButton backButton = new JButton("Back");
-        backButton.setBounds(20, 730, 80, 50);
+        RoundedButton backButton = new RoundedButton("Back", 20);
+        backButton.setBounds(20, 730, 100, 50);
+        backButton.setFont(new Font("Arial", Font.BOLD, 13));
+        backButton.setBackground(new Color(217, 217, 217));
+        backButton.setForeground(new Color(51, 51, 51));
+        backButton.setBorder(new RoundedBorder(20, Color.black, 3));
+
+        backButton.setHorizontalAlignment(SwingConstants.CENTER);
+        backButton.setVerticalAlignment(SwingConstants.CENTER);
+
 
         backButton.addActionListener(new ActionListener() 
         {
@@ -344,6 +386,21 @@ public class SignUpPage extends JPanel
             public void actionPerformed(ActionEvent e)
             {
                 mainFrame.cardLayout.show(mainFrame.mainPanel, "openingPage");
+            }
+        });
+
+        backButton.addMouseListener(new MouseAdapter()
+        {
+            @Override
+            public void mouseEntered(MouseEvent e) 
+            {
+                backButton.setBackground(new Color(194, 194, 194)); // Hover color
+            }
+        
+            @Override
+            public void mouseExited(MouseEvent e) 
+            {
+                backButton.setBackground(new Color(217, 217, 217)); // Original color
             }
         });
 

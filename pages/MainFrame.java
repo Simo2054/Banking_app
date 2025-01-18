@@ -65,7 +65,11 @@ public class MainFrame
     // and information about it
     // (money, currency, details about card, functions, transaction history)
 
-    MainFrame() throws IOException // constructor
+    MultipleCardsPage multipleCardsPage;
+    // instance for a page where the user will choose which card to show
+    // if they have multiple cards linked to the current account
+
+    MainFrame() throws Exception // constructor
     {
         try
         {
@@ -82,7 +86,7 @@ public class MainFrame
         openingPage = new OpeningPage(this);
         loginPage = new LoginPage(this);
         signUpPage = new SignUpPage(this);
-        successfulLogIn = new LogInSuccess(this, loginPage);
+        successfulLogIn = new LogInSuccess(this);
         cardManager = new CardManager(this);
         CardDataPage = new CardDataPage(this);
         BkAccIdentity = new BkAccIdentity(this);
@@ -90,6 +94,7 @@ public class MainFrame
         PrepCardPage = new PrepCardPage(this);
         cardObtained = new CardObtained(this);
         bkAccountPage = new BkAccountPage(this);
+        multipleCardsPage = new MultipleCardsPage(this);
 
         startFrame();
         initMainPanel();
@@ -104,6 +109,7 @@ public class MainFrame
         mainPanel.add(PrepCardPage, "PrepCardPage");
         mainPanel.add(cardObtained, "cardObtained");
         mainPanel.add(bkAccountPage, "bkAccountPage");
+        mainPanel.add(multipleCardsPage, "multipleCardsPage");
 
         mainPanel.add(cardManager.getCardTypesPanel(), "cardTypesPanel"); // to add the container for all card types to the mainPanel
 
@@ -146,6 +152,18 @@ public class MainFrame
     public String getEmail() // getter for e-mail (used in BkAccAdress.java, CardObtained.java)
     {
         return introducedEmail;
+    }
+
+    private String introducedPassword;
+
+    public void setPass(String pass) // setter for password (used in LogInSuccess.java)
+    {
+        this.introducedPassword = pass;
+    }
+
+    public String getPass()
+    {
+        return introducedPassword;
     }
 
     private int currentUserID;

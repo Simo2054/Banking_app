@@ -13,6 +13,8 @@ import Card_types.*;
 import managers.*;
 
 import javax.swing.*;
+import javax.swing.border.Border;
+
 import java.awt.*;
 import java.awt.event.*;
 import java.io.*;
@@ -33,7 +35,7 @@ public class BkAccIdentity extends JPanel
         this.mainFrame = mainFrame;
         adressManager = new AdressManager();
 
-        setBackground(new Color(110, 20, 90));
+        setBackground(new Color(250, 243, 221));
         setLayout(null);
 
         instructions(); 
@@ -53,8 +55,8 @@ public class BkAccIdentity extends JPanel
         acc_details_instr.setText("Please introduce your data for creating a bank account first: ");
         acc_details_instr.setEditable(false);
         acc_details_instr.setFont(new Font("Arial", Font.BOLD, 18));
-        acc_details_instr.setForeground(Color.BLUE);
-        acc_details_instr.setBackground(new Color(165, 202, 255));
+        acc_details_instr.setForeground(new Color(94, 74, 227));
+        acc_details_instr.setBackground(new Color(175, 175, 220));
         acc_details_instr.setLineWrap(true);
         acc_details_instr.setWrapStyleWord(true);
         acc_details_instr.setBounds(50, 50, 300, 50);
@@ -66,7 +68,7 @@ public class BkAccIdentity extends JPanel
         fnm_instr.setText("> Please introduce your first name(s): ");
         fnm_instr.setEditable(false);
         fnm_instr.setFont(new Font("Arial", Font.LAYOUT_LEFT_TO_RIGHT, 18));
-        fnm_instr.setForeground(Color.WHITE);
+        fnm_instr.setForeground(Color.BLACK);
         fnm_instr.setBackground(new Color(0,0,0,0));
         fnm_instr.setLineWrap(true);
         fnm_instr.setWrapStyleWord(true);
@@ -77,7 +79,7 @@ public class BkAccIdentity extends JPanel
         lstnm_instr.setText("> Please introduce your last name: ");
         lstnm_instr.setEditable(false);
         lstnm_instr.setFont(new Font("Arial", Font.LAYOUT_LEFT_TO_RIGHT, 18));
-        lstnm_instr.setForeground(Color.WHITE);
+        lstnm_instr.setForeground(Color.BLACK);
         lstnm_instr.setBackground(new Color(0,0,0,0));
         lstnm_instr.setLineWrap(true);
         lstnm_instr.setWrapStyleWord(true);
@@ -88,7 +90,7 @@ public class BkAccIdentity extends JPanel
         tel_nr_instr.setText("> Please introduce your phone number: ");
         tel_nr_instr.setEditable(false);
         tel_nr_instr.setFont(new Font("Arial", Font.LAYOUT_LEFT_TO_RIGHT, 18));
-        tel_nr_instr.setForeground(Color.WHITE);
+        tel_nr_instr.setForeground(Color.BLACK);
         tel_nr_instr.setBackground(new Color(0,0,0,0));
         tel_nr_instr.setLineWrap(true);
         tel_nr_instr.setWrapStyleWord(true);
@@ -99,7 +101,7 @@ public class BkAccIdentity extends JPanel
         country_instr.setText("> Please pick the name of your country: ");
         country_instr.setEditable(false);
         country_instr.setFont(new Font("Arial", Font.LAYOUT_LEFT_TO_RIGHT, 18));
-        country_instr.setForeground(Color.WHITE);
+        country_instr.setForeground(Color.BLACK);
         country_instr.setBackground(new Color(0,0,0,0));
         country_instr.setLineWrap(true);
         country_instr.setWrapStyleWord(true);
@@ -123,20 +125,25 @@ public class BkAccIdentity extends JPanel
 
     private void user_fields() throws IOException
     {
+        Border lineBorder = BorderFactory.createLineBorder(Color.BLACK,4);
+        
         // field to let the user introduce their first name (fnm)
         fnm_field = new JTextField();
         fnm_field.setFont(new Font("Arial", Font.LAYOUT_LEFT_TO_RIGHT, 18));
         fnm_field.setBounds(50, 220, 300, 30);
+        fnm_field.setBorder(lineBorder);
 
         // field to let the user introduce their last name (lstnm)
         lstnm_field = new JTextField();
         lstnm_field.setFont(new Font("Arial", Font.LAYOUT_LEFT_TO_RIGHT, 18));
         lstnm_field.setBounds(50, 290, 300, 30);
+        lstnm_field.setBorder(lineBorder);
 
         tel_nr_field = new JTextField();
         tel_nr_field.setFont(new Font("Arial", Font.LAYOUT_LEFT_TO_RIGHT, 18));
         tel_nr_field.setBounds(50, 380, 300, 30);
-
+        tel_nr_field.setBorder(lineBorder);
+        
         options = adressManager.getCountries();// initializing the options array using getCountries method
         Arrays.sort(options); // sort the array alphabetically
         country_option = new JComboBox<>(options); // using the array to create a dropdown list of all countries available
@@ -248,17 +255,33 @@ public class BkAccIdentity extends JPanel
 
     private void nextAndBackButtons() throws IOException
     {
-        backButton = new JButton("Back");
-        backButton.setBounds(20, 730, 80, 50);
+        RoundedButton backButton = new RoundedButton("Back", 20);
+        backButton.setBounds(20, 730, 100, 50);
+        backButton.setFont(new Font("Arial", Font.BOLD, 13));
+        backButton.setBackground(new Color(217, 217, 217));
+        backButton.setForeground(new Color(51, 51, 51));
+        backButton.setBorder(new RoundedBorder(20, Color.black, 3));
 
-        nextButton = new JButton("Next");
-        nextButton.setBounds(300, 730, 80, 50);
+        backButton.setHorizontalAlignment(SwingConstants.CENTER);
+        backButton.setVerticalAlignment(SwingConstants.CENTER);
+
+
+        RoundedButton nextButton = new RoundedButton("Next", 20);
+        nextButton.setBounds(280, 730, 100, 50);
+        nextButton.setFont(new Font("Arial", Font.BOLD, 13));
+        nextButton.setBackground(new Color(127, 200, 214));
+        nextButton.setForeground(new Color(51, 51, 51));
+        nextButton.setBorder(new RoundedBorder(20, Color.GRAY, 3));
+
+        nextButton.setHorizontalAlignment(SwingConstants.CENTER);
+        nextButton.setVerticalAlignment(SwingConstants.CENTER);
+
 
         warning = new JTextArea();
         warning.setText("Please complete all fields!");// display the warning message
         warning.setEditable(false);
         warning.setFont(new Font("Arial", Font.LAYOUT_LEFT_TO_RIGHT, 15));
-        warning.setForeground(Color.PINK);
+        warning.setForeground(Color.RED);
         warning.setBackground(new Color(0,0,0,0));
         warning.setLineWrap(true);
         warning.setWrapStyleWord(true);
@@ -272,6 +295,21 @@ public class BkAccIdentity extends JPanel
             public void actionPerformed(ActionEvent e)
             {
                 mainFrame.cardLayout.show(mainFrame.mainPanel, "cardTypesPanel");
+            }
+        });
+
+        backButton.addMouseListener(new MouseAdapter()
+        {
+            @Override
+            public void mouseEntered(MouseEvent e) 
+            {
+                backButton.setBackground(new Color(194, 194, 194)); // Hover color
+            }
+        
+            @Override
+            public void mouseExited(MouseEvent e) 
+            {
+                backButton.setBackground(new Color(217, 217, 217)); // Original color
             }
         });
 
@@ -310,6 +348,21 @@ public class BkAccIdentity extends JPanel
                     System.out.println("altceva");
                 }
                 
+            }
+        });
+
+        nextButton.addMouseListener(new MouseAdapter()
+        {
+            @Override
+            public void mouseEntered(MouseEvent e) 
+            {
+                nextButton.setBackground(new Color(107, 175, 195)); // Hover color
+            }
+        
+            @Override
+            public void mouseExited(MouseEvent e) 
+            {
+                nextButton.setBackground(new Color(127, 200, 214)); // Original color
             }
         });
 

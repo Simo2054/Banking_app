@@ -27,7 +27,7 @@ public class BkAccountPage extends JPanel
         this.mainFrame = mainFrame;
         tscMan = new TransactionsManager();
 
-        setBackground(new Color(110, 20, 90));
+        setBackground(new Color(250, 243, 221));
         setLayout(null);
     }
 
@@ -145,7 +145,7 @@ public class BkAccountPage extends JPanel
                     transcIDs = sechiule.DatabaseManager.getInstance().tscIDs(cardID);
                     System.out.println("marimea este: " + transcIDs.size());
 
-                    prodList = sechiule.DatabaseManager.getInstance().getTransactionDetails(cardID);
+                    prodList = sechiule.DatabaseManager.getInstance().getTransactionDetails(1);
                     System.out.println("marimea array-ului este " + prodList.size());
 
                     if(transcIDs.isEmpty())

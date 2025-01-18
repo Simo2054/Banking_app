@@ -640,6 +640,39 @@ public class DatabaseManager
         return trs;
     }
 
+    public String accountExists(String email)
+    {
+        String getQuery = "SELECT password FROM users WHERE email = ?";
+
+        try (PreparedStatement preparedStatement = connection.prepareStatement(getQuery))
+        {
+            preparedStatement.setString(1, email);
+
+            try(ResultSet resultSet = preparedStatement.executeQuery())
+            {
+                if(resultSet.next())
+                {
+                    String pass = resultSet.getString("password");
+                    System.out.println("passwardo introduced: " + pass);
+                    return pass;
+                }
+                else
+                {
+                    System.out.println("invalid email");
+                    return "";
+                }
+            }
+        }
+        catch (Exception e)
+        {
+            System.out.println("Eroare: " + e.getMessage());
+            return "";
+        }
+
+    }
+
+    //public List<User> getUserInfo(String email)
+
 /* 
     // Retrieve all users from the 'users' table
     public void listUsers() {

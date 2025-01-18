@@ -20,7 +20,7 @@ public abstract class TypesOfCards extends JPanel
         cardObtained = new CardObtained(mainFrame);
 
         setLayout(null);
-        setBackground(new Color(110, 20, 90));
+        setBackground(new Color(250, 243, 221));
 
         greeting_fields();
         switch_buttons();
@@ -34,7 +34,7 @@ public abstract class TypesOfCards extends JPanel
         intro_text.setText("Hello, " + mainFrame.getUsername() + "!");
         intro_text.setEditable(false);
         intro_text.setFont(new Font("Arial", Font.BOLD, 20));
-        intro_text.setForeground(Color.WHITE);
+        intro_text.setForeground(Color.BLACK);
         intro_text.setBackground(new Color(0,0,0,0));
         intro_text.setLineWrap(true);
         intro_text.setWrapStyleWord(true);
@@ -56,7 +56,7 @@ public abstract class TypesOfCards extends JPanel
         card_propose.setBounds(50, 200, 300, 55);
         card_propose.setEditable(false);
         card_propose.setFont(new Font("Arial", Font.LAYOUT_LEFT_TO_RIGHT, 20));
-        card_propose.setForeground(Color.WHITE);
+        card_propose.setForeground(Color.BLACK);
         card_propose.setBackground(new Color(0,0,0,0));
         card_propose.setLineWrap(true);
         card_propose.setWrapStyleWord(true);
@@ -116,9 +116,9 @@ public abstract class TypesOfCards extends JPanel
         JLabel card_title = new JLabel();
         card_title.setText(title);
         card_title.setFont(new Font("Arial", Font.BOLD, 20));
-        card_title.setForeground(Color.RED);
+        card_title.setForeground(Color.BLACK);
         card_title.setOpaque(true);
-        card_title.setBackground(Color.WHITE);
+        card_title.setBackground(new Color(217, 217, 217));
 
         int panelWidth = 400;
 
@@ -143,9 +143,15 @@ public abstract class TypesOfCards extends JPanel
         card_instructions.setEditable(false);
         card_instructions.setFont(new Font("Arial", Font.LAYOUT_LEFT_TO_RIGHT, 15));
         card_instructions.setForeground(Color.BLACK);
-        card_instructions.setBackground(Color.CYAN);
+        card_instructions.setBackground(new Color(175, 175, 220));
         card_instructions.setLineWrap(true);
         card_instructions.setWrapStyleWord(true);
+
+        // adding padding to the text area
+        card_instructions.setMargin(new Insets(10, 10, 10, 10));
+
+        // to make text start from the beginning
+        card_instructions.setCaretPosition(0);
 
         JScrollPane scrollPane = new JScrollPane(card_instructions);
         scrollPane.setBounds(75, 460, 250, 150);
@@ -156,10 +162,13 @@ public abstract class TypesOfCards extends JPanel
     // method to let the user add a card they already have
     protected void existent_card()
     {
-        JButton existsCard = new JButton();
-        existsCard.setText("I already have a card");
+        RoundedButton existsCard = new RoundedButton("I already have a card", 20);
         existsCard.setFont(new Font("Arial", Font.BOLD, 20));
         existsCard.setBounds(50, 730, 300, 50);
+        existsCard.setBackground(new Color(127, 200, 214));
+        existsCard.setForeground(new Color(51, 51, 51));
+        existsCard.setBorder(new RoundedBorder(20, Color.GRAY, 3));
+        
 
         existsCard.addActionListener(new ActionListener() 
         {
@@ -170,15 +179,32 @@ public abstract class TypesOfCards extends JPanel
             }
         });
 
+        existsCard.addMouseListener(new MouseAdapter()
+        {
+            @Override
+            public void mouseEntered(MouseEvent e) 
+            {
+                existsCard.setBackground(new Color(107, 175, 195)); // Hover color
+            }
+        
+            @Override
+            public void mouseExited(MouseEvent e) 
+            {
+                existsCard.setBackground(new Color(127, 200, 214)); // Original color
+            }
+        });
+
         add(existsCard);
     }
 
     protected void chooseCardButton(String page)
     {
-        JButton chooseCard = new JButton();
-        chooseCard.setText("Choose Card Type");
+        RoundedButton chooseCard = new RoundedButton("Choose Card Type", 20);
         chooseCard.setFont(new Font("Arial", Font.BOLD, 20));
         chooseCard.setBounds(75, 620, 250, 50);
+        chooseCard.setBackground(new Color(143, 214, 148));
+        chooseCard.setForeground(Color.BLACK);
+        chooseCard.setBorder(new RoundedBorder(30, Color.gray, 4));
 
         chooseCard.addActionListener(new ActionListener() 
         {
@@ -201,6 +227,21 @@ public abstract class TypesOfCards extends JPanel
 
                 // show the next page
                 mainFrame.cardLayout.show(mainFrame.mainPanel, page);
+            }
+        });
+
+        chooseCard.addMouseListener(new MouseAdapter() 
+        {
+            @Override
+            public void mouseEntered(MouseEvent e) 
+            {
+                chooseCard.setBackground(new Color(122, 203, 128)); // Hover color
+            }
+        
+            @Override
+            public void mouseExited(MouseEvent e) 
+            {
+                chooseCard.setBackground(new Color(143, 214, 148)); // Original color
             }
         });
 

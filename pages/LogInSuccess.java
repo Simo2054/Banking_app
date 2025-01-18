@@ -11,15 +11,13 @@ import java.io.IOException;
 
 public class LogInSuccess extends JPanel
 {
-    private UserManager userManager;
     private MainFrame mainFrame;
-    private LoginPage loginPage;
+    private UserManager userManager;
     
-    public LogInSuccess(MainFrame mainFrame, LoginPage loginPage) throws IOException
+    public LogInSuccess(MainFrame mainFrame) throws IOException
     {
-        userManager = new UserManager();
         this.mainFrame = mainFrame;
-        this.loginPage = loginPage;
+        userManager = new UserManager();
         
         setBackground(new Color(110, 20, 90));
         setLayout(null);
@@ -28,6 +26,10 @@ public class LogInSuccess extends JPanel
         RememberMeBox();
         NextButton();
     }
+
+    private String email; 
+    private String password;
+    private int userID;
 
     private void Rectangle()
     {
@@ -103,10 +105,20 @@ public class LogInSuccess extends JPanel
             {
                 if(rememberUser == true)
                 {
-                    //userManager.RememberUser(loginPage.input_mail, loginPage.user_password);
                     // by clicking the "remember me" checkbox, user's credentials will be 
                     // kept in a file for future logging in
+
+                    email = mainFrame.getEmail();
+                    password = mainFrame.getPass();
+                    userManager.RememberUser(email, password);
+
+                    // nevoie de userID pentru a scoate array-ul de cardIDs in urmatoarea pagina
+                    
+
+                    // mainFrame.cardLayout.show(mainFrame.mainPanel, "bkAccountPage");
                 }
+
+                mainFrame.multipleCardsPage.updateFields();
                 System.out.println("next>>>");
             }
         });

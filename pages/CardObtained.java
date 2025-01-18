@@ -25,7 +25,7 @@ public class CardObtained extends JPanel
         iban_creator = new IBAN_creator();
         userManager = new UserManager();
 
-        setBackground(new Color(110, 20, 90));
+        setBackground(new Color(250, 243, 221));
         setLayout(null);
     }
 
@@ -221,8 +221,15 @@ public class CardObtained extends JPanel
 
     private void nextButton() throws IOException
     {
-        nextButton = new JButton("Got it !");
-        nextButton.setBounds(300, 730, 80, 50);
+        RoundedButton nextButton = new RoundedButton("Finish", 20);
+        nextButton.setBounds(280, 730, 100, 50);
+        nextButton.setFont(new Font("Arial", Font.BOLD, 13));
+        nextButton.setBackground(new Color(127, 200, 214));
+        nextButton.setForeground(new Color(51, 51, 51));
+        nextButton.setBorder(new RoundedBorder(20, Color.GRAY, 3));
+
+        nextButton.setHorizontalAlignment(SwingConstants.CENTER);
+        nextButton.setVerticalAlignment(SwingConstants.CENTER);
 
         nextButton.addActionListener(new ActionListener() 
         {
@@ -266,6 +273,7 @@ public class CardObtained extends JPanel
                         // when there are more cards, there will be an extra page where user can select
                         // a card to show
 
+                        //mainFrame.cardLayout.show(mainFrame.mainPanel, "multipleCardsPage");
                     }
                     */
                 } 
@@ -277,6 +285,21 @@ public class CardObtained extends JPanel
 
                 // next page 
                 //mainFrame.cardLayout.show(mainFrame.mainPanel, "bkAccountPage");
+            }
+        });
+
+        nextButton.addMouseListener(new MouseAdapter()
+        {
+            @Override
+            public void mouseEntered(MouseEvent e) 
+            {
+                nextButton.setBackground(new Color(107, 175, 195)); // Hover color
+            }
+        
+            @Override
+            public void mouseExited(MouseEvent e) 
+            {
+                nextButton.setBackground(new Color(127, 200, 214)); // Original color
             }
         });
 

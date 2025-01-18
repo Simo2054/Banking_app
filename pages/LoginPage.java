@@ -6,7 +6,6 @@ import managers.*;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
-import java.io.IOException;
 
 public class LoginPage extends JPanel
 // the class LoginPage inherits from JPanel class
@@ -20,7 +19,7 @@ public class LoginPage extends JPanel
 
     private MainFrame mainFrame;// field to hold the reference to the MainFrame class
 
-    public LoginPage(MainFrame mainFrame) throws IOException
+    public LoginPage(MainFrame mainFrame) throws Exception
     // constructor for the LoginPage class
     // it accepts and object of type MainFrame, which will allow the class
     // to interact with the MainFrame class
@@ -109,6 +108,22 @@ public class LoginPage extends JPanel
             {
                 input_mail = user_mail.getText();
                 System.out.println("user: " + input_mail);
+
+                try
+                {
+                    // checks if the introduced email contains a domain
+                    if(!(userManager.checkValidMail(input_mail)))
+                    {
+                        warning.setBounds(50, 300, 300, 40);
+                        warning.setText("E-Mail adress not available");// display the warning message
+                        warning.setVisible(true);
+                        user_mail.requestFocusInWindow();
+                    }
+                }
+                catch (Exception ex)
+                {
+                    ex.printStackTrace();
+                }
             }
         });
 
@@ -151,12 +166,12 @@ public class LoginPage extends JPanel
     }
 
     private JButton loginCheckButton;
-    private JTextArea warning;
+    private JTextArea warning;    
 
-    private void loginCheck()
+    private void loginCheck() throws Exception
     {
         loginCheckButton = new JButton("Log in");
-        loginCheckButton.setBounds(50, 500, 100, 40);
+        loginCheckButton.setBounds(300, 730, 80, 50);
 
         warning = new JTextArea();
         warning.setEditable(false);
@@ -170,23 +185,39 @@ public class LoginPage extends JPanel
         loginCheckButton.addActionListener(new ActionListener() 
         {
             @Override
-            public void actionPerformed(ActionEvent e)
+            public void actionPerformed(ActionEvent e) 
             {
                 System.out.println(); System.out.println();
                 System.out.println("username: " + input_mail);
                 System.out.println("password: " + user_password);
-                if(userManager.authenticate(input_mail, user_password))
+                try
                 {
-                    System.out.println("Login Successful!");
-                    mainFrame.cardLayout.show(mainFrame.mainPanel, "successfulLogIn");
+                    if(!(input_mail.isEmpty()) && !(user_password.isEmpty()))
+                    // checking if all of the fields are completed
+                    {
+                        if(userManager.authenticate(input_mail, user_password))
+                        {
+                            System.out.println("Login Successful!");
+
+                            System.out.println("emailul setat: " + input_mail + " si parola setata: " + user_password);
+                            mainFrame.setEmail(input_mail);
+                            mainFrame.setPass(user_password);
+
+                            mainFrame.cardLayout.show(mainFrame.mainPanel, "successfulLogIn");
+                        }
+                        else // case where input data doesn't match
+                        {
+                            System.out.println("invalid email or password"); 
+                        }
+                    }
+                    else // case where one or more fields are empty
+                    {
+                        System.out.println("Data missing");
+                    }
                 }
-                else if((input_mail.isEmpty()) && (user_password.isEmpty()))
+                catch (Exception ex)
                 {
-                    System.out.println("introduce data!"); // data missing from both fields
-                }
-                else
-                {
-                    System.out.println("incorrect data!"); // data missing from one field of data is wrong on one or both fields
+                    ex.printStackTrace();
                 }
             }
         });
@@ -194,18 +225,17 @@ public class LoginPage extends JPanel
         add(loginCheckButton);
     }
 
-    JButton backButton;
-
     private void BackButton()
     {
-        backButton = new JButton("Back");
-        backButton.setBounds(300, 730, 80, 50);
+        JButton backButton = new JButton("Back");
+        backButton.setBounds(20, 730, 80, 50);
 
         backButton.addActionListener(new ActionListener() 
         {
             @Override
             public void actionPerformed(ActionEvent e)
             {
+                
                 mainFrame.cardLayout.show(mainFrame.mainPanel, "openingPage");
             }
         });

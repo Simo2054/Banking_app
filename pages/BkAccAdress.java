@@ -13,6 +13,8 @@ import Card_types.*;
 import managers.*;
 
 import javax.swing.*;
+import javax.swing.border.Border;
+
 import java.awt.*;
 import java.awt.event.*;
 import java.io.*;
@@ -38,7 +40,7 @@ public class BkAccAdress extends JPanel
     private LoginPage loginPage;
     private SignUpPage signUpPage;
 
-    public BkAccAdress(MainFrame mainFrame, BkAccIdentity bkAccIdentity) throws IOException
+    public BkAccAdress(MainFrame mainFrame, BkAccIdentity bkAccIdentity) throws Exception
     {
         this.mainFrame = mainFrame;
         adressManager = new AdressManager();
@@ -46,7 +48,7 @@ public class BkAccAdress extends JPanel
         loginPage = new LoginPage(mainFrame);
         signUpPage = new SignUpPage(mainFrame);
 
-        setBackground(new Color(110, 20, 90));
+        setBackground(new Color(250, 243, 221));
         setLayout(null);
     }
 
@@ -77,7 +79,7 @@ public class BkAccAdress extends JPanel
         city_instr.setText("> Please introduce the name of your city of residency:");
         city_instr.setEditable(false);
         city_instr.setFont(new Font("Arial", Font.LAYOUT_LEFT_TO_RIGHT, 18));
-        city_instr.setForeground(Color.WHITE);
+        city_instr.setForeground(Color.BLACK);
         city_instr.setBackground(new Color(0,0,0,0));
         city_instr.setLineWrap(true);
         city_instr.setWrapStyleWord(true);
@@ -87,7 +89,7 @@ public class BkAccAdress extends JPanel
         county_instr.setText("> Please introduce the name of your county or district:");
         county_instr.setEditable(false);
         county_instr.setFont(new Font("Arial", Font.LAYOUT_LEFT_TO_RIGHT, 18));
-        county_instr.setForeground(Color.WHITE);
+        county_instr.setForeground(Color.BLACK);
         county_instr.setBackground(new Color(0,0,0,0));
         county_instr.setLineWrap(true);
         county_instr.setWrapStyleWord(true);
@@ -97,7 +99,7 @@ public class BkAccAdress extends JPanel
         street_nm_instr.setText("> Please introduce the name of the street where your home is located: ");
         street_nm_instr.setEditable(false);
         street_nm_instr.setFont(new Font("Arial", Font.LAYOUT_LEFT_TO_RIGHT, 18));
-        street_nm_instr.setForeground(Color.WHITE);
+        street_nm_instr.setForeground(Color.BLACK);
         street_nm_instr.setBackground(new Color(0,0,0,0));
         street_nm_instr.setLineWrap(true);
         street_nm_instr.setWrapStyleWord(true);
@@ -107,7 +109,7 @@ public class BkAccAdress extends JPanel
         home_nr_instr.setText("> Please introduce the number of your home: ");
         home_nr_instr.setEditable(false);
         home_nr_instr.setFont(new Font("Arial", Font.LAYOUT_LEFT_TO_RIGHT, 18));
-        home_nr_instr.setForeground(Color.WHITE);
+        home_nr_instr.setForeground(Color.BLACK);
         home_nr_instr.setBackground(new Color(0,0,0,0));
         home_nr_instr.setLineWrap(true);
         home_nr_instr.setWrapStyleWord(true);
@@ -133,13 +135,17 @@ public class BkAccAdress extends JPanel
         initCityField();
         initCountyField();
 
+        Border lineBorder = BorderFactory.createLineBorder(Color.BLACK,4);
+
         street_nm_field = new JTextField();
         street_nm_field.setFont(new Font("Arial", Font.LAYOUT_LEFT_TO_RIGHT, 18));
         street_nm_field.setBounds(50, 310, 300, 30);
+        street_nm_field.setBorder(lineBorder);
 
         home_nr_field = new JTextField();
         home_nr_field.setFont(new Font("Arial", Font.LAYOUT_LEFT_TO_RIGHT, 18));
         home_nr_field.setBounds(50, 410, 300, 30);
+        home_nr_field.setBorder(lineBorder);
 
         street_nm_field.addActionListener(new ActionListener() 
         {
@@ -269,17 +275,32 @@ public class BkAccAdress extends JPanel
 
     private void nextAndBackButtons() throws IOException
     {
-        backButton = new JButton("Back");
-        backButton.setBounds(20, 730, 80, 50);
+        RoundedButton backButton = new RoundedButton("Back", 20);
+        backButton.setBounds(20, 730, 100, 50);
+        backButton.setFont(new Font("Arial", Font.BOLD, 13));
+        backButton.setBackground(new Color(217, 217, 217));
+        backButton.setForeground(new Color(51, 51, 51));
+        backButton.setBorder(new RoundedBorder(20, Color.black, 3));
 
-        nextButton = new JButton("Next");
-        nextButton.setBounds(300, 730, 80, 50);
+        backButton.setHorizontalAlignment(SwingConstants.CENTER);
+        backButton.setVerticalAlignment(SwingConstants.CENTER);
+
+
+        RoundedButton nextButton = new RoundedButton("Next", 20);
+        nextButton.setBounds(280, 730, 100, 50);
+        nextButton.setFont(new Font("Arial", Font.BOLD, 13));
+        nextButton.setBackground(new Color(127, 200, 214));
+        nextButton.setForeground(new Color(51, 51, 51));
+        nextButton.setBorder(new RoundedBorder(20, Color.GRAY, 3));
+
+        nextButton.setHorizontalAlignment(SwingConstants.CENTER);
+        nextButton.setVerticalAlignment(SwingConstants.CENTER);
 
         warning = new JTextArea();
         warning.setText("Please complete all fields!");// display the warning message
         warning.setEditable(false);
         warning.setFont(new Font("Arial", Font.LAYOUT_LEFT_TO_RIGHT, 15));
-        warning.setForeground(Color.PINK);
+        warning.setForeground(Color.RED);
         warning.setBackground(new Color(0,0,0,0));
         warning.setLineWrap(true);
         warning.setWrapStyleWord(true);
@@ -293,6 +314,21 @@ public class BkAccAdress extends JPanel
             public void actionPerformed(ActionEvent e)
             {
                 mainFrame.cardLayout.show(mainFrame.mainPanel, "BkAccIdentity");
+            }
+        });
+
+        backButton.addMouseListener(new MouseAdapter()
+        {
+            @Override
+            public void mouseEntered(MouseEvent e) 
+            {
+                backButton.setBackground(new Color(194, 194, 194)); // Hover color
+            }
+        
+            @Override
+            public void mouseExited(MouseEvent e) 
+            {
+                backButton.setBackground(new Color(217, 217, 217)); // Original color
             }
         });
 
@@ -364,6 +400,21 @@ public class BkAccAdress extends JPanel
                     System.out.println("please introduce your data");
                 }
                 
+            }
+        });
+
+        nextButton.addMouseListener(new MouseAdapter()
+        {
+            @Override
+            public void mouseEntered(MouseEvent e) 
+            {
+                nextButton.setBackground(new Color(107, 175, 195)); // Hover color
+            }
+        
+            @Override
+            public void mouseExited(MouseEvent e) 
+            {
+                nextButton.setBackground(new Color(127, 200, 214)); // Original color
             }
         });
 
